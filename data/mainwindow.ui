@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>265</width>
-    <height>276</height>
+    <width>288</width>
+    <height>271</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,9 +18,21 @@
     <normaloff>../../../../usr/share/pixmaps/gost-crypto-gui.png</normaloff>../../../../usr/share/pixmaps/gost-crypto-gui.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>15</number>
+    </property>
+    <property name="rightMargin">
+     <number>15</number>
+    </property>
+    <item row="0" column="0">
      <widget class="QPushButton" name="btnSign">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="statusTip">
        <string>Подписать указанный файл</string>
       </property>
@@ -29,8 +41,14 @@
       </property>
      </widget>
     </item>
-    <item>
+    <item row="1" column="0">
      <widget class="QPushButton" name="btnVerify">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="statusTip">
        <string>Проверить ЭЦП подписанного файла</string>
       </property>
@@ -39,8 +57,14 @@
       </property>
      </widget>
     </item>
-    <item>
+    <item row="2" column="0">
      <widget class="QPushButton" name="btnEncrypt">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="statusTip">
        <string>Зашифровать указанный файл</string>
       </property>
@@ -49,7 +73,7 @@
       </property>
      </widget>
     </item>
-    <item>
+    <item row="3" column="0">
      <widget class="QPushButton" name="btnDecrypt">
       <property name="statusTip">
        <string>Расшифровать файл</string>
@@ -66,8 +90,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>265</width>
-     <height>22</height>
+     <width>288</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -105,10 +129,19 @@
      <addaction name="actionDettachedOn"/>
      <addaction name="actionDettachedOff"/>
     </widget>
+    <widget class="QMenu" name="menu_2">
+     <property name="title">
+      <string>Расширение зашифрованного файла</string>
+     </property>
+     <addaction name="actionenc"/>
+     <addaction name="actionp7e"/>
+     <addaction name="actionp7m"/>
+    </widget>
     <addaction name="cryptoprovider"/>
     <addaction name="encoding"/>
     <addaction name="sign_check"/>
     <addaction name="dettached"/>
+    <addaction name="menu_2"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -193,6 +226,33 @@
    </property>
    <property name="text">
     <string>Выключено</string>
+   </property>
+  </action>
+  <action name="actionenc">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>enc</string>
+   </property>
+  </action>
+  <action name="actionp7e">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>p7e</string>
+   </property>
+  </action>
+  <action name="actionp7m">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>p7m</string>
    </property>
   </action>
  </widget>

@@ -1,0 +1,66 @@
+v1.4 Apr 25 2023
+- added new MultiOutputDialog
+
+v1.3 Apr 18 2023
+- replace regex with dictionary funcs in get_store_certs
+- fix all funcs in gui.py for work with multiple files
+
+v1.2 Apr 12 2023
+- improved certs parse logic for cryptopro4 cert
+
+v1.1 Apr 07 2023
+- improved certs parse logic
+- fixed popen multithread error if one of chain certs not installed
+- added backport to goslinux and redos72
+
+v1.0.1 Mar 23 2023
+- create config if not exist on startup of application
+
+v1.0 Mar 23 2023
+- changed project structure to use setup.py on build
+- fix in detached sign verify
+
+v0.9 Sep 28 2022
+- added encrypt/decrypt to/from p7e/p7m files
+- rebased src to use archive as SOURCE0
+
+v0.8 Mar 23 2022
+- added missing require python3-qt5
+- fix in save report button
+
+v0.7 Mar 10 2022
+- changed logic for filenames from libreoffice plugin
+
+v0.6 Mar 04 2022
+- port from qt4 to qt5 and python3
+
+v0.5 Mar 02 2022
+- added compatibility for new versions of cryptopro 4 and 5
+- removed patches, because they are already applied in code
+
+v0.4-5 Oct 25 2021
+- added aarch64 compitibility
+
+v0.4-4 Feb 10 2021
+- Patch: dettach sign using -delsign argument
+
+v0.4-3 Dec 16 2020
+- Updated to 0.4
+
+v0.3-7 Jul 30 2019
+- apply commit 0fb6d5b53d4ac46263121b3780018365317c6a04 from git
+
+v0.3-6 Mar 26 2019
+- apply commit b1b527ecada4acf116e9c19409f339f593a2d1e2 from git
+
+v0.3-5 Apr 02 2018
+- apply commit 4b7a47a22e9d2059d36b3a9905b7c8240732104b from git
+
+v0.3-4 Mar 12 2018
+- apply commit d1348e5822a8973900d67fee07973bd1eb6b478f from git
+
+v0.3-3 Feb 16 2018
+- apply commit df0f050cf8b42ad3c72f2f147db15f243a03cc98 from git
+
+v0.3-2 Feb 15 2018
+- apply commit f5db7f3f348fb90a52c22ae8413f6c6f4bc296b1 from git

@@ -1,37 +1,31 @@
 #!/bin/bash
-rm -f gostcryptogui/*.pyc
-mkdir -p ~/rpmbuild/SPEC ~/rpmbuild/SOURCES
-tar -czf ~/rpmbuild/SOURCES/gostcryptogui.tar.gz gostcryptogui
-cp gostcryptogui.spec ~/rpmbuild/SPEC/
-cp gost-crypto-gui.png ~/rpmbuild/SOURCES/
-cp gost-crypto-gui.py ~/rpmbuild/SOURCES/
-cp gost-crypto-gui.desktop ~/rpmbuild/SOURCES/
-cp x-extension-enc.xml ~/rpmbuild/SOURCES/
-cp x-extension-sig.xml ~/rpmbuild/SOURCES/
-cp x-extension-sgn.xml ~/rpmbuild/SOURCES/
-cp encrypted.png ~/rpmbuild/SOURCES/
-cp signed.png ~/rpmbuild/SOURCES/
-cp emblem-nochain.png ~/rpmbuild/SOURCES/
-cp emblem-unverified.png ~/rpmbuild/SOURCES/
-cp emblem-verified.png ~/rpmbuild/SOURCES/
-cp setup.py ~/rpmbuild/SOURCES/
-rpmbuild -ba --target i386  ~/rpmbuild/SPEC/gostcryptogui.spec
-rpmbuild -ba --target x86_64  ~/rpmbuild/SPEC/gostcryptogui.spec
+#rm -f gostcryptogui/*.pyc
 
-cp nautilus/gost-crypto-gui-menu.py ~/rpmbuild/SOURCES/
-cp nautilus/gost-crypto-gui-emblem.py ~/rpmbuild/SOURCES/
-cp nautilus-gostcryptogui.spec ~/rpmbuild/SPEC/
-rpmbuild -ba --target i386 ~/rpmbuild/SPEC/nautilus-gostcryptogui.spec
-rpmbuild -ba --target x86_64 ~/rpmbuild/SPEC/nautilus-gostcryptogui.spec
+mkdir -p ~/rpmbuild/SPECS ~/rpmbuild/SOURCES ./gostcryptogui-$1
 
-cp caja/gost-crypto-gui-menu.py ~/rpmbuild/SOURCES/
-cp caja/gost-crypto-gui-emblem.py ~/rpmbuild/SOURCES/
-cp caja-gostcryptogui.spec ~/rpmbuild/SPEC/
-rpmbuild -ba --target i386 ~/rpmbuild/SPEC/caja-gostcryptogui.spec
-rpmbuild -ba --target x86_64 ~/rpmbuild/SPEC/caja-gostcryptogui.spec
+rsync -ah --progress src ./gostcryptogui-$1
+rsync -ah --progress data ./gostcryptogui-$1
+rsync -ah --progress pics ./gostcryptogui-$1
+rsync -ah --progress setup.py ./gostcryptogui-$1
+rsync -ah --progress LICENSE ./gostcryptogui-$1
+rsync -ah --progress README.md ./gostcryptogui-$1
+rsync -ah --progress Changelog ./gostcryptogui-$1
 
-cp nemo/gost-crypto-gui-menu.py ~/rpmbuild/SOURCES/
-cp nemo/gost-crypto-gui-emblem.py ~/rpmbuild/SOURCES/
-cp nemo-gostcryptogui.spec ~/rpmbuild/SPEC/
-rpmbuild -ba --target i386 ~/rpmbuild/SPEC/nemo-gostcryptogui.spec
-rpmbuild -ba --target x86_64 ~/rpmbuild/SPEC/nemo-gostcryptogui.spec
+tar -cvzf ./gostcryptogui-$1.tar.gz ./gostcryptogui-$1
+rsync -ah --progress ./gostcryptogui-$1.tar.gz ~/rpmbuild/SOURCES/
+
+rm -rf ~/rpmbuild/SPECS/gostcryptogui.spec
+
+cp spec\ for\ 7.2/gostcryptogui.spec ~/rpmbuild/SPECS/
+rpmbuild -ba ~/rpmbuild/SPECS/gostcryptogui.spec
+
+rsync -ah --progress ~/rpmbuild/RPMS/noarch/gostcryptogui-$1-1.el7.2.noarch.rpm ~/git_projects/gost-crypto-gui/gostcryptogui-$1-1.el7.2.noarch.rpm
+rsync -ah --progress ~/rpmbuild/SRPMS/gostcryptogui-$1-1.el7.2.src.rpm ~/git_projects/gost-crypto-gui/gostcryptogui-$1-1.el7.2.src.rpm
+
+cp spec\ for\ 7.3/gostcryptogui.spec ~/rpmbuild/SPECS/
+rpmbuild -ba ~/rpmbuild/SPECS/gostcryptogui.spec
+
+rm -rf gostcryptogui-$1.tar.gz gostcryptogui-$1
+
+rsync -ah --progress ~/rpmbuild/RPMS/noarch/gostcryptogui-$1-1.el7.3.noarch.rpm ~/git_projects/gost-crypto-gui/gostcryptogui-$1-1.el7.3.noarch.rpm
+rsync -ah --progress ~/rpmbuild/SRPMS/gostcryptogui-$1-1.el7.3.src.rpm ~/git_projects/gost-crypto-gui/gostcryptogui-$1-1.el7.3.src.rpm

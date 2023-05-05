@@ -1,8 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 """
 Copyright (c) 2018 Борис Макаренко
+Copyright (c) 2022-2023 Мурылев Владлен
 
 Данная лицензия разрешает лицам, получившим копию данного программного
 обеспечения и сопутствующей документации (в дальнейшем именуемыми «Программное
@@ -24,6 +25,7 @@ Copyright (c) 2018 Борис Макаренко
 ИСПОЛЬЗОВАНИЯ ПРОГРАММНОГО ОБЕСПЕЧЕНИЯ ИЛИ ИНЫХ ДЕЙСТВИЙ С ПРОГРАММНЫМ ОБЕСПЕЧЕНИЕМ..
 
 Copyright (c) 2018 Boris Makarenko
+Copyright (c) 2022-2023 Vladlen Murylev
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -54,20 +56,22 @@ def nongui(fun):
     """Decorator running the function in non-gui thread while
     processing the gui events."""
     from multiprocessing.pool import ThreadPool
-    from PyQt4.QtGui import QApplication
+    from PyQt5.QtWidgets import QApplication
 
     def wrap(*args, **kwargs):
         pool = ThreadPool(processes=1)
-        async = pool.apply_async(fun, args, kwargs)
-        while not async.ready():
-            async.wait(0.01)
+        async_ = pool.apply_async(fun, args, kwargs)
+        while not async_.ready():
+            async_.wait(0.01)
             QApplication.processEvents()
-        return async.get()
+        return async_.get()
 
     return wrap
 
 # Класс CryptoPro предназнаечен для выполнения криптографических операций над файлами средствами КриптоПро CSP
 
+def versiontuple(v):
+    return tuple(map(int, (v.split("."))))
 
 class CryptoPro:
     arch = str
@@ -80,7 +84,9 @@ class CryptoPro:
         elif platform.machine() == 'i686':
             self.arch = 'ia32'
         elif  platform.machine() == 'e2k':
-            arch = 'e2k64'
+            self.arch = 'e2k64'
+        elif  platform.machine() == 'aarch64':
+            self.arch = 'aarch64'
         else:
             raise Exception(u'Текущая архитектура %s не поддерживается' % platform.machine())
         if not os.path.exists('/opt/cprocsp/bin/%s/certmgr' % self.arch) or not os.path.exists('/opt/cprocsp/bin/%s/cryptcp' % self.arch):
@@ -88,6 +94,14 @@ class CryptoPro:
         # КОСТЫЛЬ: Создаем временную директорию для хранения отсоединенных подписей
         if not os.path.exists('/tmp/gost-crypto-gui'):
             os.makedirs('/tmp/gost-crypto-gui')
+
+    def get_cspversion(self):
+        csptest = subprocess.Popen(['/opt/cprocsp/bin/%s/csptest' % self.arch, '-keyset', '-verifycontext'],
+                                   stdout=subprocess.PIPE)
+        temp_output = csptest.communicate()[0].decode('utf-8')
+        output = temp_output.split('\n')[0]
+        r = re.search(r'v([0-9.]*[0-9]+)\ (.+)\ Release Ver\:([0-9.]*[0-9]+)\ OS\:([a-zA-z]+)', output)
+        return r.group(1), r.group(2), r.group(3), r.group(4)
 
     # Метод error_description принимает код ошибки и возвращает её описание. Если такой ошибки в словаре нет,
     # то код ошибки возвращается обратно
@@ -167,24 +181,92 @@ class CryptoPro:
         else:
             pass
         output = certmgr.communicate()[0]
-        m = re.findall(
-            r'\d+-{7}\nIssuer.*?: (.+?)\n.*?Subject.*?: (.+?)\n.*?Serial.*?: (?:0x)?(.+?)\n.*?SHA1 Hash.*?: (?:0x)?(.+?)\n.*?Not valid before.*?(\d.+?)UTC\n.*?Not valid after.*?(\d.+?)UTC\n.*?PrivateKey Link.*?(Yes|No).*?\n',
-            output, re.MULTILINE + re.DOTALL)
-        for cert in m:
-            issuerDN = dict(re.findall(ur'([A-Za-z0-9\.]+?)=([\xab\xbb\(\)\w \.\,0-9@\-\#\/\"\/\']+|\"(?:\\.|[^\"])*\")(?:, |$)',
-                                       cert[0].decode('utf-8'), re.UNICODE))
-            issuerCN = issuerDN['CN']
-            subjectDN = dict(re.findall(ur'([A-Za-z0-9\.]+?)=([\xab\xbb\(\)\w \.\,0-9@\-\#\/\"\/\']+|\"(?:\\.|[^\"])*\")(?:, |$)',
-                                        cert[1].decode('utf-8'), re.UNICODE))
-            subjectCN = subjectDN['CN']
-            secretKey = cert[6]
-            serial = cert[2]
-            thumbprint = cert[3]
-            notValidBefore = cert[4]
-            notValidAfter = cert[5]
+        cert_dict = self.create_certs_dict(output.decode('utf-8'))
+        for k in cert_dict:
+            single_cert_dict = self.create_single_cert_dict(cert_dict[k])
+            cert_keys = list(single_cert_dict.keys())
+            issuerKey = list(filter(lambda v: re.match(r'Issuer|Издатель', v), cert_keys))
+            subjectKey = list(filter(lambda v: re.match(r'Subject|Субъект', v), cert_keys))
+            SerialKey = list(filter(lambda v: re.match(r'Serial|Серийный номер', v), cert_keys))
+            SHA1Key= list(filter(lambda v: re.match(r'SHA1 Hash|Хэш SHA1|SHA1 отпечаток', v), cert_keys))
+            BeforeKey = list(filter(lambda v: re.match(r'Not valid before|Выдан', v), cert_keys))
+            AfterKey = list(filter(lambda v: re.match(r'Not valid after|Истекает', v), cert_keys))
+            PrivateKey = list(filter(lambda v: re.match(r'PrivateKey Link|Ссылка на ключ', v), cert_keys))
+
+            issuerDN = self.create_dict_from_strk(single_cert_dict[issuerKey[0]])
+            issuerCN = issuerDN['CN'].strip()
+            subjectDN = self.create_dict_from_strk(single_cert_dict[subjectKey[0]])
+            subjectCN = subjectDN['CN'].strip()
+            secretKey = single_cert_dict[PrivateKey[0]].strip()
+            serial = single_cert_dict[SerialKey[0]].strip()
+            thumbprint = single_cert_dict[SHA1Key[0]].strip()
+            notValidBefore = re.sub("UTC", "", single_cert_dict[BeforeKey[0]]).strip()
+            notValidAfter = re.sub("UTC", "", single_cert_dict[AfterKey[0]]).strip()
+
             yield dict(issuerDN=issuerDN, issuerCN=issuerCN, subjectDN=subjectDN, subjectCN=subjectCN,
                        secretKey=secretKey, serial=serial, thumbprint=thumbprint, notValidBefore=notValidBefore,
                        notValidAfter=notValidAfter)
+
+
+    def create_certs_dict(self, strk):
+        strk_keys = re.findall("\d+-{7}\n", strk.strip(), re.MULTILINE + re.DOTALL)
+        strk_list = re.split("\d+-{7}\n", strk.strip(), re.MULTILINE + re.DOTALL)[1:]
+        new_dict = {}
+        counter_keys = 0
+        for i in range(0, len(strk_list)):
+            temp_str = strk_list[i].strip()
+            new_dict[strk_keys[counter_keys]] = temp_str if i != len(strk_list)-1 else re.split("\==.*\n", temp_str)[0]
+            counter_keys += 1
+        return new_dict
+
+    def create_single_cert_dict(self, strk):
+        if re.findall(r'(Назначение/EKU|Extended Key Usage)', strk.strip(), re.MULTILINE + re.DOTALL):
+            parts = re.split(r'(Назначение/EKU|Extended Key Usage)', strk.strip(), re.MULTILINE + re.DOTALL)
+            strk_keys1 = re.findall("^([A-Za-zА-Яа-я0-9 ]+?)\:", parts[0], re.MULTILINE + re.DOTALL)
+            strk_rows = re.findall(r'^([A-Za-zА-Яа-я0-9 ]+?)\:(.+?)[\n].*?', parts[0], re.MULTILINE + re.DOTALL)
+            keys_dict_count = {i[0].strip(): strk_keys1.count(i[0]) for i in strk_rows}
+            new_dict = {}
+            for k in keys_dict_count:
+                new_dict[k] = [] if keys_dict_count[k] > 1 else ""
+            for el in strk_rows:
+                el0 = el[0].strip()
+                if type(new_dict[el0]) is str:
+                    new_dict[el0] = el[1]
+                elif type(new_dict[el0]) is list:
+                    new_dict[el0].append(el[1])
+            strk_keys2 = parts[1]
+            strk_rows2 = parts[2]
+            strk_rows2 = re.sub(":", "", strk_rows2.strip()).split("\n")
+            new_dict[strk_keys2] = []
+            for k in strk_rows2:
+                new_dict[strk_keys2].append(k.strip())
+        else:
+            strk_rows = re.findall(r'^([A-Za-zА-Яа-я0-9 ]+?)\:(.+?)[\n].*?', strk.strip(), re.MULTILINE + re.DOTALL)
+            strk_keys = re.findall("^([A-Za-zА-Яа-я0-9 ]+?)\:", strk.strip(), re.MULTILINE + re.DOTALL)
+            keys_dict_count = {i[0].strip(): strk_keys.count(i[0]) for i in strk_rows}
+            new_dict = {}
+            for k in keys_dict_count:
+                new_dict[k] = [] if keys_dict_count[k] > 1 else ""
+            for el in strk_rows:
+                el0 = el[0].strip()
+                if type(new_dict[el0]) is str:
+                    new_dict[el0] = el[1]
+                elif type(new_dict[el0]) is list:
+                    new_dict[el0].append(el[1])
+        return new_dict
+
+    def create_dict_from_strk(self, strk):
+        strk_keys = re.findall("([A-Za-z0-9\.]+?)=", strk.strip())
+
+        strk_list = re.split("([A-Za-z0-9\.]+?)=", strk.strip())[1:]
+        new_dict = {}
+        counter_keys = 0
+        for i in range(1, len(strk_list), 2):
+            temp_str = strk_list[i].strip()
+            new_dict[strk_keys[counter_keys]] = temp_str[:-1] if "," == temp_str[-1] else temp_str
+            counter_keys += 1
+        return new_dict
+
 
     # Метод sign выполняет операцию подписи заданного файла(filepath), при помощи заданного SHA-отпечатка
     # сертификата(thumbprint) и используя заданную кодировку(encoding): DER или BASE64
@@ -194,9 +276,10 @@ class CryptoPro:
     @nongui
     def sign(self, thumbprint, filepath, encoding, dettached=False):
         # Исправляем криптопрошные крокозябры
+        # print(thumbprint, filepath, encoding, dettached)
         new_env = dict(os.environ)
         new_env['LANG'] = 'en_US.UTF-8'
-
+        # new_env['timeout'] = '10'
         cryptcp_args = ['/opt/cprocsp/bin/%s/cryptcp' % self.arch, '-thumbprint', thumbprint, filepath]
         if dettached:
             cryptcp_args.insert(1, '-signf')
@@ -205,13 +288,17 @@ class CryptoPro:
             cryptcp_args.insert(1, '-sign')
         if encoding == 'der':
             cryptcp_args.insert(-1, '-der')
-
+        print(cryptcp_args)
+        # cryptcp_args.insert(-1, '-nochain')
+        # cryptcp_args.insert(-1, '-norev')
         cryptcp = subprocess.Popen(cryptcp_args, cwd=os.path.dirname(filepath), stdout=subprocess.PIPE, stdin=subprocess.PIPE, env=new_env)
 
         # Согласиться
-        cryptcp.stdin.write('Y')
-        output = cryptcp.stdout.read()
-        errorcode = re.search(r'(?:ErrorCode: |ReturnCode: )(?P<errorcode>\w+)', output,
+        output, errors = cryptcp.communicate(b'Y\n')
+
+        errorcode = re.search(r'(?:ErrorCode: |ReturnCode: )(?P<errorcode>\w+)', errors.decode('utf-8'),
+                              re.MULTILINE + re.DOTALL).groupdict()['errorcode'] if errors is not None else \
+            re.search(r'(?:ErrorCode: |ReturnCode: )(?P<errorcode>\w+)', output.decode('utf-8'),
                               re.MULTILINE + re.DOTALL).groupdict()['errorcode']
         # КОСТЫЛЬ переименовываем отсоединенные подписи из sgn в sig
         if dettached:
@@ -222,7 +309,7 @@ class CryptoPro:
         if not int(errorcode, 0) == 0:
             raise Exception(self.error_description(errorcode))
         # Проверяем наличие в выводе сообщения об ошибке проверки цепочки сертификатов
-        elif 'Certificate chain is not checked for this certificate' in output:
+        elif 'Certificate chain is not checked for this certificate' in output.decode('utf-8'):
             return True, self.error_description('0x20000133')
         else:
             return True, None
@@ -244,16 +331,15 @@ class CryptoPro:
         new_env['LANG'] = 'en_US.UTF-8'
         if dettach:
             cryptcp = subprocess.Popen(
-                ['/opt/cprocsp/bin/%s/cryptcp' % self.arch, '-verify', '-verall', filepath, filepath[:-4]],
+                ['/opt/cprocsp/bin/%s/cryptcp' % self.arch, '-delsign', filepath],
                 stdout=subprocess.PIPE, stdin=subprocess.PIPE, env=new_env, shell=False)
         else:
             cryptcp = subprocess.Popen(['/opt/cprocsp/bin/%s/cryptcp' % self.arch, '-verify', '-verall', filepath],
                                        stdout=subprocess.PIPE, stdin=subprocess.PIPE, env=new_env, shell=False)
         # Согласиться
-        cryptcp.stdin.write('Y')
-        output = cryptcp.stdout.read()
+        output, errors = cryptcp.communicate(b'Y\n')
 
-        errorcode = re.search(r'(?:ErrorCode: |ReturnCode: )(?P<errorcode>\w+)', output,
+        errorcode = re.search(r'(?:ErrorCode: |ReturnCode: )(?P<errorcode>\w+)', output.decode('utf-8'),
                               re.MULTILINE + re.DOTALL).groupdict()['errorcode']
         cert_info = self.get_store_certs(crt_file=filepath)
 
@@ -264,18 +350,19 @@ class CryptoPro:
             cryptcp = subprocess.Popen(['/opt/cprocsp/bin/%s/cryptcp' % self.arch, '-vsignf',
                                         '-dir', '/tmp/gost-crypto-gui/', '-f', tmpname, filepath[:-4]],
                                        stdout=subprocess.PIPE, stdin=subprocess.PIPE, env=new_env, shell=False)
-            cryptcp.stdin.write('Y')
-            cryptcp.stdin.write('Y')
-            output = cryptcp.stdout.read()
+
+            output, errors = cryptcp.communicate(b'Y\nY\n')
+
+            # output = cryptcp.stdout.read().decode('utf-8')
             cert_info = self.get_store_certs(crt_file=tmpname)
 
         chainisverified = ('The certificate revocation status or one of the certificates in the certificate chain is'
-                           ' unknown.' not in output) \
-                          and ('Certificate chain is not checked for this certificate' not in output)
+                           ' unknown.' not in output.decode('utf-8')) \
+                          and ('Certificate chain is not checked for this certificate' not in output.decode('utf-8'))
         chainisrevoked = 'Trust for this certificate or one of the certificates in the certificate chain has' \
-                         ' been revoked' in output
-        certisexpired = 'This certificate or one of the certificates in the certificate chain is not time valid.' in output
-        errorcode = re.search(r'(?:ErrorCode: |ReturnCode: )(?P<errorcode>\w+)', output,
+                         ' been revoked' in output.decode('utf-8')
+        certisexpired = 'This certificate or one of the certificates in the certificate chain is not time valid.' in output.decode('utf-8')
+        errorcode = re.search(r'(?:ErrorCode: |ReturnCode: )(?P<errorcode>\w+)', output.decode('utf-8'),
                               re.MULTILINE + re.DOTALL).groupdict()['errorcode']
         if not int(errorcode, 0) == 0:
             raise Exception(self.error_description(errorcode))
@@ -286,30 +373,30 @@ class CryptoPro:
     #  или имени файла сертификата (thumbprint), и используя заданную кодировку(encoding): DER или BASE64
     # Путь до файла должен быть абсолютным. Зашифрованный файл сохраняется в той же директории с расширением '.enc'
     @nongui
-    def encrypt(self, thumbprint, filepath, encoding):
+    def encrypt(self, thumbprint, filepath, encoding, fileend):
         # Исправляем криптопрошные крокозябры
         new_env = dict(os.environ)
         new_env['LANG'] = 'en_US.UTF-8'
 
         if encoding == 'der':
             cryptcp = subprocess.Popen(['/opt/cprocsp/bin/%s/cryptcp' % self.arch, '-encr', '-der',
-                                         '-f' if thumbprint[0] == '/' else '-thumbprint', thumbprint, filepath, filepath + '.enc'],
+                                         '-f' if thumbprint[0] == '/' else '-thumbprint', thumbprint, filepath, filepath + fileend],
                                        stdout=subprocess.PIPE, stdin=subprocess.PIPE, env=new_env, shell=False)
         else:
             cryptcp = subprocess.Popen(
                 ['/opt/cprocsp/bin/%s/cryptcp' % self.arch, '-encr', '-f' if thumbprint[0] == '/' else '-thumbprint', thumbprint, filepath,
-                 filepath + '.enc'],
+                 filepath + fileend],
                 stdout=subprocess.PIPE, stdin=subprocess.PIPE, env=new_env, shell=False)
         # Согласит
-        cryptcp.stdin.write('Y')
-        output = cryptcp.stdout.read()
+        output, errors = cryptcp.communicate(b'Y\n')
+        # output = cryptcp.stdout.read().decode('utf-8')
         chainisverified = ('The certificate revocation status or one of the certificates in the certificate chain is'
-                           ' unknown.' not in output) \
-                          and ('Certificate chain is not checked for this certificate' not in output)
+                           ' unknown.' not in output.decode('utf-8')) \
+                          and ('Certificate chain is not checked for this certificate' not in output.decode('utf-8'))
         chainisrevoked = 'Trust for this certificate or one of the certificates in the certificate chain has' \
-                         ' been revoked' in output
-        certisexpired = 'This certificate or one of the certificates in the certificate chain is not time valid.' in output
-        errorcode = re.search(r'(?:ErrorCode: |ReturnCode: )(?P<errorcode>\w+)', output,
+                         ' been revoked' in output.decode('utf-8')
+        certisexpired = 'This certificate or one of the certificates in the certificate chain is not time valid.' in output.decode('utf-8')
+        errorcode = re.search(r'(?:ErrorCode: |ReturnCode: )(?P<errorcode>\w+)', output.decode('utf-8'),
                               re.MULTILINE + re.DOTALL).groupdict()['errorcode']
         if not int(errorcode, 0) == 0:
             raise Exception(self.error_description(errorcode))
@@ -330,15 +417,15 @@ class CryptoPro:
                                     '-thumbprint', thumbprint, filepath, filepath[:-4]],
                                    stdout=subprocess.PIPE, stdin=subprocess.PIPE, env=new_env, shell=False)
         # Согласит
-        cryptcp.stdin.write('Y')
-        output = cryptcp.stdout.read()
+        output, errors = cryptcp.communicate(b'Y\n')
+
         chainisverified = ('The certificate revocation status or one of the certificates in the certificate chain is'
-                           ' unknown.' not in output) \
-                          and ('Certificate chain is not checked for this certificate' not in output)
+                           ' unknown.' not in output.decode('utf-8')) \
+                          and ('Certificate chain is not checked for this certificate' not in output.decode('utf-8'))
         chainisrevoked = 'Trust for this certificate or one of the certificates in the certificate chain has' \
-                         ' been revoked' in output
-        certisexpired = 'This certificate or one of the certificates in the certificate chain is not time valid.' in output
-        errorcode = re.search(r'(?:ErrorCode: |ReturnCode: )(?P<errorcode>\w+)', output,
+                         ' been revoked' in output.decode('utf-8')
+        certisexpired = 'This certificate or one of the certificates in the certificate chain is not time valid.' in output.decode('utf-8')
+        errorcode = re.search(r'(?:ErrorCode: |ReturnCode: )(?P<errorcode>\w+)', output.decode('utf-8'),
                               re.MULTILINE + re.DOTALL).groupdict()['errorcode']
         if not int(errorcode, 0) == 0:
             raise Exception(self.error_description(errorcode))
