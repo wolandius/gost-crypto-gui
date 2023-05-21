@@ -3,14 +3,29 @@
 import sys
 import os.path
 
-from gostcryptogui import gui
-# import gui
-
-from PyQt5 import QtGui, QtWidgets
+# from gostcryptogui import gui
+import gui
+import PyQt5
+from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5.QtCore import QTranslator
 
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
+
+    print(PyQt5.QtCore.QLocale().system().name())
+    print(PyQt5.QtCore.QLocale().system())
+    if "ru_RU" in PyQt5.QtCore.QLocale().system().name():
+        pass
+    elif "en_US" in PyQt5.QtCore.QLocale().system().name():
+        translator = QTranslator(app)
+        translator.load("GostCryptoGui-en_US.qm", "/home/wolandius/git_projects/gost-crypto-gui/data/locales")
+        app.installTranslator(translator)
+    else:
+        translator = QTranslator(app)
+        translator.load("GostCryptoGui-en_US.qm", "/home/wolandius/git_projects/gost-crypto-gui/data/locales")
+        app.installTranslator(translator)
+
     ex = gui.Window()
     if not os.path.exists("~/.gost-crypto-gui/"):
         ex.setOptions()
@@ -19,14 +34,14 @@ def main():
         ex.show()
         sys.exit(app.exec_())
     elif sys.argv[1] == '--help':
-        print('Использование: gost-crypto-gui [КЛЮЧ] [ФАЙЛ]')
-        print('Выполняет криптографические операции над файлами при помощи алгоритмов ГОСТ\n')
-        print('Ключи:\n')
-        print('-sign\t\tПодписать файл')
-        print('-encr\t\tЗашифровать файл')
-        print('-verify\t\tПроверить электронную подпись файла')
-        print('-dettach\tОтсоединить электронную подпись от файла')
-        print('-decr\t\tРасшифровать файл')
+        print(PyQt5.QtCore.QCoreApplication.translate('', 'Использование: gost-crypto-gui [КЛЮЧ] [ФАЙЛ]'))
+        print(PyQt5.QtCore.QCoreApplication.translate('', 'Выполняет криптографические операции над файлами при помощи алгоритмов ГОСТ\n'))
+        print(PyQt5.QtCore.QCoreApplication.translate('', 'Ключи:\n'))
+        print(PyQt5.QtCore.QCoreApplication.translate('', '-sign\t\tПодписать файл'))
+        print(PyQt5.QtCore.QCoreApplication.translate('', '-encr\t\tЗашифровать файл'))
+        print(PyQt5.QtCore.QCoreApplication.translate('', '-verify\t\tПроверить электронную подпись файла'))
+        print(PyQt5.QtCore.QCoreApplication.translate('', '-dettach\tОтсоединить электронную подпись от файла'))
+        print(PyQt5.QtCore.QCoreApplication.translate('', '-decr\t\tРасшифровать файл'))
     else:
         filename = ""
         for i in range(2, len(sys.argv)):

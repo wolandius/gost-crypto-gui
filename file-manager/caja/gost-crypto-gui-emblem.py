@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 """
@@ -43,7 +43,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
-import ConfigParser
+import configparser
 import os.path
 import gostcryptogui
 from gi.repository import Caja, GObject
@@ -56,10 +56,10 @@ class SignatureCheckProvider(GObject.GObject, Caja.InfoProvider):
 
     def readConfig(self):
         try:
-            config = ConfigParser.ConfigParser()
+            config = configparser.ConfigParser.ConfigParser()
             config.read(os.path.expanduser('~/.gost-crypto-gui/config.cfg'))
             return config.getboolean('gost-crypto-gui', 'signcheck')
-        except ConfigParser.NoSectionError:
+        except configparser.ConfigParser.NoSectionError:
             return True
 
     def update_file_info(self, file):
@@ -67,7 +67,7 @@ class SignatureCheckProvider(GObject.GObject, Caja.InfoProvider):
             return
         if os.path.splitext(file.get_name())[1] == ".sig" and self.readConfig():
             filepath = urllib.unquote(file.get_uri())[7:]
-            signer, chain, revoked, expired = gostcryptogui.cprocsp.CryptoPro().verify(unicode(filepath), False)
+            signer, chain, revoked, expired = gostcryptogui.cprocsp.CryptoPro().verify(filepath, False)
             if not chain:
                 file.add_emblem("nochain")
             elif expired or revoked:

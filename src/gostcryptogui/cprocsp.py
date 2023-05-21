@@ -50,7 +50,8 @@ import platform
 import shutil
 import subprocess
 import re
-
+import PyQt5
+from PyQt5.QtCore import QCoreApplication
 
 def nongui(fun):
     """Decorator running the function in non-gui thread while
@@ -88,9 +89,9 @@ class CryptoPro:
         elif  platform.machine() == 'aarch64':
             self.arch = 'aarch64'
         else:
-            raise Exception(u'Текущая архитектура %s не поддерживается' % platform.machine())
+            raise Exception(PyQt5.QtCore.QCoreApplication.translate('','Текущая архитектура %s не поддерживается') % platform.machine())
         if not os.path.exists('/opt/cprocsp/bin/%s/certmgr' % self.arch) or not os.path.exists('/opt/cprocsp/bin/%s/cryptcp' % self.arch):
-            raise Exception(u'СКЗИ Крипто Про CSP или некоторые его компоненты не установлены.')
+            raise Exception(PyQt5.QtCore.QCoreApplication.translate('','СКЗИ Крипто Про CSP или некоторые его компоненты не установлены.'))
         # КОСТЫЛЬ: Создаем временную директорию для хранения отсоединенных подписей
         if not os.path.exists('/tmp/gost-crypto-gui'):
             os.makedirs('/tmp/gost-crypto-gui')
@@ -107,63 +108,63 @@ class CryptoPro:
     # то код ошибки возвращается обратно
     @staticmethod
     def error_description(error):
-        errors = {'0x20000064': u'Мало памяти',
-                  '0x20000065': u'Не удалось открыть файл',
-                  '0x20000066': u'Операция отменена пользователем',
-                  '0x20000067': u'Некорректное преобразование BASE64',
-                  '0x20000068': u'Если указан параметр -help, то других быть не должно',
-                  '0x200000c8': u'Указан лишний файл',
-                  '0x200000c9': u'Указан неизвестный ключ',
-                  '0x200000ca': u'Указана лишняя команда',
-                  '0x200000cb': u'Для ключа не указан параметр',
-                  '0x200000cc': u'Не указана команда',
-                  '0x200000cd': u'Не указан необходимый ключ',
-                  '0x200000ce': u'Указан неверный ключ',
-                  '0x200000cf': u'Параметром ключа -q должно быть натуральное число',
-                  '0x200000d0': u'Не указан входной файл',
-                  '0x200000d1': u'Не указан выходной файл',
-                  '0x200000d2': u'Команда не использует параметр с именем файла',
-                  '0x200000d3': u'Не указан  файл сообщения',
-                  '0x2000012c': u'Не удалось открыть хранилище сертификатов:',
-                  '0x2000012d': u'Сертификаты не найдены',
-                  '0x2000012e': u'Найдено более одного сертификата (ключ -1)',
-                  '0x2000012f': u'Команда подразумевает использование только одного сертификата',
-                  '0x20000130': u'Неверно указан номер',
-                  '0x20000131': u'Нет используемых сертификатов',
-                  '0x20000132': u'Данный сертификат не может применяться для этой операции',
-                  '0x20000133': u'Цепочка сертификатов не проверена. Либо сертификат был отозван или срок действия истек.',
-                  '0x20000134': u'Криптопровайдер, поддерживающий необходимый алгоритм не найден',
-                  '0x20000135': u'Неудачный ввод пароля ключевого контейнера',
-                  '0x20000136': u'Ошибка связи с закрытым ключом',
-                  '0x20000190': u'Не указана маска файлов',
-                  '0x20000191': u'Указаны несколько масок файлов',
-                  '0x20000192': u'Файлы не найдены',
-                  '0x20000193': u'Задана неверная маска',
-                  '0x20000194': u'Неверный хеш',
-                  '0x200001f4': u'Ключ -start указан, а выходной файл нет',
-                  '0x200001f5': u'Содержимое файла - не подписанное сообщение',
-                  '0x200001f6': u'Неизвестный алгоритм подписи',
-                  '0x200001f7': u'Сертификат автора подписи не найден',
-                  '0x200001f8': u'Подпись не найдена',
-                  '0x200001f9': u'Подпись не верна',
-                  '0x20000200': u'Штамп времени не верен',
-                  '0x20000258': u'Содержимое файла - не зашифрованное сообщение',
-                  '0x20000259': u'Неизвестный алгоритм шифрования',
-                  '0x2000025a': u'Не найден сертификат с соответствующим секретным ключом',
-                  '0x200002bc': u'Не удалось инициализировать cOM',
-                  '0x200002bd': u'Контейнеры не найдены',
-                  '0x200002be': u'Не удалось получить ответ от сервера',
-                  '0x200002bf': u'Сертификат не найден в ответе сервера',
-                  '0x200002c0': u'Файл не содержит идентификатор запроса:',
-                  '0x200002c1': u'Некорректный адрес ЦС',
-                  '0x200002c2': u'Получен неверный cookie',
-                  '0x20000320': u'Серийный номер содержит недопустимое количество символов',
-                  '0x20000321': u'Неверный код продукта',
-                  '0x20000322': u'Не удалось проверить серийный номер',
-                  '0x20000323': u'Не удалось сохранить серийный номер',
-                  '0x20000324': u'Не удалось загрузить серийный номер',
-                  '0x20000325': u'Лицензия просрочена',
-                  '0x0000065b': u'Отсутствует лицензия КриптоПро CSP'}
+        errors = {'0x20000064': PyQt5.QtCore.QCoreApplication.translate('', 'Мало памяти'),
+                  '0x20000065': PyQt5.QtCore.QCoreApplication.translate('', 'Не удалось открыть файл'),
+                  '0x20000066': PyQt5.QtCore.QCoreApplication.translate('', 'Операция отменена пользователем'),
+                  '0x20000067': PyQt5.QtCore.QCoreApplication.translate('', 'Некорректное преобразование BASE64'),
+                  '0x20000068': PyQt5.QtCore.QCoreApplication.translate('', 'Если указан параметр -help, то других быть не должно'),
+                  '0x200000c8': PyQt5.QtCore.QCoreApplication.translate('', 'Указан лишний файл'),
+                  '0x200000c9': PyQt5.QtCore.QCoreApplication.translate('', 'Указан неизвестный ключ'),
+                  '0x200000ca': PyQt5.QtCore.QCoreApplication.translate('', 'Указана лишняя команда'),
+                  '0x200000cb': PyQt5.QtCore.QCoreApplication.translate('', 'Для ключа не указан параметр'),
+                  '0x200000cc': PyQt5.QtCore.QCoreApplication.translate('', 'Не указана команда'),
+                  '0x200000cd': PyQt5.QtCore.QCoreApplication.translate('', 'Не указан необходимый ключ'),
+                  '0x200000ce': PyQt5.QtCore.QCoreApplication.translate('', 'Указан неверный ключ'),
+                  '0x200000cf': PyQt5.QtCore.QCoreApplication.translate('', 'Параметром ключа -q должно быть натуральное число'),
+                  '0x200000d0': PyQt5.QtCore.QCoreApplication.translate('', 'Не указан входной файл'),
+                  '0x200000d1': PyQt5.QtCore.QCoreApplication.translate('', 'Не указан выходной файл'),
+                  '0x200000d2': PyQt5.QtCore.QCoreApplication.translate('', 'Команда не использует параметр с именем файла'),
+                  '0x200000d3': PyQt5.QtCore.QCoreApplication.translate('', 'Не указан  файл сообщения'),
+                  '0x2000012c': PyQt5.QtCore.QCoreApplication.translate('', 'Не удалось открыть хранилище сертификатов:'),
+                  '0x2000012d': PyQt5.QtCore.QCoreApplication.translate('', 'Сертификаты не найдены'),
+                  '0x2000012e': PyQt5.QtCore.QCoreApplication.translate('', 'Найдено более одного сертификата (ключ -1)'),
+                  '0x2000012f': PyQt5.QtCore.QCoreApplication.translate('', 'Команда подразумевает использование только одного сертификата'),
+                  '0x20000130': PyQt5.QtCore.QCoreApplication.translate('', 'Неверно указан номер'),
+                  '0x20000131': PyQt5.QtCore.QCoreApplication.translate('', 'Нет используемых сертификатов'),
+                  '0x20000132': PyQt5.QtCore.QCoreApplication.translate('', 'Данный сертификат не может применяться для этой операции'),
+                  '0x20000133': PyQt5.QtCore.QCoreApplication.translate('', 'Цепочка сертификатов не проверена. Либо сертификат был отозван или срок действия истек.'),
+                  '0x20000134': PyQt5.QtCore.QCoreApplication.translate('', 'Криптопровайдер, поддерживающий необходимый алгоритм не найден'),
+                  '0x20000135': PyQt5.QtCore.QCoreApplication.translate('', 'Неудачный ввод пароля ключевого контейнера'),
+                  '0x20000136': PyQt5.QtCore.QCoreApplication.translate('', 'Ошибка связи с закрытым ключом'),
+                  '0x20000190': PyQt5.QtCore.QCoreApplication.translate('', 'Не указана маска файлов'),
+                  '0x20000191': PyQt5.QtCore.QCoreApplication.translate('', 'Указаны несколько масок файлов'),
+                  '0x20000192': PyQt5.QtCore.QCoreApplication.translate('', 'Файлы не найдены'),
+                  '0x20000193': PyQt5.QtCore.QCoreApplication.translate('', 'Задана неверная маска'),
+                  '0x20000194': PyQt5.QtCore.QCoreApplication.translate('', 'Неверный хеш'),
+                  '0x200001f4': PyQt5.QtCore.QCoreApplication.translate('', 'Ключ -start указан, а выходной файл нет'),
+                  '0x200001f5': PyQt5.QtCore.QCoreApplication.translate('', 'Содержимое файла - не подписанное сообщение'),
+                  '0x200001f6': PyQt5.QtCore.QCoreApplication.translate('', 'Неизвестный алгоритм подписи'),
+                  '0x200001f7': PyQt5.QtCore.QCoreApplication.translate('', 'Сертификат автора подписи не найден'),
+                  '0x200001f8': PyQt5.QtCore.QCoreApplication.translate('', 'Подпись не найдена'),
+                  '0x200001f9': PyQt5.QtCore.QCoreApplication.translate('', 'Подпись не верна'),
+                  '0x20000200': PyQt5.QtCore.QCoreApplication.translate('', 'Штамп времени не верен'),
+                  '0x20000258': PyQt5.QtCore.QCoreApplication.translate('', 'Содержимое файла - не зашифрованное сообщение'),
+                  '0x20000259': PyQt5.QtCore.QCoreApplication.translate('', 'Неизвестный алгоритм шифрования'),
+                  '0x2000025a': PyQt5.QtCore.QCoreApplication.translate('', 'Не найден сертификат с соответствующим секретным ключом'),
+                  '0x200002bc': PyQt5.QtCore.QCoreApplication.translate('', 'Не удалось инициализировать cOM'),
+                  '0x200002bd': PyQt5.QtCore.QCoreApplication.translate('', 'Контейнеры не найдены'),
+                  '0x200002be': PyQt5.QtCore.QCoreApplication.translate('', 'Не удалось получить ответ от сервера'),
+                  '0x200002bf': PyQt5.QtCore.QCoreApplication.translate('', 'Сертификат не найден в ответе сервера'),
+                  '0x200002c0': PyQt5.QtCore.QCoreApplication.translate('', 'Файл не содержит идентификатор запроса:'),
+                  '0x200002c1': PyQt5.QtCore.QCoreApplication.translate('', 'Некорректный адрес ЦС'),
+                  '0x200002c2': PyQt5.QtCore.QCoreApplication.translate('', 'Получен неверный cookie'),
+                  '0x20000320': PyQt5.QtCore.QCoreApplication.translate('', 'Серийный номер содержит недопустимое количество символов'),
+                  '0x20000321': PyQt5.QtCore.QCoreApplication.translate('', 'Неверный код продукта'),
+                  '0x20000322': PyQt5.QtCore.QCoreApplication.translate('', 'Не удалось проверить серийный номер'),
+                  '0x20000323': PyQt5.QtCore.QCoreApplication.translate('', 'Не удалось сохранить серийный номер'),
+                  '0x20000324': PyQt5.QtCore.QCoreApplication.translate('', 'Не удалось загрузить серийный номер'),
+                  '0x20000325': PyQt5.QtCore.QCoreApplication.translate('', 'Лицензия просрочена'),
+                  '0x0000065b': PyQt5.QtCore.QCoreApplication.translate('', 'Отсутствует лицензия КриптоПро CSP')}
         try:
             return errors[error]
         except KeyError:

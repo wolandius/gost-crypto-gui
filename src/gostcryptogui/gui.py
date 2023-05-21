@@ -46,6 +46,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 import configparser
+import os
+import subprocess
 
 from datetime import datetime
 
@@ -54,7 +56,7 @@ from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from gostcryptogui.cprocsp import *
 # from cprocsp import *
 
-VERSION = "1.4"
+VERSION = "2.0"
 class ViewCert(QtWidgets.QDialog):
     report = str
     def __init__(self, parent=None):
@@ -67,7 +69,7 @@ class ViewCert(QtWidgets.QDialog):
         self.show()
 
     def saveReportDialog(self):
-        fileName = QtWidgets.QFileDialog.getSaveFileName(self, u'Сохранить отчет', '', '(*.txt)')
+        fileName = QtWidgets.QFileDialog.getSaveFileName(self, PyQt5.QtCore.QCoreApplication.translate('', 'Сохранить отчет'), '', '(*.txt)')
         if not fileName[0]:
             return
         fileReport = open(fileName[0], 'w')
@@ -120,21 +122,27 @@ class ChooseCert(QtWidgets.QDialog):
         # Получаем сертификаты из личного хранилища
         certs_data = CryptoPro().get_store_certs(store='uMy')
         if not withsecret:
-            cert_list.append('<i>Из файла...</i>')
+            cert_list.append(PyQt5.QtCore.QCoreApplication.translate('', '<i>Из файла...</i>'))
         for line in certs_data:
-            cert_html = f'<img src="/usr/share/gostcryptogui/emblem-verified.png" width=22 height=22><b>{line["subjectCN"]}</b> <br>Выдан:{line["issuerCN"]} <br>' \
-                        f'Серийный номер: {line["serial"]}<br>Хэш SHA1: {line["thumbprint"]}<br>'
+            cert_html = f'<img src="/usr/share/gostcryptogui/emblem-verified.png" width=22 height=22><b>{line["subjectCN"]}</b> '\
+                        PyQt5.QtCore.QCoreApplication.translate('', '<br>Выдан:') \
+                        f'{line["issuerCN"]} <br>' \
+                        PyQt5.QtCore.QCoreApplication.translate('', 'Серийный номер: ') \
+                        f'{line["serial"]}' \
+                        PyQt5.QtCore.QCoreApplication.translate('', '<br>Хэш SHA1: ') \
+                        f'{line["thumbprint"]}<br>'
 
             if datetime.strptime(line['notValidBefore'], '%d/%m/%Y  %H:%M:%S') > datetime.utcnow():
-                cert_html += f'Не действителен до: <font color=red><b>{line["notValidBefore"]}</b></font><br>'
+                cert_html += PyQt5.QtCore.QCoreApplication.translate('', 'Не действителен до: ')\
+                f'<font color=red><b>{line["notValidBefore"]}</b></font><br>'
                 cert_html = cert_html.replace('emblem-verified.png', 'emblem-unverified.png')
             else:
-                cert_html += 'Не действителен до: %s<br>' % line['notValidBefore']
+                cert_html += PyQt5.QtCore.QCoreApplication.translate('', 'Не действителен до: %s<br>') % line['notValidBefore']
             if datetime.strptime(line['notValidAfter'], '%d/%m/%Y  %H:%M:%S') < datetime.utcnow():
-                cert_html += 'Не действителен после: <font color=red><b>%s</b></font>' % line['notValidAfter']
+                cert_html += PyQt5.QtCore.QCoreApplication.translate('', 'Не действителен после: <font color=red><b>%s</b></font>') % line['notValidAfter']
                 cert_html = cert_html.replace('emblem-verified.png', 'emblem-unverified.png')
             else:
-                cert_html += 'Не действителен после: %s' % line['notValidAfter']
+                cert_html += PyQt5.QtCore.QCoreApplication.translate('', 'Не действителен после: %s') % line['notValidAfter']
             if withsecret:
                     cert_list.append(cert_html)
                     self.certs_hashes.append(line)
@@ -180,9 +188,9 @@ class ResultDialog(QtWidgets.QDialog):
         super(ResultDialog, self).__init__(parent)
         self.filename, self.result, self.dettached = filename, result, dettached
         msgBox = QtWidgets.QMessageBox()
-        closeButton = QtWidgets.QPushButton(u'Закрыть')
-        sendButton = QtWidgets.QPushButton(u'Отправить по почте')
-        showButton = QtWidgets.QPushButton(u'Показать в папке')
+        closeButton = QtWidgets.QPushButton(PyQt5.QtCore.QCoreApplication.translate('', 'Закрыть'))
+        sendButton = QtWidgets.QPushButton(PyQt5.QtCore.QCoreApplication.translate('', 'Отправить по почте'))
+        showButton = QtWidgets.QPushButton(PyQt5.QtCore.QCoreApplication.translate('', 'Показать в папке'))
         msgBox.setText(message)
         msgBox.addButton(closeButton, QtWidgets.QMessageBox.NoRole)
         msgBox.addButton(sendButton, QtWidgets.QMessageBox.NoRole)
@@ -214,9 +222,12 @@ class MultiResultDialog(QtWidgets.QDialog):
         for line in output:
             cert_html = f'{line[0]}:<br>' \
                         f'<b>{line[1]}</b><br>' \
-                        f'Информация о сертификате:<br>' \
+                        PyQt5.QtCore.QCoreApplication.translate('', 'Информация о сертификате:<br>') \
                         f'<b>{line[2]["subjectCN"]}</b><br>' \
-                        f'Серийный номер: {line[2]["serial"]}<br>Хэш SHA1: {line[2]["thumbprint"]}<br>' \
+                        PyQt5.QtCore.QCoreApplication.translate('', 'Серийный номер:') \
+                        f'{line[2]["serial"]}'\
+                        PyQt5.QtCore.QCoreApplication.translate('', '<br>Хэш SHA1:')\
+                        ' {line[2]["thumbprint"]}<br>' \
                         f'{line[3]}'
             cert_list.append(cert_html)
         model = QtCore.QStringListModel(cert_list)
@@ -234,7 +245,11 @@ class Window(QtWidgets.QMainWindow):
     def __init__(self):
         super(Window, self).__init__()
         # uic.loadUi('/home/wolandius/git_projects/gost-crypto-gui/data/mainwindow.ui', self)
+
+        # # Translate application
+
         uic.loadUi('/usr/share/gostcryptogui/mainwindow.ui', self)
+
 
         aboutAction = QtWidgets.QAction(u'&О программе', self)
         aboutAction.setShortcut('Ctrl+Q')
@@ -277,7 +292,7 @@ class Window(QtWidgets.QMainWindow):
         try:
             CryptoPro()
         except Exception as error:
-            QtWidgets.QMessageBox().warning(self, u"Cообщение", u"Произошла ошибка:\n%s" % error)
+            QtWidgets.QMessageBox().warning(self, PyQt5.QtCore.QCoreApplication.translate('', "Cообщение"), PyQt5.QtCore.QCoreApplication.translate('', "Произошла ошибка:\n%s") % error)
 
 
     def writeConfig(self):
@@ -357,7 +372,7 @@ class Window(QtWidgets.QMainWindow):
 
     def sign(self, *args):
         if self.sender():
-            file_names = QtWidgets.QFileDialog().getOpenFileNames(self, "Выберите файл(ы)", "", "")
+            file_names = QtWidgets.QFileDialog().getOpenFileNames(self, PyQt5.QtCore.QCoreApplication.translate('', "Выберите файл(ы)"), "", "")
             if not file_names[0]:
                 return
         else:
@@ -365,13 +380,13 @@ class Window(QtWidgets.QMainWindow):
         try:
             choose = ChooseCert(parent=self, withsecret=True)
         except Exception as error:
-            QtWidgets.QMessageBox().warning(self, u"Cообщение", u"Произошла ошибка:\n%s" % error)
+            QtWidgets.QMessageBox().warning(self, PyQt5.QtCore.QCoreApplication.translate('', "Cообщение"), PyQt5.QtCore.QCoreApplication.translate('', "Произошла ошибка:\n%s") % error)
             return
         if choose.exec_():
             cert_info = choose.getCertificate()
         else:
             return
-        progressDialog = QtWidgets.QProgressDialog("", u"Отмена", 0, 0, self)
+        progressDialog = QtWidgets.QProgressDialog("", PyQt5.QtCore.QCoreApplication.translate('', "Отмена"), 0, 0, self)
         progressDialog.setValue(-1)
         if len(file_names) > 1:
             file_names = list(file_names)
@@ -401,7 +416,7 @@ class Window(QtWidgets.QMainWindow):
     def call_sign_dialog(self, progressDialog, index, file_names, filename, cert_info, multimode):
 
         progressDialog.setLabelText(
-            'Подпись файла %s из %s<br>Текущий файл: %s' % (index + 1, len(file_names), filename.split('/')[-1]))
+            PyQt5.QtCore.QCoreApplication.translate('', 'Подпись файла %s из %s<br>Текущий файл: %s') % (index + 1, len(file_names), filename.split('/')[-1]))
         progressDialog.show()
         if progressDialog.wasCanceled():
             return
@@ -411,12 +426,12 @@ class Window(QtWidgets.QMainWindow):
                                       dettached=self.dettached)
             message = ''
             if result[0]:
-                message = "Файл %s успешно подписан.\n\nПодписанный файл: %s\n\n" % \
+                message = PyQt5.QtCore.QCoreApplication.translate('', "Файл %s успешно подписан.\n\nПодписанный файл: %s\n\n") % \
                           (filename, filename + '.sig')
-                message += 'Сертификат:\n{p[subjectCN]}\nВыдан: {p[issuerCN]}\nСерийный номер: {p[serial]}\nНе действителен до: {p[notValidBefore]}\nНе действителен после: {p[notValidAfter]}\n\n'.format(
+                message += PyQt5.QtCore.QCoreApplication.translate('', 'Сертификат:\n{p[subjectCN]}\nВыдан: {p[issuerCN]}\nСерийный номер: {p[serial]}\nНе действителен до: {p[notValidBefore]}\nНе действителен после: {p[notValidAfter]}\n\n').format(
                     p=cert_info)
             if result[1]:
-                message += "\n\nПредупреждение: %s" % result[1]
+                message += PyQt5.QtCore.QCoreApplication.translate('', "\n\nПредупреждение: %s") % result[1]
             progressDialog.hide()
             if not multimode:
                 ResultDialog(filename, filename + '.sig',
@@ -424,19 +439,19 @@ class Window(QtWidgets.QMainWindow):
             else:
                 message = ""
                 if result[1]:
-                    message += "\nПредупреждение: %s" % result[1]
-                return ('Файл успешно подписан', filename + '.sig', cert_info,  message)
+                    message += PyQt5.QtCore.QCoreApplication.translate('', "\nПредупреждение: %s") % result[1]
+                return (PyQt5.QtCore.QCoreApplication.translate('', 'Файл успешно подписан'), filename + '.sig', cert_info,  message)
         except Exception as error:
-            QtWidgets.QMessageBox().warning(self, "Cообщение", u"Произошла ошибка:\n%s" % error)
+            QtWidgets.QMessageBox().warning(self, PyQt5.QtCore.QCoreApplication.translate('', "Cообщение"), PyQt5.QtCore.QCoreApplication.translate('', "Произошла ошибка:\n%s") % error)
 
     def verify(self, dettach=False, *args):
         if self.sender():
-            file_names = QtWidgets.QFileDialog().getOpenFileNames(self, "Выберите файл(ы)", "", "*.sig")
+            file_names = QtWidgets.QFileDialog().getOpenFileNames(self, PyQt5.QtCore.QCoreApplication.translate('', "Выберите файл(ы)"), "", "*.sig")
             if not file_names[0]:
                 return
         else:
             file_names = args
-        progressDialog = QtWidgets.QProgressDialog("", "Отмена", 0, 0, self)
+        progressDialog = QtWidgets.QProgressDialog("", PyQt5.QtCore.QCoreApplication.translate('', "Отмена"), 0, 0, self)
         progressDialog.setValue(-1)
         progressDialog.show()
         if len(file_names) > 1:
@@ -461,7 +476,7 @@ class Window(QtWidgets.QMainWindow):
                 label = QtWidgets.QLabel()
                 label.setText(text)
                 cert_view.cert_listview.setItemWidget(item, label)
-        progressDialog.setLabelText('Проверка подписи файла %s из %s<br>Текущий файл: %s' % (index+1, len(file_names),
+        progressDialog.setLabelText(PyQt5.QtCore.QCoreApplication.translate('', 'Проверка подписи файла %s из %s<br>Текущий файл: %s') % (index+1, len(file_names),
                                                                                              filename.split('/')[-1]))
         if progressDialog.wasCanceled():
             return
@@ -470,41 +485,41 @@ class Window(QtWidgets.QMainWindow):
             cert_info = list(cert_info)[0]
             cert_view = ViewCert(self)
             cert_view.report = output
-            add_line('Файл: %s' % filename)
-            add_line('<b>Информация о сертификате подписи:</b>:')
-            add_line('<b>Эмитент</b>:')
+            add_line(PyQt5.QtCore.QCoreApplication.translate('', 'Файл: %s') % filename)
+            add_line(PyQt5.QtCore.QCoreApplication.translate('', '<b>Информация о сертификате подписи:</b>:'))
+            add_line(PyQt5.QtCore.QCoreApplication.translate('', '<b>Эмитент</b>:'))
             for field, value in cert_info['issuerDN'].items():
                 add_line('<b>%s</b>: %s' % (self.translate_cert_fields(field), value))
             add_line()
-            add_line('<b>Субъект</b>:')
+            add_line(PyQt5.QtCore.QCoreApplication.translate('', '<b>Субъект</b>:'))
             for field, value in cert_info['subjectDN'].items():
                 add_line('<b>%s</b>: %s' % (self.translate_cert_fields(field), value))
             add_line()
-            add_line('<b>Серийный номер</b>: %s' % cert_info['serial'])
+            add_line(PyQt5.QtCore.QCoreApplication.translate('', '<b>Серийный номер</b>: %s') % cert_info['serial'])
             not_valid_before = datetime.strptime(cert_info['notValidBefore'], '%d/%m/%Y  %H:%M:%S')
-            add_line('<b>Не действителен до</b>: %s' % datetime.strftime(not_valid_before, '%d.%m.%Y %H:%M:%S'))
+            add_line(PyQt5.QtCore.QCoreApplication.translate('', '<b>Не действителен до</b>: %s') % datetime.strftime(not_valid_before, '%d.%m.%Y %H:%M:%S'))
             not_valid_after = datetime.strptime(cert_info['notValidAfter'], '%d/%m/%Y  %H:%M:%S')
-            add_line('<b>Не действителен после</b>: %s' % datetime.strftime(not_valid_after, '%d.%m.%Y %H:%M:%S'))
+            add_line(PyQt5.QtCore.QCoreApplication.translate('', '<b>Не действителен после</b>: %s') % datetime.strftime(not_valid_after, '%d.%m.%Y %H:%M:%S'))
             add_line()
             if chain:
-                add_line('<font color="green"><b>Цепочка сертификатов была проверена.</b></font>')
+                add_line(PyQt5.QtCore.QCoreApplication.translate('', '<font color="green"><b>Цепочка сертификатов была проверена.</b></font>'))
             else:
-                add_line('<font color="orange"><b>ВНИМАНИЕ: Цепочка сертификатов не была проверена.</b></font>')
+                add_line(PyQt5.QtCore.QCoreApplication.translate('', '<font color="orange"><b>ВНИМАНИЕ: Цепочка сертификатов не была проверена.</b></font>'))
             if revoked:
                 add_line(
-                    '<font color="red"><b>ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!</b></font>')
+                    PyQt5.QtCore.QCoreApplication.translate('', '<font color="red"><b>ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!</b></font>'))
             elif expired:
                 add_line(
-                    '<font color="red"><b>ВНИМАНИЕ: Срок действия сертификата истек или еще не наступил!</b></font>')
+                    PyQt5.QtCore.QCoreApplication.translate('', '<font color="red"><b>ВНИМАНИЕ: Срок действия сертификата истек или еще не наступил!</b></font>'))
             elif chain:
-                add_line('<font color="green"><b>Сертификат действителен.</b></font>')
+                add_line(PyQt5.QtCore.QCoreApplication.translate('', '<font color="green"><b>Сертификат действителен.</b></font>'))
             cert_view.exec_()
         except Exception as error:
-            QtWidgets.QMessageBox().warning(self, "Cообщение", "Произошла ошибка:\n%s" % error)
+            QtWidgets.QMessageBox().warning(self, PyQt5.QtCore.QCoreApplication.translate('', "Cообщение"), PyQt5.QtCore.QCoreApplication.translate('', "Произошла ошибка:\n%s") % error)
 
     def encrypt(self, *args):
         if self.sender():
-            file_names = QtWidgets.QFileDialog().getOpenFileNames(self, "Выберите файл(ы)", "", "")
+            file_names = QtWidgets.QFileDialog().getOpenFileNames(self, PyQt5.QtCore.QCoreApplication.translate('', "Выберите файл(ы)"), "", "")
             if not file_names[0]:
                 return
         else:
@@ -512,12 +527,12 @@ class Window(QtWidgets.QMainWindow):
         try:
             choose = ChooseCert(parent=self, withsecret=False)
         except Exception as error:
-            QtWidgets.QMessageBox().warning(self, "Cообщение", "Произошла ошибка:\n%s" % error)
+            QtWidgets.QMessageBox().warning(self, PyQt5.QtCore.QCoreApplication.translate('', "Cообщение"), PyQt5.QtCore.QCoreApplication.translate('', "Произошла ошибка:\n%s") % error)
             return
         if choose.exec_():
             cert_info = choose.getCertificate()
             if cert_info == 'file':
-                thumbprint = QtWidgets.QFileDialog().getOpenFileName(self, "Выберите файл(ы)", "", "*.crt *cer")
+                thumbprint = QtWidgets.QFileDialog().getOpenFileName(self, PyQt5.QtCore.QCoreApplication.translate('', "Выберите файл(ы)"), "", "*.crt *cer")
                 if len(thumbprint) > 0:
                     thumbprint = list(thumbprint)
                     del thumbprint[-1]
@@ -529,7 +544,7 @@ class Window(QtWidgets.QMainWindow):
                 thumbprint = cert_info['thumbprint']
         else:
             return
-        progressDialog = QtWidgets.QProgressDialog("", "Отмена", 0, 0, self)
+        progressDialog = QtWidgets.QProgressDialog("", PyQt5.QtCore.QCoreApplication.translate('', "Отмена"), 0, 0, self)
         progressDialog.setValue(-1)
         if len(file_names) > 1:
             file_names = list(file_names)
@@ -551,7 +566,7 @@ class Window(QtWidgets.QMainWindow):
             MultiResultDialog(parent=self, output=outputs)
 
     def call_encrypt_dialog(self, progressDialog, index, file_names, filename, thumbprint, cert_info, multimode):
-        progressDialog.setLabelText(u'Шифрование файла %s из %s<br>Текущий файл: %s' % (index+1, len(file_names),
+        progressDialog.setLabelText(PyQt5.QtCore.QCoreApplication.translate('', 'Шифрование файла %s из %s<br>Текущий файл: %s') % (index+1, len(file_names),
                                                                                         filename.split('/')[-1]))
 
         progressDialog.show()
@@ -560,35 +575,35 @@ class Window(QtWidgets.QMainWindow):
         try:
             encrypted, chain, revoked, expired = CryptoPro().encrypt(thumbprint, filename, self.encoding, self.fileend)
             if encrypted:
-                message = u'Файл %s успешно зашифрован.\n\nЗашифрованный файл: %s\n\n' % (
+                message = PyQt5.QtCore.QCoreApplication.translate('', 'Файл %s успешно зашифрован.\n\nЗашифрованный файл: %s\n\n') % (
                 filename, filename + self.fileend)
-                message += u'Сертификат:\n{p[subjectCN]}\nВыдан: {p[issuerCN]}\nСерийный номер: {p[serial]}\nНе действителен до: {p[notValidBefore]}\nНе действителен после: {p[notValidAfter]}\n\n'.format(
+                message += PyQt5.QtCore.QCoreApplication.translate('', 'Сертификат:\n{p[subjectCN]}\nВыдан: {p[issuerCN]}\nСерийный номер: {p[serial]}\nНе действителен до: {p[notValidBefore]}\nНе действителен после: {p[notValidAfter]}\n\n').format(
                     p=cert_info)
                 if not chain:
-                    message += u'ВНИМАНИЕ: Статус отзыва сертификата не был проверен!\n'
+                    message += PyQt5.QtCore.QCoreApplication.translate('', 'ВНИМАНИЕ: Статус отзыва сертификата не был проверен!\n')
                 if revoked:
-                    message += u'ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!\n'
+                    message += PyQt5.QtCore.QCoreApplication.translate('', 'ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!\n')
                 if expired:
-                    message += u'ВНИМАНИЕ: Срок действия сертификата истек или еще не наступил!\n'
+                    message += PyQt5.QtCore.QCoreApplication.translate('', 'ВНИМАНИЕ: Срок действия сертификата истек или еще не наступил!\n')
                 progressDialog.hide()
                 if not multimode:
                     ResultDialog(filename, filename + self.fileend, message).show()
                 else:
                     message = ""
                     if not chain:
-                        message += u'ВНИМАНИЕ: Статус отзыва сертификата не был проверен!\n'
+                        message += PyQt5.QtCore.QCoreApplication.translate('', 'ВНИМАНИЕ: Статус отзыва сертификата не был проверен!\n')
                     if revoked:
-                        message += u'ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!\n'
+                        message += PyQt5.QtCore.QCoreApplication.translate('', 'ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!\n')
                     if expired:
-                        message += u'ВНИМАНИЕ: Срок действия сертификата истек или еще не наступил!\n'
+                        message += PyQt5.QtCore.QCoreApplication.translate('', 'ВНИМАНИЕ: Срок действия сертификата истек или еще не наступил!\n')
 
-                    return ('Файл успешно зашифрован', filename + self.fileend, cert_info, message)
+                    return (PyQt5.QtCore.QCoreApplication.translate('', 'Файл успешно зашифрован'PyQt5.QtCore.QCoreApplication.translate('', , filename + self.fileend, cert_info, message)
 
         except Exception as error:
-            QtWidgets.QMessageBox().warning(self, u"Cообщение", u"Произошла ошибка:\n%s" % error)
+            QtWidgets.QMessageBox().warning(self, PyQt5.QtCore.QCoreApplication.translate('', "Cообщение"), PyQt5.QtCore.QCoreApplication.translate('', "Произошла ошибка:\n%s") % error)
     def decrypt(self, *args):
         if self.sender():
-            file_names = QtWidgets.QFileDialog().getOpenFileNames(self, "Выберите файл(ы)", "", "*.enc *.encr *.p7e *p7m")
+            file_names = QtWidgets.QFileDialog().getOpenFileNames(self, PyQt5.QtCore.QCoreApplication.translate('', "Выберите файл(ы)"), "", "*.enc *.encr *.p7e *p7m")
             if not file_names[0]:
                 return
         else:
@@ -596,13 +611,13 @@ class Window(QtWidgets.QMainWindow):
         try:
             choose = ChooseCert(parent=self, withsecret=True)
         except Exception as error:
-            QtWidgets.QMessageBox().warning(self, u"Cообщение", u"Произошла ошибка:\n%s" % error)
+            QtWidgets.QMessageBox().warning(self, PyQt5.QtCore.QCoreApplication.translate('', "Cообщение"), PyQt5.QtCore.QCoreApplication.translate('', "Произошла ошибка:\n%s") % error)
             return
         if choose.exec_():
             cert_info = choose.getCertificate()
         else:
             return
-        progressDialog = QtWidgets.QProgressDialog("", u"Отмена", 0, 0, self)
+        progressDialog = QtWidgets.QProgressDialog("", PyQt5.QtCore.QCoreApplication.translate('', "Отмена"), 0, 0, self)
         progressDialog.setValue(-1)
         if len(file_names) > 1:
             file_names = list(file_names)
@@ -623,7 +638,7 @@ class Window(QtWidgets.QMainWindow):
         progressDialog.close()
 
     def call_decrypt_dialog(self, progressDialog, index, file_names, filename, cert_info):
-        progressDialog.setLabelText(u'Расшифровка файла %s из %s<br>Текущий файл: %s' % (index+1, len(file_names),
+        progressDialog.setLabelText(PyQt5.QtCore.QCoreApplication.translate('', 'Расшифровка файла %s из %s<br>Текущий файл: %s') % (index+1, len(file_names),
                                                                                          filename.split('/')[-1]))
         progressDialog.show()
         if progressDialog.wasCanceled():
@@ -631,72 +646,72 @@ class Window(QtWidgets.QMainWindow):
         try:
             decrypted, chain, revoked, expired = CryptoPro().decrypt(cert_info['thumbprint'], filename)
             if decrypted:
-                message = u'Файл %s успешно расшифрован.\n\nРасшифрованный файл: %s\n\n' % (filename, filename[:-4])
+                message = PyQt5.QtCore.QCoreApplication.translate('', 'Файл %s успешно расшифрован.\n\nРасшифрованный файл: %s\n\n') % (filename, filename[:-4])
                 if not chain:
-                    message += u'ВНИМАНИЕ: Статус отзыва сертификата не был проверен!\n'
+                    message += PyQt5.QtCore.QCoreApplication.translate('', 'ВНИМАНИЕ: Статус отзыва сертификата не был проверен!\n')
                 if revoked:
-                    message += u'ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!\n'
+                    message += PyQt5.QtCore.QCoreApplication.translate('', 'ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!\n')
                 if expired:
-                    message += u'ВНИМАНИЕ: Срок действия сертификата истек или еще не наступил!\n'
+                    message += PyQt5.QtCore.QCoreApplication.translate('', 'ВНИМАНИЕ: Срок действия сертификата истек или еще не наступил!\n')
                 progressDialog.hide()
                 ResultDialog(filename, filename[:-4], message).show()
         except Exception as error:
-            QtWidgets.QMessageBox().warning(self, u"Cообщение", u"Произошла ошибка:\n%s" % error)
+            QtWidgets.QMessageBox().warning(self, PyQt5.QtCore.QCoreApplication.translate('',"Cообщение"), PyQt5.QtCore.QCoreApplication.translate('',"Произошла ошибка:\n%s") % error)
     def translate_cert_fields(self, fieldname):
-        fields = {'1.2.840.113549.1.9.2': u'неструктурированное имя',
-                  '1.2.643.5.1.5.2.1.2': u'код должности',
-                  '1.2.643.5.1.5.2.1.1': u'код структурного подразделения ФССП России (ВКСП)',
-                  '1.2.643.5.1.5.2.2.1': u'Полномочия публикации обновлений ПО',
-                  '1.2.643.5.1.5.2.2.2': u'Подсистема АИС ФССП России',
-                  '1.2.643.5.1.24.2.9': u'Главный судебный пристав Российской Федерации',
-                  '1.2.643.5.1.24.2.10': u'Заместитель главного судебного пристава Российской Федерации',
-                  '1.2.643.5.1.24.2.11': u'Главный судебный пристав субъекта Российской Федерации',
-                  '1.2.643.5.1.24.2.12': u'Заместитель главного судебного пристава субъекта Российской Федерации',
-                  '1.2.643.5.1.24.2.13': u'Старший судебный пристав',
-                  '1.2.643.5.1.24.2.14': u'Судебный пристав-исполнитель',
-                  '1.2.643.100.2.1': u'Доступ к СМЭВ (ФЛ)',
-                  '1.2.643.100.2.2': u'Доступ к СМЭВ (ЮЛ)',
-                  '1.2.643.2.2.34.2': u'Временный доступ к Центру Регистрации',
-                  '1.2.643.2.2.34.4': u'Администратор Центра Регистрации КриптоПро УЦ',
-                  '1.2.643.2.2.34.5': u'Оператор Центра Регистрации КриптоПро УЦ',
-                  '1.2.643.2.2.34.6': u'Пользователь центра регистрации КриптоПро УЦ',
-                  '1.2.643.2.2.34.7': u'Центр Регистрации КриптоПро УЦ',
-                  '1.3.6.1.5.5.7.3.1': u'Проверка подлинности сервера',
-                  '1.3.6.1.5.5.7.3.2': u'Проверка подлинности клиента',
-                  '1.3.6.1.5.5.7.3.4': u'Защищенная электронная почта',
-                  '1.3.6.1.5.5.7.3.8': u'Установка штампа времени',
-                  '1.2.643.3.61.502710.1.6.3.4.1.1': u'Администратор организации',
-                  '1.2.643.3.61.502710.1.6.3.4.1.2': u'Уполномоченный специалист',
-                  '1.2.643.3.61.502710.1.6.3.4.1.3': u'Должностное лицо с правом подписи контракта',
-                  '1.2.643.3.61.502710.1.6.3.4.1.4': u'Специалист с правом направления проекта контракта участнику размещения заказа',
-                  'CN': u'общее имя',
-                  'SN': u'фамилия',
-                  'G': u'имя и отчество',
-                  'I': u'инициалы',
-                  'T': u'должность',
-                  'OU': u'структурное подразделение',
-                  'O': u'организация',
-                  'L': u'населенный пункт',
-                  'S': u'субъект РФ',
-                  'C': u'страна',
-                  'E': u'адрес электронной почты',
-                  'INN': u'ИНН',
-                  'OGRN': u'ОГРН',
-                  'SNILS': u'СНИЛС',
-                  'STREET': u'название улицы, номер дома',
-                  'StreetAddress': u'адрес места нахождения',
-                  'Unstructured Name': u'неструктурированное имя'}
+        fields = {'1.2.840.113549.1.9.2': PyQt5.QtCore.QCoreApplication.translate('', 'неструктурированное имя'),
+                  '1.2.643.5.1.5.2.1.2': PyQt5.QtCore.QCoreApplication.translate('', 'код должности'),
+                  '1.2.643.5.1.5.2.1.1': PyQt5.QtCore.QCoreApplication.translate('', 'код структурного подразделения ФССП России (ВКСП)'),
+                  '1.2.643.5.1.5.2.2.1': PyQt5.QtCore.QCoreApplication.translate('', 'Полномочия публикации обновлений ПО'),
+                  '1.2.643.5.1.5.2.2.2': PyQt5.QtCore.QCoreApplication.translate('', 'Подсистема АИС ФССП России'),
+                  '1.2.643.5.1.24.2.9': PyQt5.QtCore.QCoreApplication.translate('', 'Главный судебный пристав Российской Федерации'),
+                  '1.2.643.5.1.24.2.10': PyQt5.QtCore.QCoreApplication.translate('', 'Заместитель главного судебного пристава Российской Федерации'),
+                  '1.2.643.5.1.24.2.11': PyQt5.QtCore.QCoreApplication.translate('', 'Главный судебный пристав субъекта Российской Федерации'),
+                  '1.2.643.5.1.24.2.12': PyQt5.QtCore.QCoreApplication.translate('', 'Заместитель главного судебного пристава субъекта Российской Федерации'),
+                  '1.2.643.5.1.24.2.13': PyQt5.QtCore.QCoreApplication.translate('', 'Старший судебный пристав'),
+                  '1.2.643.5.1.24.2.14': PyQt5.QtCore.QCoreApplication.translate('', 'Судебный пристав-исполнитель'),
+                  '1.2.643.100.2.1': PyQt5.QtCore.QCoreApplication.translate('', 'Доступ к СМЭВ (ФЛ)'),
+                  '1.2.643.100.2.2': PyQt5.QtCore.QCoreApplication.translate('', 'Доступ к СМЭВ (ЮЛ)'),
+                  '1.2.643.2.2.34.2': PyQt5.QtCore.QCoreApplication.translate('', 'Временный доступ к Центру Регистрации'),
+                  '1.2.643.2.2.34.4': PyQt5.QtCore.QCoreApplication.translate('', 'Администратор Центра Регистрации КриптоПро УЦ'),
+                  '1.2.643.2.2.34.5': PyQt5.QtCore.QCoreApplication.translate('', 'Оператор Центра Регистрации КриптоПро УЦ'),
+                  '1.2.643.2.2.34.6': PyQt5.QtCore.QCoreApplication.translate('', 'Пользователь центра регистрации КриптоПро УЦ'),
+                  '1.2.643.2.2.34.7': PyQt5.QtCore.QCoreApplication.translate('', 'Центр Регистрации КриптоПро УЦ'),
+                  '1.3.6.1.5.5.7.3.1': PyQt5.QtCore.QCoreApplication.translate('', 'Проверка подлинности сервера'),
+                  '1.3.6.1.5.5.7.3.2': PyQt5.QtCore.QCoreApplication.translate('', 'Проверка подлинности клиента'),
+                  '1.3.6.1.5.5.7.3.4': PyQt5.QtCore.QCoreApplication.translate('', 'Защищенная электронная почта'),
+                  '1.3.6.1.5.5.7.3.8': PyQt5.QtCore.QCoreApplication.translate('', 'Установка штампа времени'),
+                  '1.2.643.3.61.502710.1.6.3.4.1.1': PyQt5.QtCore.QCoreApplication.translate('', 'Администратор организации'),
+                  '1.2.643.3.61.502710.1.6.3.4.1.2': PyQt5.QtCore.QCoreApplication.translate('', 'Уполномоченный специалист'),
+                  '1.2.643.3.61.502710.1.6.3.4.1.3': PyQt5.QtCore.QCoreApplication.translate('', 'Должностное лицо с правом подписи контракта'),
+                  '1.2.643.3.61.502710.1.6.3.4.1.4': PyQt5.QtCore.QCoreApplication.translate('', 'Специалист с правом направления проекта контракта участнику размещения заказа'),
+                  'CN': PyQt5.QtCore.QCoreApplication.translate('', 'общее имя'),
+                  'SN': PyQt5.QtCore.QCoreApplication.translate('', 'фамилия'),
+                  'G': PyQt5.QtCore.QCoreApplication.translate('', 'имя и отчество'),
+                  'I': PyQt5.QtCore.QCoreApplication.translate('', 'инициалы'),
+                  'T': PyQt5.QtCore.QCoreApplication.translate('', 'должность'),
+                  'OU': PyQt5.QtCore.QCoreApplication.translate('', 'структурное подразделение'),
+                  'O': PyQt5.QtCore.QCoreApplication.translate('', 'организация'),
+                  'L': PyQt5.QtCore.QCoreApplication.translate('', 'населенный пункт'),
+                  'S': PyQt5.QtCore.QCoreApplication.translate('', 'субъект РФ'),
+                  'C': PyQt5.QtCore.QCoreApplication.translate('', 'страна'),
+                  'E': PyQt5.QtCore.QCoreApplication.translate('', 'адрес электронной почты'),
+                  'INN': PyQt5.QtCore.QCoreApplication.translate('', 'ИНН'),
+                  'OGRN': PyQt5.QtCore.QCoreApplication.translate('', 'ОГРН'),
+                  'SNILS': PyQt5.QtCore.QCoreApplication.translate('', 'СНИЛС'),
+                  'STREET': PyQt5.QtCore.QCoreApplication.translate('', 'название улицы, номер дома'),
+                  'StreetAddress': PyQt5.QtCore.QCoreApplication.translate('', 'адрес места нахождения'),
+                  'Unstructured Name': PyQt5.QtCore.QCoreApplication.translate('', 'неструктурированное имя')}
         try:
             return fields[fieldname]
         except KeyError:
             return fieldname
 
     def aboutProgram(self):
-        QtWidgets.QMessageBox().about(self, "О программе",
+        QtWidgets.QMessageBox().about(self, PyQt5.QtCore.QCoreApplication.translate('', "О программе"),
                                   f"<b>gost-crypto-gui {VERSION}</b><br>"
-                                  "<br>2019г. Борис Макаренко<br>УИТ ФССП России"
+                                  PyQt5.QtCore.QCoreApplication.translate('', "<br>2019г. Борис Макаренко<br>УИТ ФССП России"
                                   "<br>E-mail: <a href='mailto:makarenko@fssprus.ru'>makarenko@fssprus.ru</a>"
                                   "<br> <a href='mailto:bmakarenko90@gmail.com'>bmakarenko90@gmail.com</a><br>"
                                   "<br>2022-2023г. Владлен Мурылев<br>ООО \"РЕД СОФТ\""
                                   "<br>E-mail: <a href='mailto:redos.support@red-soft.ru'>redos.support@red-soft.ru</a><br>"
-                                  "<a href='http://opensource.org/licenses/MIT'>Лицензия MIT</a>")
+                                  "<a href='http://opensource.org/licenses/MIT'>Лицензия MIT</a>"))

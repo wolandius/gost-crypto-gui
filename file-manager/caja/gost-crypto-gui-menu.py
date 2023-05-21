@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 """
@@ -78,7 +78,7 @@ class VerifyMenuProvider(GObject.GObject, Caja.MenuProvider):
 
     def menu_activate_cb(self, menu, fileObj):
         filename = urllib.unquote(fileObj.get_uri())[7:]
-        subprocess.Popen(['python', '/usr/bin/gost-crypto-gui.py', '-verify', filename])
+        subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-verify', filename])
 
 
 class DettachMenuProvider(GObject.GObject, Caja.MenuProvider):
@@ -108,7 +108,7 @@ class DettachMenuProvider(GObject.GObject, Caja.MenuProvider):
 
     def menu_activate_cb(self, menu, fileObj):
         filename = urllib.unquote(fileObj.get_uri())[7:]
-        subprocess.Popen(['python', '/usr/bin/gost-crypto-gui.py', '-dettach', filename])
+        subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-dettach', filename])
 
 
 class DecryptMenuProvider(GObject.GObject, Caja.MenuProvider):
@@ -138,7 +138,7 @@ class DecryptMenuProvider(GObject.GObject, Caja.MenuProvider):
 
     def menu_activate_cb(self, menu, fileObj):
         filename = urllib.unquote(fileObj.get_uri())[7:]
-        subprocess.Popen(['python', '/usr/bin/gost-crypto-gui.py', '-decr', filename])
+        subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-decr', filename])
 
 
 class SignMenuProvider(GObject.GObject, Caja.MenuProvider):
@@ -166,7 +166,7 @@ class SignMenuProvider(GObject.GObject, Caja.MenuProvider):
 
     def menu_activate_cb(self, menu, fileObj):
         filename = urllib.unquote(fileObj.get_uri())[7:]
-        subprocess.Popen(['python', '/usr/bin/gost-crypto-gui.py', '-sign', filename])
+        subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-sign', filename])
 
 
 class EncryptMenuProvider(GObject.GObject, Caja.MenuProvider):
@@ -194,4 +194,4 @@ class EncryptMenuProvider(GObject.GObject, Caja.MenuProvider):
 
     def menu_activate_cb(self, menu, fileObj):
         filename = urllib.unquote(fileObj.get_uri())[7:]
-        subprocess.Popen(['python', '/usr/bin/gost-crypto-gui.py', '-encr', filename])
+        subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-encr', filename])
