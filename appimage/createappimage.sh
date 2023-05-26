@@ -3,18 +3,25 @@ if [ ! -f "./appimagetool" ]; then
     wget https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage -O ./appimagetool
 fi
 rm -rf ./gost-crypto-gui-ro$1.AppImage
-rm -rf ./AppDir
+#rm -rf ./AppDir
 mkdir -p ./AppDir
 cd ..
 python3 ./setup.py install --root=./appimage/AppDir --prefix=usr
 cd appimage
 
 cp AppRun ./AppDir/
+if [ $1 = "72" ]; then
+    sed -i 's|python3.8|python3.6|g' ./AppDir/AppRun
+fi
+
 cp ../data/gost-crypto-gui.desktop ./AppDir/
 cp ../pics/128x128/gost-crypto-gui.png ./AppDir/
 pushd ./redos_rpms
 cp -r ./usr ../AppDir/
 cp -r ./etc ../AppDir/
+popd
+pushd ./AppDir/usr/lib64/qt5/plugins
+ln -sf platforms/ ../../../bin/platforms
 popd
 rm -rf ./AppDir/usr/share/caja-python/
 chmod +x ./AppDir/gost-crypto-gui.desktop

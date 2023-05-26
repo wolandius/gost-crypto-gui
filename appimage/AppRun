@@ -3,8 +3,7 @@ APP_DIR=`dirname $0`
 APP_DIR=`cd "$APP_DIR";pwd`
 export LD_LIBRARY_PATH=$DIR/usr/lib/:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH="${APP_DIR}/usr/lib/:${APP_DIR}/usr/lib/i386-linux-gnu/:${APP_DIR}/usr/lib/x86_64-linux-gnu/:${APP_DIR}/usr/lib32/:${APP_DIR}/usr/lib64/:${APP_DIR}/lib/:${APP_DIR}/lib/i386-linux-gnu/:${APP_DIR}/lib/x86_64-linux-gnu/:${APP_DIR}/lib32/:${APP_DIR}/lib64/${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-#export PYTHONHOME="${APPDIR}/usr/"
-export PYTHONPATH="${APP_DIR}/usr/lib/python3.8/site-packages/:${APP_DIR}/usr/lib/python3.8"
+export PYTHONPATH="${APP_DIR}/usr/lib/python3.8/site-packages/:${APP_DIR}/usr/lib64/python3.8/site-packages/:${APP_DIR}/usr/lib/python3.8:${APP_DIR}/usr/lib/python3.8"
+export QT_QPA_PLATFORM_PLUGIN_PATH="${APP_DIR}/usr/lib64/qt5/plugins"
 export PATH="${APP_DIR}"/usr/bin/:"${APP_DIR}"/usr/sbin/:"${APP_DIR}"/bin/:"${APP_DIR}"/sbin/:"${APP_DIR}"/usr/bin/python:"${APP_DIR}"/usr/bin/python3:$DIR/usr/bin:$PATH
-
 exec "${APP_DIR}/usr/bin/gost-crypto-gui" "$@"

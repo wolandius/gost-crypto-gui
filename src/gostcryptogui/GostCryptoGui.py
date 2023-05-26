@@ -14,9 +14,6 @@ appdir = os.popen("echo $APPDIR").readline().strip()
 def main():
     global appdir
     app = QtWidgets.QApplication(sys.argv)
-
-    print(PyQt5.QtCore.QLocale().system().name())
-    print(PyQt5.QtCore.QLocale().system())
     if "ru_RU" in PyQt5.QtCore.QLocale().system().name():
         pass
     elif "en_US" in PyQt5.QtCore.QLocale().system().name():
