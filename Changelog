@@ -1,3 +1,8 @@
+v2.0 May 26 2023
+- added appimage support
+- added translations for app
+- port gostcryptogui-caja to python3
+
 v1.4 Apr 25 2023
 - added new MultiOutputDialog
 
