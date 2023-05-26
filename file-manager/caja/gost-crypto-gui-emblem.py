@@ -46,28 +46,43 @@ THE SOFTWARE.
 import configparser
 import os.path
 import gostcryptogui
+import gi
 from gi.repository import Caja, GObject
-import urllib
 
 
 class SignatureCheckProvider(GObject.GObject, Caja.InfoProvider):
     def __init__(self):
-        pass
+        GObject.Object.__init__(self)
+
+    def get_artibute(path, section, setting):  # добавление или изменние параметров в конфигах
+        config = configparser.ConfigParser(delimiters='=')
+        config.read(path)
+        section_ = config[section]
+        value = section_.get(setting)
+        return value
 
     def readConfig(self):
         try:
-            config = configparser.ConfigParser.ConfigParser()
-            config.read(os.path.expanduser('~/.gost-crypto-gui/config.cfg'))
-            return config.getboolean('gost-crypto-gui', 'signcheck')
-        except configparser.ConfigParser.NoSectionError:
+            value = self.get_artibute('~/.gost-crypto-gui/config.cfg', 'gost-crypto-gui', 'signcheck')
+            return True if "True" in value or value is True else False
+        except Exception as e:
             return True
 
     def update_file_info(self, file):
+        global pwd
+
+        pwd = None
+        if pwd == None:
+            pwd = file.get_parent_location().get_path()
+
+        if pwd == None or not os.path.exists(file.get_uri()[7:]):
+            return
+
         if file.get_uri_scheme() != 'file':
             return
         if os.path.splitext(file.get_name())[1] == ".sig" and self.readConfig():
-            filepath = urllib.unquote(file.get_uri())[7:]
-            signer, chain, revoked, expired = gostcryptogui.cprocsp.CryptoPro().verify(filepath, False)
+            filepath = file.get_uri()[7:]
+            signer, chain, revoked, expired, output = gostcryptogui.cprocsp.CryptoPro().verify(filepath, False)
             if not chain:
                 file.add_emblem("nochain")
             elif expired or revoked:

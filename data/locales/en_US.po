@@ -1,0 +1,39 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-25 17:23+0300\n"
+"PO-Revision-Date: 2023-05-25 17:34+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: vladlen.murylyov <vladlen.murylyov@red-soft.ru>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en_US\n"
+
+#: /home/wolandius/git_projects/gost-crypto-gui/file-manager/caja/gost-crypto-gui-menu.py:101
+msgid "Проверить ЭЦП"
+msgstr "Check EDS"
+
+#: /home/wolandius/git_projects/gost-crypto-gui/file-manager/caja/gost-crypto-gui-menu.py:109
+msgid "Отсоединить ЭЦП"
+msgstr "Disconnect EDS"
+
+#: /home/wolandius/git_projects/gost-crypto-gui/file-manager/caja/gost-crypto-gui-menu.py:120
+msgid "Расшифровать"
+msgstr "Decrypt"
+
+#: /home/wolandius/git_projects/gost-crypto-gui/file-manager/caja/gost-crypto-gui-menu.py:129
+msgid "Подписать файл"
+msgstr "Sign file"
+
+#: /home/wolandius/git_projects/gost-crypto-gui/file-manager/caja/gost-crypto-gui-menu.py:137
+msgid "Зашифровать файл"
+msgstr "Encrypt file"

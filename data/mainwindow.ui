@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string>gost-crypto-gui</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>../../../../usr/share/pixmaps/gost-crypto-gui.png</normaloff>../../../../usr/share/pixmaps/gost-crypto-gui.png</iconset>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <property name="leftMargin">

@@ -53,6 +53,8 @@ import re
 import PyQt5
 from PyQt5.QtCore import QCoreApplication
 
+
+
 def nongui(fun):
     """Decorator running the function in non-gui thread while
     processing the gui events."""

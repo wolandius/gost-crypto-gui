@@ -8,7 +8,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name='gostcryptogui',
-    version='1.4.1',
+    version='2.0',
     description='A PyQt GUI for performing cryptographic operations over files using GOST algorithms',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -54,8 +54,19 @@ setup(
                                                         "pics/emblem-nochain.png",
                                                         "pics/emblem-unverified.png",
                                                         "pics/emblem-verified.png",
+                                                        "data/locales/GostCryptoGui-en_US.qm",
                                                      ]
                         ),
+                        ("share/caja-python/extensions/", [
+                                                            "file-manager/caja/gost-crypto-gui-emblem.py",
+                                                            "file-manager/caja/gost-crypto-gui-menu.py"
+                                                          ]
+                        ),
+                        ("share/locale/en_US/LC_MESSAGES/", [
+                                                        "data/locales/en_US/LC_MESSAGES/gostcryptogui_caja.mo",
+                        ]),
+                        ("share/locale/ru/LC_MESSAGES/", ["data/locales/ru/LC_MESSAGES/gostcryptogui_caja.mo",
+                        ]),
 
     ],
     entry_points={

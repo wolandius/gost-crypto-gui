@@ -1,456 +1,434 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0">
-<context encoding="UTF-8">
+<!DOCTYPE TS>
+<TS version="2.1" language="en">
+<context>
     <name></name>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="37"/>
+    <message>
+        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="42"/>
         <source>Использование: gost-crypto-gui [КЛЮЧ] [ФАЙЛ]</source>
-        <translation type="unfinished"></translation>
+        <translation>Usage: gost-crypto-gui [KEY] [FILE]</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="38"/>
+    <message>
+        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="43"/>
         <source>Выполняет криптографические операции над файлами при помощи алгоритмов ГОСТ
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Performs cryptographic operations on files using GOST algorithms
+</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="39"/>
+    <message>
+        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="44"/>
         <source>Ключи:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Keys:
+</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="40"/>
-        <source>-sign<byte value="x9"/><byte value="x9"/>Подписать файл</source>
-        <translation type="unfinished"></translation>
+    <message>
+        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="45"/>
+        <source>-sign		Подписать файл</source>
+        <translation>-sign		Sign file</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="41"/>
-        <source>-encr<byte value="x9"/><byte value="x9"/>Зашифровать файл</source>
-        <translation type="unfinished"></translation>
+    <message>
+        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="46"/>
+        <source>-encr		Зашифровать файл</source>
+        <translation>-encr		Encrypt file</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="42"/>
-        <source>-verify<byte value="x9"/><byte value="x9"/>Проверить электронную подпись файла</source>
-        <translation type="unfinished"></translation>
+    <message>
+        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="47"/>
+        <source>-verify		Проверить электронную подпись файла</source>
+        <translation>-verify		Check the electronic signature of a file</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="43"/>
-        <source>-dettach<byte value="x9"/>Отсоединить электронную подпись от файла</source>
-        <translation type="unfinished"></translation>
+    <message>
+        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="48"/>
+        <source>-dettach	Отсоединить электронную подпись от файла</source>
+        <translation>-dettach	Detach e-signature from file</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="44"/>
-        <source>-decr<byte value="x9"/><byte value="x9"/>Расшифровать файл</source>
-        <translation type="unfinished"></translation>
+    <message>
+        <location filename="../../src/gostcryptogui/GostCryptoGui.py" line="49"/>
+        <source>-decr		Расшифровать файл</source>
+        <translation>-decr		Decrypt File</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/cprocsp.py" line="92"/>
-        <source>Текущая архитектура %s не поддерживается</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="94"/>
+        <source>Текущая архитектура %s не поддерживается</source>
+        <translation>Current architecture %s is not supported</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/cprocsp.py" line="96"/>
         <source>СКЗИ Крипто Про CSP или некоторые его компоненты не установлены.</source>
-        <translation type="unfinished"></translation>
+        <translation>CIPF Crypto Pro CSP or some of its components are not installed.</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/cprocsp.py" line="111"/>
-        <source>Мало памяти</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/cprocsp.py" line="112"/>
-        <source>Не удалось открыть файл</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="113"/>
-        <source>Операция отменена пользователем</source>
-        <translation type="unfinished"></translation>
+        <source>Мало памяти</source>
+        <translation>Not enough memory</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="114"/>
-        <source>Некорректное преобразование BASE64</source>
-        <translation type="unfinished"></translation>
+        <source>Не удалось открыть файл</source>
+        <translation>Failed to open file</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="115"/>
-        <source>Если указан параметр -help, то других быть не должно</source>
-        <translation type="unfinished"></translation>
+        <source>Операция отменена пользователем</source>
+        <translation>Operation canceled by user</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="116"/>
-        <source>Указан лишний файл</source>
-        <translation type="unfinished"></translation>
+        <source>Некорректное преобразование BASE64</source>
+        <translation>Incorrect BASE64 conversion</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="117"/>
-        <source>Указан неизвестный ключ</source>
-        <translation type="unfinished"></translation>
+        <source>Если указан параметр -help, то других быть не должно</source>
+        <translation>If the -help option is specified, then there should be no others</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="118"/>
-        <source>Указана лишняя команда</source>
-        <translation type="unfinished"></translation>
+        <source>Указан лишний файл</source>
+        <translation>Extra file specified</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="119"/>
-        <source>Для ключа не указан параметр</source>
-        <translation type="unfinished"></translation>
+        <source>Указан неизвестный ключ</source>
+        <translation>Unknown key specified</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="120"/>
-        <source>Не указана команда</source>
-        <translation type="unfinished"></translation>
+        <source>Указана лишняя команда</source>
+        <translation>Extra command specified</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="121"/>
-        <source>Не указан необходимый ключ</source>
-        <translation type="unfinished"></translation>
+        <source>Для ключа не указан параметр</source>
+        <translation>No parameter specified for key</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="122"/>
-        <source>Указан неверный ключ</source>
-        <translation type="unfinished"></translation>
+        <source>Не указана команда</source>
+        <translation>Command not specified</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="123"/>
-        <source>Параметром ключа -q должно быть натуральное число</source>
-        <translation type="unfinished"></translation>
+        <source>Не указан необходимый ключ</source>
+        <translation>Required key not specified</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="124"/>
-        <source>Не указан входной файл</source>
-        <translation type="unfinished"></translation>
+        <source>Указан неверный ключ</source>
+        <translation>Invalid key specified</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="125"/>
-        <source>Не указан выходной файл</source>
-        <translation type="unfinished"></translation>
+        <source>Параметром ключа -q должно быть натуральное число</source>
+        <translation>The -q option must be a natural number</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="126"/>
-        <source>Команда не использует параметр с именем файла</source>
-        <translation type="unfinished"></translation>
+        <source>Не указан входной файл</source>
+        <translation>Input file not specified</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="127"/>
-        <source>Не указан  файл сообщения</source>
-        <translation type="unfinished"></translation>
+        <source>Не указан выходной файл</source>
+        <translation>No output file specified</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="128"/>
-        <source>Не удалось открыть хранилище сертификатов:</source>
-        <translation type="unfinished"></translation>
+        <source>Команда не использует параметр с именем файла</source>
+        <translation>The command does not use a filename parameter</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="129"/>
-        <source>Сертификаты не найдены</source>
-        <translation type="unfinished"></translation>
+        <source>Не указан  файл сообщения</source>
+        <translation>Message file not specified</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="130"/>
-        <source>Найдено более одного сертификата (ключ -1)</source>
-        <translation type="unfinished"></translation>
+        <source>Не удалось открыть хранилище сертификатов:</source>
+        <translation>Failed to open certificate store:</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="131"/>
-        <source>Команда подразумевает использование только одного сертификата</source>
-        <translation type="unfinished"></translation>
+        <source>Сертификаты не найдены</source>
+        <translation>Certificates not found</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="132"/>
-        <source>Неверно указан номер</source>
-        <translation type="unfinished"></translation>
+        <source>Найдено более одного сертификата (ключ -1)</source>
+        <translation>More than one certificate found (key -1)</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="133"/>
-        <source>Нет используемых сертификатов</source>
-        <translation type="unfinished"></translation>
+        <source>Команда подразумевает использование только одного сертификата</source>
+        <translation>The command implies the use of only one certificate</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="134"/>
-        <source>Данный сертификат не может применяться для этой операции</source>
-        <translation type="unfinished"></translation>
+        <source>Неверно указан номер</source>
+        <translation>Invalid number</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="135"/>
-        <source>Цепочка сертификатов не проверена. Либо сертификат был отозван или срок действия истек.</source>
-        <translation type="unfinished"></translation>
+        <source>Нет используемых сертификатов</source>
+        <translation>No certificates in use</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="136"/>
-        <source>Криптопровайдер, поддерживающий необходимый алгоритм не найден</source>
-        <translation type="unfinished"></translation>
+        <source>Данный сертификат не может применяться для этой операции</source>
+        <translation>This certificate cannot be used for this operation</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="137"/>
-        <source>Неудачный ввод пароля ключевого контейнера</source>
-        <translation type="unfinished"></translation>
+        <source>Цепочка сертификатов не проверена. Либо сертификат был отозван или срок действия истек.</source>
+        <translation>The certificate chain has not been verified. Either the certificate has been revoked or has expired.</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="138"/>
-        <source>Ошибка связи с закрытым ключом</source>
-        <translation type="unfinished"></translation>
+        <source>Криптопровайдер, поддерживающий необходимый алгоритм не найден</source>
+        <translation>A crypto provider that supports the required algorithm was not found</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="139"/>
-        <source>Не указана маска файлов</source>
-        <translation type="unfinished"></translation>
+        <source>Неудачный ввод пароля ключевого контейнера</source>
+        <translation>Failed key container password entry</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="140"/>
-        <source>Указаны несколько масок файлов</source>
-        <translation type="unfinished"></translation>
+        <source>Ошибка связи с закрытым ключом</source>
+        <translation>Private key communication error</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="141"/>
-        <source>Файлы не найдены</source>
-        <translation type="unfinished"></translation>
+        <source>Не указана маска файлов</source>
+        <translation>File mask not specified</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="142"/>
-        <source>Задана неверная маска</source>
-        <translation type="unfinished"></translation>
+        <source>Указаны несколько масок файлов</source>
+        <translation>Multiple file masks specified</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="143"/>
-        <source>Неверный хеш</source>
-        <translation type="unfinished"></translation>
+        <source>Файлы не найдены</source>
+        <translation>Files not found</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="144"/>
-        <source>Ключ -start указан, а выходной файл нет</source>
-        <translation type="unfinished"></translation>
+        <source>Задана неверная маска</source>
+        <translation>Invalid mask specified</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="145"/>
-        <source>Содержимое файла - не подписанное сообщение</source>
-        <translation type="unfinished"></translation>
+        <source>Неверный хеш</source>
+        <translation>Invalid hash</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="146"/>
-        <source>Неизвестный алгоритм подписи</source>
-        <translation type="unfinished"></translation>
+        <source>Ключ -start указан, а выходной файл нет</source>
+        <translation>The -start switch is specified but the output file is not</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="147"/>
-        <source>Сертификат автора подписи не найден</source>
-        <translation type="unfinished"></translation>
+        <source>Содержимое файла - не подписанное сообщение</source>
+        <translation>File content - unsigned message</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="148"/>
-        <source>Подпись не найдена</source>
-        <translation type="unfinished"></translation>
+        <source>Неизвестный алгоритм подписи</source>
+        <translation>Unknown signature algorithm</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="149"/>
-        <source>Подпись не верна</source>
-        <translation type="unfinished"></translation>
+        <source>Сертификат автора подписи не найден</source>
+        <translation>Signer certificate not found</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="150"/>
-        <source>Штамп времени не верен</source>
-        <translation type="unfinished"></translation>
+        <source>Подпись не найдена</source>
+        <translation>Signature not found</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="151"/>
-        <source>Содержимое файла - не зашифрованное сообщение</source>
-        <translation type="unfinished"></translation>
+        <source>Подпись не верна</source>
+        <translation>Signature is not correct</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="152"/>
-        <source>Неизвестный алгоритм шифрования</source>
-        <translation type="unfinished"></translation>
+        <source>Штамп времени не верен</source>
+        <translation>Time stamp is not correct</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="153"/>
-        <source>Не найден сертификат с соответствующим секретным ключом</source>
-        <translation type="unfinished"></translation>
+        <source>Содержимое файла - не зашифрованное сообщение</source>
+        <translation>The content of the file is not an encrypted message</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="154"/>
-        <source>Не удалось инициализировать cOM</source>
-        <translation type="unfinished"></translation>
+        <source>Неизвестный алгоритм шифрования</source>
+        <translation>Unknown encryption algorithm</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="155"/>
-        <source>Контейнеры не найдены</source>
-        <translation type="unfinished"></translation>
+        <source>Не найден сертификат с соответствующим секретным ключом</source>
+        <translation>No certificate found with matching private key</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="156"/>
-        <source>Не удалось получить ответ от сервера</source>
-        <translation type="unfinished"></translation>
+        <source>Не удалось инициализировать cOM</source>
+        <translation>Failed to initialize cOM</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="157"/>
-        <source>Сертификат не найден в ответе сервера</source>
-        <translation type="unfinished"></translation>
+        <source>Контейнеры не найдены</source>
+        <translation>Containers not found</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="158"/>
-        <source>Файл не содержит идентификатор запроса:</source>
-        <translation type="unfinished"></translation>
+        <source>Не удалось получить ответ от сервера</source>
+        <translation>Failed to get a response from the server</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="159"/>
-        <source>Некорректный адрес ЦС</source>
-        <translation type="unfinished"></translation>
+        <source>Сертификат не найден в ответе сервера</source>
+        <translation>Certificate not found in server response</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="160"/>
-        <source>Получен неверный cookie</source>
-        <translation type="unfinished"></translation>
+        <source>Файл не содержит идентификатор запроса:</source>
+        <translation>The file does not contain a request ID:</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="161"/>
-        <source>Серийный номер содержит недопустимое количество символов</source>
-        <translation type="unfinished"></translation>
+        <source>Некорректный адрес ЦС</source>
+        <translation>Incorrect CA address</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="162"/>
-        <source>Неверный код продукта</source>
-        <translation type="unfinished"></translation>
+        <source>Получен неверный cookie</source>
+        <translation>Invalid cookie received</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="163"/>
-        <source>Не удалось проверить серийный номер</source>
-        <translation type="unfinished"></translation>
+        <source>Серийный номер содержит недопустимое количество символов</source>
+        <translation>The serial number contains an invalid number of characters</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="164"/>
-        <source>Не удалось сохранить серийный номер</source>
-        <translation type="unfinished"></translation>
+        <source>Неверный код продукта</source>
+        <translation>Invalid product code</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="165"/>
-        <source>Не удалось загрузить серийный номер</source>
-        <translation type="unfinished"></translation>
+        <source>Не удалось проверить серийный номер</source>
+        <translation>Failed to verify serial number</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="166"/>
-        <source>Лицензия просрочена</source>
-        <translation type="unfinished"></translation>
+        <source>Не удалось сохранить серийный номер</source>
+        <translation>Failed to save serial number</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/cprocsp.py" line="167"/>
+        <source>Не удалось загрузить серийный номер</source>
+        <translation>Failed to load serial number</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/cprocsp.py" line="168"/>
+        <source>Лицензия просрочена</source>
+        <translation>License expired</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/cprocsp.py" line="169"/>
         <source>Отсутствует лицензия КриптоПро CSP</source>
-        <translation type="unfinished"></translation>
+        <translation>No CryptoPro CSP license</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="72"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="75"/>
         <source>Сохранить отчет</source>
-        <translation type="unfinished"></translation>
+        <translation>Save report</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="125"/>
-        <source>&lt;i&gt;Из файла...&lt;/i&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="128"/>
-        <source>&lt;br&gt;Выдан:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="130"/>
-        <source>Серийный номер: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/gui.py" line="132"/>
-        <source>&lt;br&gt;Хэш SHA1: </source>
-        <translation type="unfinished"></translation>
+        <source>&lt;i&gt;Из файла...&lt;/i&gt;</source>
+        <translation>&lt;i&gt;From file...&lt;/i&gt;</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="136"/>
-        <source>Не действителен до: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="140"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="148"/>
         <source>Не действителен до: %s&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Not valid until: %s&lt;br&gt;</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="142"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="150"/>
         <source>Не действителен после: &lt;font color=red&gt;&lt;b&gt;%s&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Not valid after: &lt;font color=red&gt;&lt;b&gt;%s&lt;/b&gt;&lt;/font&gt;</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="145"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="153"/>
         <source>Не действителен после: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Not valid after: %s</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="191"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="199"/>
         <source>Закрыть</source>
-        <translation type="unfinished"></translation>
+        <translation>Close</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="192"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="200"/>
         <source>Отправить по почте</source>
-        <translation type="unfinished"></translation>
+        <translation>Send by mail</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="193"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="201"/>
         <source>Показать в папке</source>
-        <translation type="unfinished"></translation>
+        <translation>Show in Folder</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="225"/>
-        <source>Информация о сертификате:&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="743"/>
+        <source>О программе</source>
+        <translation>About the program</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="227"/>
-        <source>Серийный номер:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="229"/>
-        <source>&lt;br&gt;Хэш SHA1:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="686"/>
         <source>Cообщение</source>
-        <translation type="unfinished"></translation>
+        <translation>Message</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="686"/>
         <source>Произошла ошибка:
 %s</source>
-        <translation type="unfinished"></translation>
+        <translation>An error has occurred:
+%s</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="631"/>
         <source>Выберите файл(ы)</source>
-        <translation type="unfinished"></translation>
+        <translation>Select file(s)</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="647"/>
         <source>Отмена</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancel</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="418"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="436"/>
         <source>Подпись файла %s из %s&lt;br&gt;Текущий файл: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>File signature %s of %s&lt;br&gt;Current file: %s</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="430"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="448"/>
         <source>Файл %s успешно подписан.
 
 Подписанный файл: %s
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>File %s was successfully signed.
+
+Signed file: %s
+
+</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="580"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="605"/>
         <source>Сертификат:
 {p[subjectCN]}
 Выдан: {p[issuerCN]}
@@ -459,392 +437,438 @@
 Не действителен после: {p[notValidAfter]}
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Certificate:
+{p[subjectCN]}
+Issued by: {p[issuerCN]}
+Serial number: {p[serial]}
+Not valid until: {p[notValidBefore]}
+Not valid after: {p[notValidAfter]}
+
+</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="434"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="452"/>
         <source>
 
 Предупреждение: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Warning: %s</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="442"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="460"/>
         <source>
 Предупреждение: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Warning: %s</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="443"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="461"/>
         <source>Файл успешно подписан</source>
-        <translation type="unfinished"></translation>
+        <translation>File signed successfully</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="479"/>
-        <source>Проверка подписи файла %s из %s&lt;br&gt;Текущий файл: %s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="488"/>
-        <source>Файл: %s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="489"/>
-        <source>&lt;b&gt;Информация о сертификате подписи:&lt;/b&gt;:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="490"/>
-        <source>&lt;b&gt;Эмитент&lt;/b&gt;:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="494"/>
-        <source>&lt;b&gt;Субъект&lt;/b&gt;:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="498"/>
-        <source>&lt;b&gt;Серийный номер&lt;/b&gt;: %s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="500"/>
-        <source>&lt;b&gt;Не действителен до&lt;/b&gt;: %s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/gui.py" line="502"/>
-        <source>&lt;b&gt;Не действителен после&lt;/b&gt;: %s</source>
-        <translation type="unfinished"></translation>
+        <source>Проверка подписи файла %s из %s&lt;br&gt;Текущий файл: %s</source>
+        <translation>Signature verification of file %s of %s&lt;br&gt;Current file: %s</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="505"/>
-        <source>&lt;font color=&quot;green&quot;&gt;&lt;b&gt;Цепочка сертификатов была проверена.&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="511"/>
+        <source>Файл: %s</source>
+        <translation>File: %s</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="507"/>
-        <source>&lt;font color=&quot;orange&quot;&gt;&lt;b&gt;ВНИМАНИЕ: Цепочка сертификатов не была проверена.&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="509"/>
-        <source>&lt;font color=&quot;red&quot;&gt;&lt;b&gt;ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../../src/gostcryptogui/gui.py" line="512"/>
+        <source>&lt;b&gt;Информация о сертификате подписи:&lt;/b&gt;:</source>
+        <translation>&lt;b&gt;Signing Certificate Information:&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="513"/>
+        <source>&lt;b&gt;Эмитент&lt;/b&gt;:</source>
+        <translation>&lt;b&gt;Issuer&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="517"/>
+        <source>&lt;b&gt;Субъект&lt;/b&gt;:</source>
+        <translation>&lt;b&gt;Subject&lt;/b&gt;:</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="521"/>
+        <source>&lt;b&gt;Серийный номер&lt;/b&gt;: %s</source>
+        <translation>&lt;b&gt;Serial number&lt;/b&gt;: %s</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="523"/>
+        <source>&lt;b&gt;Не действителен до&lt;/b&gt;: %s</source>
+        <translation>&lt;b&gt;Not valid until&lt;/b&gt;: %s</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="525"/>
+        <source>&lt;b&gt;Не действителен после&lt;/b&gt;: %s</source>
+        <translation>&lt;b&gt;Not valid after&lt;/b&gt;: %s</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="528"/>
+        <source>&lt;font color=&quot;green&quot;&gt;&lt;b&gt;Цепочка сертификатов была проверена.&lt;/b&gt;&lt;/font&gt;</source>
+        <translation>&lt;font color=&quot;green&quot;&gt;&lt;b&gt;The certificate chain has been verified.&lt;/b&gt;&lt;/font&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="530"/>
+        <source>&lt;font color=&quot;orange&quot;&gt;&lt;b&gt;ВНИМАНИЕ: Цепочка сертификатов не была проверена.&lt;/b&gt;&lt;/font&gt;</source>
+        <translation>&lt;font color=&quot;orange&quot;&gt;&lt;b&gt;WARNING: The certificate chain has not been verified.&lt;/b&gt;&lt;/font&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="532"/>
+        <source>&lt;font color=&quot;red&quot;&gt;&lt;b&gt;ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!&lt;/b&gt;&lt;/font&gt;</source>
+        <translation>&lt;font color=&quot;red&quot;&gt;&lt;b&gt;WARNING: One or more certificates in the chain have been revoked!&lt;/b&gt;&lt;/font&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="535"/>
         <source>&lt;font color=&quot;red&quot;&gt;&lt;b&gt;ВНИМАНИЕ: Срок действия сертификата истек или еще не наступил!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font color=&quot;red&quot;&gt;&lt;b&gt;WARNING: The certificate has expired or has not yet arrived!&lt;/b&gt;&lt;/font&gt;</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="515"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="538"/>
         <source>&lt;font color=&quot;green&quot;&gt;&lt;b&gt;Сертификат действителен.&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font color=&quot;green&quot;&gt;&lt;b&gt;The certificate is valid.&lt;/b&gt;&lt;/font&gt;</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="569"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="594"/>
         <source>Шифрование файла %s из %s&lt;br&gt;Текущий файл: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Encrypt file %s from %s&lt;br&gt;Current file: %s</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="578"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="603"/>
         <source>Файл %s успешно зашифрован.
 
 Зашифрованный файл: %s
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>File %s was successfully encrypted.
+
+Encrypted file: %s
+
+</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="678"/>
         <source>ВНИМАНИЕ: Статус отзыва сертификата не был проверен!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>WARNING: The revocation status of the certificate has not been checked!
+</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="680"/>
         <source>ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>WARNING: One or more certificates in the chain have been revoked!
+</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="682"/>
         <source>ВНИМАНИЕ: Срок действия сертификата истек или еще не наступил!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ATTENTION: The certificate has expired or has not yet arrived!
+</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="625"/>
+        <source>Файл успешно зашифрован</source>
+        <translation>File encrypted successfully</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="668"/>
         <source>Расшифровка файла %s из %s&lt;br&gt;Текущий файл: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>Decrypt file %s from %s&lt;br&gt;Current file: %s</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="676"/>
         <source>Файл %s успешно расшифрован.
 
 Расшифрованный файл: %s
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>File %s was successfully decrypted.
+
+Decrypted file: %s
+
+</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="730"/>
         <source>неструктурированное имя</source>
-        <translation type="unfinished"></translation>
+        <translation>unstructured name</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="689"/>
         <source>код должности</source>
-        <translation type="unfinished"></translation>
+        <translation>position code</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="690"/>
         <source>код структурного подразделения ФССП России (ВКСП)</source>
-        <translation type="unfinished"></translation>
+        <translation>code of the structural unit of the FSSP of Russia (VKSP)</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="691"/>
         <source>Полномочия публикации обновлений ПО</source>
-        <translation type="unfinished"></translation>
+        <translation>Permissions to publish software updates</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="692"/>
         <source>Подсистема АИС ФССП России</source>
-        <translation type="unfinished"></translation>
+        <translation>Subsystem AIS FSSP of Russia</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="693"/>
         <source>Главный судебный пристав Российской Федерации</source>
-        <translation type="unfinished"></translation>
+        <translation>Chief bailiff of the Russian Federation</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="694"/>
         <source>Заместитель главного судебного пристава Российской Федерации</source>
-        <translation type="unfinished"></translation>
+        <translation>Deputy Chief Bailiff of the Russian Federation</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="695"/>
         <source>Главный судебный пристав субъекта Российской Федерации</source>
-        <translation type="unfinished"></translation>
+        <translation>Chief bailiff of the subject of the Russian Federation</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="696"/>
         <source>Заместитель главного судебного пристава субъекта Российской Федерации</source>
-        <translation type="unfinished"></translation>
+        <translation>Deputy Chief Bailiff of a Subject of the Russian Federation</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="697"/>
         <source>Старший судебный пристав</source>
-        <translation type="unfinished"></translation>
+        <translation>Senior bailiff</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="698"/>
         <source>Судебный пристав-исполнитель</source>
-        <translation type="unfinished"></translation>
+        <translation>Bailiff</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="699"/>
         <source>Доступ к СМЭВ (ФЛ)</source>
-        <translation type="unfinished"></translation>
+        <translation>Access to SMEV (FL)</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="700"/>
         <source>Доступ к СМЭВ (ЮЛ)</source>
-        <translation type="unfinished"></translation>
+        <translation>Access to SMEV (YuL)</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="701"/>
         <source>Временный доступ к Центру Регистрации</source>
-        <translation type="unfinished"></translation>
+        <translation>Temporary access to the Registration Center</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="702"/>
         <source>Администратор Центра Регистрации КриптоПро УЦ</source>
-        <translation type="unfinished"></translation>
+        <translation>Administrator of the CryptoPro CA Registration Center</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="703"/>
         <source>Оператор Центра Регистрации КриптоПро УЦ</source>
-        <translation type="unfinished"></translation>
+        <translation>Operator of the CryptoPro CA Registration Center</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="704"/>
         <source>Пользователь центра регистрации КриптоПро УЦ</source>
-        <translation type="unfinished"></translation>
+        <translation>CryptoPro CA registration center user</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="705"/>
         <source>Центр Регистрации КриптоПро УЦ</source>
-        <translation type="unfinished"></translation>
+        <translation>Registration Center CryptoPro CA</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="706"/>
         <source>Проверка подлинности сервера</source>
-        <translation type="unfinished"></translation>
+        <translation>Server authentication</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="707"/>
         <source>Проверка подлинности клиента</source>
-        <translation type="unfinished"></translation>
+        <translation>Client Authentication</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="708"/>
         <source>Защищенная электронная почта</source>
-        <translation type="unfinished"></translation>
+        <translation>Secure email</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="709"/>
         <source>Установка штампа времени</source>
-        <translation type="unfinished"></translation>
+        <translation>Setting the timestamp</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="710"/>
         <source>Администратор организации</source>
-        <translation type="unfinished"></translation>
+        <translation>Organization Administrator</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="711"/>
         <source>Уполномоченный специалист</source>
-        <translation type="unfinished"></translation>
+        <translation>Authorized specialist</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="712"/>
         <source>Должностное лицо с правом подписи контракта</source>
-        <translation type="unfinished"></translation>
+        <translation>An official with the right to sign a contract</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="713"/>
         <source>Специалист с правом направления проекта контракта участнику размещения заказа</source>
-        <translation type="unfinished"></translation>
+        <translation>Specialist with the right to send the draft contract to the participant in the order placement</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="714"/>
         <source>общее имя</source>
-        <translation type="unfinished"></translation>
+        <translation>common name</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="715"/>
         <source>фамилия</source>
-        <translation type="unfinished"></translation>
+        <translation>surname</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="716"/>
         <source>имя и отчество</source>
-        <translation type="unfinished"></translation>
+        <translation>first and middle name</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="717"/>
         <source>инициалы</source>
-        <translation type="unfinished"></translation>
+        <translation>initials</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="718"/>
         <source>должность</source>
-        <translation type="unfinished"></translation>
+        <translation>job title</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="719"/>
         <source>структурное подразделение</source>
-        <translation type="unfinished"></translation>
+        <translation>structural subdivision</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="720"/>
         <source>организация</source>
-        <translation type="unfinished"></translation>
+        <translation>organization</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="721"/>
         <source>населенный пункт</source>
-        <translation type="unfinished"></translation>
+        <translation>locality</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="722"/>
         <source>субъект РФ</source>
-        <translation type="unfinished"></translation>
+        <translation>The subject of the Russian Federation</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="723"/>
         <source>страна</source>
-        <translation type="unfinished"></translation>
+        <translation>country</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="724"/>
         <source>адрес электронной почты</source>
-        <translation type="unfinished"></translation>
+        <translation>E-mail address</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="725"/>
         <source>ИНН</source>
-        <translation type="unfinished"></translation>
+        <translation>TIN</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="726"/>
         <source>ОГРН</source>
-        <translation type="unfinished"></translation>
+        <translation>OGRN</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="727"/>
         <source>СНИЛС</source>
-        <translation type="unfinished"></translation>
+        <translation>SNILS</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="728"/>
         <source>название улицы, номер дома</source>
-        <translation type="unfinished"></translation>
+        <translation>street name, house number</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="729"/>
         <source>адрес места нахождения</source>
-        <translation type="unfinished"></translation>
+        <translation>location address</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
-        <source>О программе</source>
-        <translation type="unfinished"></translation>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="737"/>
+        <source>&lt;br&gt;2019г. Борис Макаренко&lt;br&gt;УИТ ФССП России</source>
+        <translation>&lt;br&gt;2019 Boris Makarenko&lt;br&gt;IT FSSP of Russia</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../src/gostcryptogui/gui.py" line="600"/>
-        <source>&lt;br&gt;2019г. Борис Макаренко&lt;br&gt;УИТ ФССП России&lt;br&gt;E-mail: &lt;a href=&apos;mailto:makarenko@fssprus.ru&apos;&gt;makarenko@fssprus.ru&lt;/a&gt;&lt;br&gt; &lt;a href=&apos;mailto:bmakarenko90@gmail.com&apos;&gt;bmakarenko90@gmail.com&lt;/a&gt;&lt;br&gt;&lt;br&gt;2022-2023г. Владлен Мурылев&lt;br&gt;ООО &quot;РЕД СОФТ&quot;&lt;br&gt;E-mail: &lt;a href=&apos;mailto:redos.support@red-soft.ru&apos;&gt;redos.support@red-soft.ru&lt;/a&gt;&lt;br&gt;&lt;a href=&apos;http://opensource.org/licenses/MIT&apos;&gt;Лицензия MIT&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="738"/>
+        <source>&lt;br&gt;E-mail: &lt;a href=mailto:makarenko@fssprus.ru&apos;&gt;makarenko@fssprus.ru&lt;/a&gt;</source>
+        <translation>&lt;br&gt;E-mail: &lt;a href=mailto:makarenko@fssprus.ru&apos;&gt;makarenko@fssprus.ru&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="739"/>
+        <source>&lt;br&gt; &lt;a href=&apos;mailto:bmakarenko90@gmail.com&apos;&gt;bmakarenko90@gmail.com&lt;/a&gt;&lt;br&gt;</source>
+        <translation>&lt;br&gt; &lt;a href=&apos;mailto:bmakarenko90@gmail.com&apos;&gt;bmakarenko90@gmail.com&lt;/a&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="740"/>
+        <source>&lt;br&gt;2022-2023г. Владлен Мурылев&lt;br&gt;ООО &quot;РЕД СОФТ&quot;</source>
+        <translation>&lt;br&gt;2022-2023 Vladlen Murylev&lt;br&gt;LLC &quot;RED SOFT&quot;</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="741"/>
+        <source>&lt;br&gt;E-mail: &lt;a href=&apos;mailto:redos.support@red-soft.ru&apos;&gt;redos.support@red-soft.ru&lt;/a&gt;&lt;br&gt;</source>
+        <translation>&lt;br&gt;E-mail: &lt;a href=&apos;mailto:redos.support@red-soft.ru&apos;&gt;redos.support@red-soft.ru&lt;/a&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/gostcryptogui/gui.py" line="742"/>
+        <source>&lt;a href=&apos;http://opensource.org/licenses/MIT&apos;&gt;Лицензия MIT&lt;/a&gt;</source>
+        <translation>&lt;a href=&apos;http://opensource.org/licenses/MIT&apos;&gt;MIT License&lt;/a&gt;</translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>CertForm</name>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../selectcert.ui" line="14"/>
         <source>Выбор сертификата</source>
-        <translation type="unfinished"></translation>
+        <translation>Certificate selection</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../selectcert.ui" line="20"/>
         <source>Отмена</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancel</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../selectcert.ui" line="27"/>
         <source>Выберите сертификат</source>
-        <translation type="unfinished"></translation>
+        <translation>Choose a certificate</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../selectcert.ui" line="34"/>
         <source>Далее</source>
-        <translation type="unfinished"></translation>
+        <translation>Next</translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>Form</name>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../viewmultiresults.ui" line="43"/>
         <source>Результат операций</source>
-        <translation type="unfinished"></translation>
+        <translation>Result of operations</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../viewmultiresults.ui" line="20"/>
         <source>Закрыть</source>
-        <translation type="unfinished"></translation>
+        <translation>Close</translation>
     </message>
 </context>
 <context>
@@ -852,145 +876,145 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>gost-crypto-gui</source>
-        <translation type="unfinished"></translation>
+        <translation>gost-crypto-gui</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="37"/>
+    <message>
+        <location filename="../mainwindow.ui" line="33"/>
         <source>Подписать указанный файл</source>
-        <translation type="unfinished"></translation>
+        <translation>Sign the specified file</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="40"/>
+    <message>
+        <location filename="../mainwindow.ui" line="36"/>
         <source>Подписать файл(ы)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sign file(s)</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="53"/>
+    <message>
+        <location filename="../mainwindow.ui" line="49"/>
         <source>Проверить ЭЦП подписанного файла</source>
-        <translation type="unfinished"></translation>
+        <translation>Check the digital signature of the signed file</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="56"/>
+    <message>
+        <location filename="../mainwindow.ui" line="52"/>
         <source>Проверить подпись</source>
-        <translation type="unfinished"></translation>
+        <translation>Verify Signature</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="69"/>
+    <message>
+        <location filename="../mainwindow.ui" line="65"/>
         <source>Зашифровать указанный файл</source>
-        <translation type="unfinished"></translation>
+        <translation>Encrypt the specified file</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="72"/>
+    <message>
+        <location filename="../mainwindow.ui" line="68"/>
         <source>Зашифровать файл(ы)</source>
-        <translation type="unfinished"></translation>
+        <translation>Encrypt file(s)</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="79"/>
+    <message>
+        <location filename="../mainwindow.ui" line="75"/>
         <source>Расшифровать файл</source>
-        <translation type="unfinished"></translation>
+        <translation>Decrypt File</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="82"/>
+    <message>
+        <location filename="../mainwindow.ui" line="78"/>
         <source>Расшифровать файл(ы)</source>
-        <translation type="unfinished"></translation>
+        <translation>Decrypt file(s)</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="99"/>
+    <message>
+        <location filename="../mainwindow.ui" line="95"/>
         <source>Опции</source>
-        <translation type="unfinished"></translation>
+        <translation>Options</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="103"/>
+    <message>
+        <location filename="../mainwindow.ui" line="99"/>
         <source>Выбрать используемый криптопровайдер</source>
-        <translation type="unfinished"></translation>
+        <translation>Select the cryptographic provider to use</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="106"/>
+    <message>
+        <location filename="../mainwindow.ui" line="102"/>
         <source>Криптопровайдер</source>
-        <translation type="unfinished"></translation>
+        <translation>Crypto provider</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="113"/>
+    <message>
+        <location filename="../mainwindow.ui" line="109"/>
         <source>Кодировка файлов</source>
-        <translation type="unfinished"></translation>
+        <translation>File encoding</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="120"/>
+    <message>
+        <location filename="../mainwindow.ui" line="116"/>
         <source>Авт. проверка подписи</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto Signature Verification</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="127"/>
+    <message>
+        <location filename="../mainwindow.ui" line="123"/>
         <source>Отсоединенная подпись</source>
-        <translation type="unfinished"></translation>
+        <translation>Disconnected signature</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="134"/>
+    <message>
+        <location filename="../mainwindow.ui" line="130"/>
         <source>Расширение зашифрованного файла</source>
-        <translation type="unfinished"></translation>
+        <translation>Encrypted file extension</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="157"/>
+    <message>
+        <location filename="../mainwindow.ui" line="153"/>
         <source>КриптоПро CSP</source>
-        <translation type="unfinished"></translation>
+        <translation>CryptoPro CSP</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="168"/>
+        <location filename="../mainwindow.ui" line="164"/>
         <source>OpenSSL</source>
-        <translation type="unfinished"></translation>
+        <translation>OpenSSL</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="179"/>
+        <location filename="../mainwindow.ui" line="175"/>
         <source>DER</source>
-        <translation type="unfinished"></translation>
+        <translation>DER</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="187"/>
+        <location filename="../mainwindow.ui" line="183"/>
         <source>base64</source>
-        <translation type="unfinished"></translation>
+        <translation>base64</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="217"/>
+    <message>
+        <location filename="../mainwindow.ui" line="213"/>
         <source>Включено</source>
-        <translation type="unfinished"></translation>
+        <translation>Included</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../mainwindow.ui" line="228"/>
+    <message>
+        <location filename="../mainwindow.ui" line="224"/>
         <source>Выключено</source>
-        <translation type="unfinished"></translation>
+        <translation>Turned off</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="239"/>
+        <location filename="../mainwindow.ui" line="235"/>
         <source>enc</source>
-        <translation type="unfinished"></translation>
+        <translation>enc</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="247"/>
+        <location filename="../mainwindow.ui" line="243"/>
         <source>p7e</source>
-        <translation type="unfinished"></translation>
+        <translation>p7e</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="255"/>
+        <location filename="../mainwindow.ui" line="251"/>
         <source>p7m</source>
-        <translation type="unfinished"></translation>
+        <translation>p7m</translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>cert_view</name>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../viewcert.ui" line="14"/>
         <source>Просмотр</source>
-        <translation type="unfinished"></translation>
+        <translation>View</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../viewcert.ui" line="33"/>
         <source>Закрыть</source>
-        <translation type="unfinished"></translation>
+        <translation>Close</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <location filename="../viewcert.ui" line="49"/>
         <source>Сохранить отчет</source>
-        <translation type="unfinished"></translation>
+        <translation>Save report</translation>
     </message>
 </context>
 </TS>

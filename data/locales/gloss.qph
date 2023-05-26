@@ -1,0 +1,883 @@
+<!DOCTYPE QPH>
+<QPH language="en">
+<phrase>
+    <source>Использование: gost-crypto-gui [КЛЮЧ] [ФАЙЛ]</source>
+    <target></target>
+</phrase>
+<phrase>
+    <source>Использование: gost-crypto-gui [КЛЮЧ] [ФАЙЛ]</source>
+    <target>Usage: gost-crypto-gui [KEY] [FILE]</target>
+</phrase>
+<phrase>
+    <source>Выполняет криптографические операции над файлами при помощи алгоритмов ГОСТ
+</source>
+    <target>Performs cryptographic operations on files using GOST algorithms
+</target>
+</phrase>
+<phrase>
+    <source>Ключи:
+</source>
+    <target>Keys:
+</target>
+</phrase>
+<phrase>
+    <source>-sign		Подписать файл</source>
+    <target>-sign		Sign file</target>
+</phrase>
+<phrase>
+    <source>Использование: gost-crypto-gui [КЛЮЧ] [ФАЙЛ]</source>
+    <target>Usage: gost-crypto-gui [KEY] [FILE]</target>
+</phrase>
+<phrase>
+    <source>-decr		Расшифровать файл</source>
+    <target></target>
+</phrase>
+<phrase>
+    <source>-dettach	Отсоединить электронную подпись от файла</source>
+    <target>-dettach	Detach e-signature from file</target>
+</phrase>
+<phrase>
+    <source>Выполняет криптографические операции над файлами при помощи алгоритмов ГОСТ
+</source>
+    <target>Performs cryptographic operations on files using GOST algorithms
+</target>
+</phrase>
+<phrase>
+    <source>-encr		Зашифровать файл</source>
+    <target>-encr		Encrypt file</target>
+</phrase>
+<phrase>
+    <source>-verify		Проверить электронную подпись файла</source>
+    <target>-verify		Check the electronic signature of a file</target>
+</phrase>
+<phrase>
+    <source>-decr		Расшифровать файл</source>
+    <target>-decr		Decrypt File</target>
+</phrase>
+<phrase>
+    <source>Текущая архитектура %s не поддерживается</source>
+    <target>Current architecture %s is not supported</target>
+</phrase>
+<phrase>
+    <source>СКЗИ Крипто Про CSP или некоторые его компоненты не установлены.</source>
+    <target>CIPF Crypto Pro CSP or some of its components are not installed.</target>
+</phrase>
+<phrase>
+    <source>Мало памяти</source>
+    <target>Not enough memory</target>
+</phrase>
+<phrase>
+    <source>Не удалось открыть файл</source>
+    <target>Failed to open file</target>
+</phrase>
+<phrase>
+    <source>Не удалось открыть файл</source>
+    <target>Failed to open file</target>
+</phrase>
+<phrase>
+    <source>Операция отменена пользователем</source>
+    <target>Operation canceled by user</target>
+</phrase>
+<phrase>
+    <source>Некорректное преобразование BASE64</source>
+    <target>Incorrect BASE64 conversion</target>
+</phrase>
+<phrase>
+    <source>Если указан параметр -help, то других быть не должно</source>
+    <target>If the -help option is specified, then there should be no others</target>
+</phrase>
+<phrase>
+    <source>Указан лишний файл</source>
+    <target>Extra file specified</target>
+</phrase>
+<phrase>
+    <source>Указан неизвестный ключ</source>
+    <target>Unknown key specified</target>
+</phrase>
+<phrase>
+    <source>Указана лишняя команда</source>
+    <target>Extra command specified</target>
+</phrase>
+<phrase>
+    <source>Для ключа не указан параметр</source>
+    <target>No parameter specified for key</target>
+</phrase>
+<phrase>
+    <source>Не указана команда</source>
+    <target>Command not specified</target>
+</phrase>
+<phrase>
+    <source>Не указан необходимый ключ</source>
+    <target>Required key not specified</target>
+</phrase>
+<phrase>
+    <source>Указан неверный ключ</source>
+    <target>Invalid key specified</target>
+</phrase>
+<phrase>
+    <source>Параметром ключа -q должно быть натуральное число</source>
+    <target>The -q option must be a natural number</target>
+</phrase>
+<phrase>
+    <source>Не указан входной файл</source>
+    <target>Input file not specified</target>
+</phrase>
+<phrase>
+    <source>Не указан выходной файл</source>
+    <target>No output file specified</target>
+</phrase>
+<phrase>
+    <source>Команда не использует параметр с именем файла</source>
+    <target>The command does not use a filename parameter</target>
+</phrase>
+<phrase>
+    <source>Не указан  файл сообщения</source>
+    <target>Message file not specified</target>
+</phrase>
+<phrase>
+    <source>Не удалось открыть хранилище сертификатов:</source>
+    <target>Failed to open certificate store:</target>
+</phrase>
+<phrase>
+    <source>Сертификаты не найдены</source>
+    <target>Certificates not found</target>
+</phrase>
+<phrase>
+    <source>Найдено более одного сертификата (ключ -1)</source>
+    <target>More than one certificate found (key -1)</target>
+</phrase>
+<phrase>
+    <source>Команда подразумевает использование только одного сертификата</source>
+    <target>The command implies the use of only one certificate</target>
+</phrase>
+<phrase>
+    <source>Неверно указан номер</source>
+    <target>Invalid number</target>
+</phrase>
+<phrase>
+    <source>Нет используемых сертификатов</source>
+    <target>No certificates in use</target>
+</phrase>
+<phrase>
+    <source>Данный сертификат не может применяться для этой операции</source>
+    <target>This certificate cannot be used for this operation</target>
+</phrase>
+<phrase>
+    <source>Цепочка сертификатов не проверена. Либо сертификат был отозван или срок действия истек.</source>
+    <target>The certificate chain has not been verified. Either the certificate has been revoked or has expired.</target>
+</phrase>
+<phrase>
+    <source>Криптопровайдер, поддерживающий необходимый алгоритм не найден</source>
+    <target>A crypto provider that supports the required algorithm was not found</target>
+</phrase>
+<phrase>
+    <source>Неудачный ввод пароля ключевого контейнера</source>
+    <target>Failed key container password entry</target>
+</phrase>
+<phrase>
+    <source>Ошибка связи с закрытым ключом</source>
+    <target>Private key communication error</target>
+</phrase>
+<phrase>
+    <source>Не указана маска файлов</source>
+    <target>File mask not specified</target>
+</phrase>
+<phrase>
+    <source>Указаны несколько масок файлов</source>
+    <target>Multiple file masks specified</target>
+</phrase>
+<phrase>
+    <source>Файлы не найдены</source>
+    <target>Files not found</target>
+</phrase>
+<phrase>
+    <source>Задана неверная маска</source>
+    <target>Invalid mask specified</target>
+</phrase>
+<phrase>
+    <source>Неверный хеш</source>
+    <target>Invalid hash</target>
+</phrase>
+<phrase>
+    <source>Ключ -start указан, а выходной файл нет</source>
+    <target>The -start switch is specified but the output file is not</target>
+</phrase>
+<phrase>
+    <source>Содержимое файла - не подписанное сообщение</source>
+    <target>File content - unsigned message</target>
+</phrase>
+<phrase>
+    <source>Неизвестный алгоритм подписи</source>
+    <target>Unknown signature algorithm</target>
+</phrase>
+<phrase>
+    <source>Сертификат автора подписи не найден</source>
+    <target>Signer certificate not found</target>
+</phrase>
+<phrase>
+    <source>Сертификат автора подписи не найден</source>
+    <target>Signer certificate not found</target>
+</phrase>
+<phrase>
+    <source>Подпись не найдена</source>
+    <target>Signature not found</target>
+</phrase>
+<phrase>
+    <source>Подпись не верна</source>
+    <target>Signature is not correct</target>
+</phrase>
+<phrase>
+    <source>Штамп времени не верен</source>
+    <target>Time stamp is not correct</target>
+</phrase>
+<phrase>
+    <source>Содержимое файла - не зашифрованное сообщение</source>
+    <target>The content of the file is not an encrypted message</target>
+</phrase>
+<phrase>
+    <source>Неизвестный алгоритм шифрования</source>
+    <target>Unknown encryption algorithm</target>
+</phrase>
+<phrase>
+    <source>Не найден сертификат с соответствующим секретным ключом</source>
+    <target>No certificate found with matching private key</target>
+</phrase>
+<phrase>
+    <source>Не удалось инициализировать cOM</source>
+    <target>Failed to initialize cOM</target>
+</phrase>
+<phrase>
+    <source>Контейнеры не найдены</source>
+    <target>Containers not found</target>
+</phrase>
+<phrase>
+    <source>Не удалось получить ответ от сервера</source>
+    <target>Failed to get a response from the server</target>
+</phrase>
+<phrase>
+    <source>Сертификат не найден в ответе сервера</source>
+    <target>Certificate not found in server response</target>
+</phrase>
+<phrase>
+    <source>Файл не содержит идентификатор запроса:</source>
+    <target>The file does not contain a request ID:</target>
+</phrase>
+<phrase>
+    <source>Некорректный адрес ЦС</source>
+    <target>Incorrect CA address</target>
+</phrase>
+<phrase>
+    <source>Получен неверный cookie</source>
+    <target>Invalid cookie received</target>
+</phrase>
+<phrase>
+    <source>Серийный номер содержит недопустимое количество символов</source>
+    <target>The serial number contains an invalid number of characters</target>
+</phrase>
+<phrase>
+    <source>Серийный номер содержит недопустимое количество символов</source>
+    <target>The serial number contains an invalid number of characters</target>
+</phrase>
+<phrase>
+    <source>Неверный код продукта</source>
+    <target>Invalid product code</target>
+</phrase>
+<phrase>
+    <source>Не удалось проверить серийный номер</source>
+    <target>Failed to verify serial number</target>
+</phrase>
+<phrase>
+    <source>Не удалось сохранить серийный номер</source>
+    <target>Failed to save serial number</target>
+</phrase>
+<phrase>
+    <source>Не удалось загрузить серийный номер</source>
+    <target>Failed to load serial number</target>
+</phrase>
+<phrase>
+    <source>Лицензия просрочена</source>
+    <target>License expired</target>
+</phrase>
+<phrase>
+    <source>Отсутствует лицензия КриптоПро CSP</source>
+    <target>No CryptoPro CSP license</target>
+</phrase>
+<phrase>
+    <source>Отсутствует лицензия КриптоПро CSP</source>
+    <target>No CryptoPro CSP license</target>
+</phrase>
+<phrase>
+    <source>Сохранить отчет</source>
+    <target>Save report</target>
+</phrase>
+<phrase>
+    <source>&lt;i&gt;Из файла...&lt;/i&gt;</source>
+    <target>&lt;i&gt;From file...&lt;/i&gt;</target>
+</phrase>
+<phrase>
+    <source>Не действителен до: %s&lt;br&gt;</source>
+    <target>Not valid until: %s&lt;br&gt;</target>
+</phrase>
+<phrase>
+    <source>Не действителен после: &lt;font color=red&gt;&lt;b&gt;%s&lt;/b&gt;&lt;/font&gt;</source>
+    <target>Not valid after: &lt;font color=red&gt;&lt;b&gt;%s&lt;/b&gt;&lt;/font&gt;</target>
+</phrase>
+<phrase>
+    <source>Не действителен после: %s</source>
+    <target>Not valid after: %s</target>
+</phrase>
+<phrase>
+    <source>Закрыть</source>
+    <target>Close</target>
+</phrase>
+<phrase>
+    <source>Отправить по почте</source>
+    <target>Send by mail</target>
+</phrase>
+<phrase>
+    <source>Cообщение</source>
+    <target>Message</target>
+</phrase>
+<phrase>
+    <source>Произошла ошибка:
+%s</source>
+    <target>An error has occurred:
+%s</target>
+</phrase>
+<phrase>
+    <source>Показать в папке</source>
+    <target>Show in Folder</target>
+</phrase>
+<phrase>
+    <source>Выберите файл(ы)</source>
+    <target>Select file(s)</target>
+</phrase>
+<phrase>
+    <source>Отмена</source>
+    <target>Cancel</target>
+</phrase>
+<phrase>
+    <source>Подпись файла %s из %s&lt;br&gt;Текущий файл: %s</source>
+    <target>File signature %s of %s&lt;br&gt;Current file: %s</target>
+</phrase>
+<phrase>
+    <source>Файл %s успешно подписан.
+
+Подписанный файл: %s
+
+</source>
+    <target>File %s was successfully signed.
+
+Signed file: %s
+
+</target>
+</phrase>
+<phrase>
+    <source>Сертификат:
+{p[subjectCN]}
+Выдан: {p[issuerCN]}
+Серийный номер: {p[serial]}
+Не действителен до: {p[notValidBefore]}
+Не действителен после: {p[notValidAfter]}
+
+</source>
+    <target>Certificate:
+{p[subjectCN]}
+Issued by: {p[issuerCN]}
+Serial number: {p[serial]}
+Not valid until: {p[notValidBefore]}
+Not valid after: {p[notValidAfter]}
+
+</target>
+</phrase>
+<phrase>
+    <source>
+
+Предупреждение: %s</source>
+    <target>
+
+
+Warning: %s</target>
+</phrase>
+<phrase>
+    <source>
+
+Предупреждение: %s</source>
+    <target>
+
+Warning: %s</target>
+</phrase>
+<phrase>
+    <source>
+Предупреждение: %s</source>
+    <target>
+Warning: %s</target>
+</phrase>
+<phrase>
+    <source>Файл успешно подписан</source>
+    <target>File signed successfully</target>
+</phrase>
+<phrase>
+    <source>Проверка подписи файла %s из %s&lt;br&gt;Текущий файл: %s</source>
+    <target>Signature verification of file %s of %s&lt;br&gt;Current file: %s</target>
+</phrase>
+<phrase>
+    <source>Файл: %s</source>
+    <target>File: %s</target>
+</phrase>
+<phrase>
+    <source>&lt;b&gt;Информация о сертификате подписи:&lt;/b&gt;:</source>
+    <target>&lt;b&gt;Signing Certificate Information:&lt;/b&gt;:</target>
+</phrase>
+<phrase>
+    <source>&lt;b&gt;Эмитент&lt;/b&gt;:</source>
+    <target>&lt;b&gt;Issuer&lt;/b&gt;:</target>
+</phrase>
+<phrase>
+    <source>&lt;b&gt;Субъект&lt;/b&gt;:</source>
+    <target>&lt;b&gt;Subject&lt;/b&gt;:</target>
+</phrase>
+<phrase>
+    <source>&lt;b&gt;Серийный номер&lt;/b&gt;: %s</source>
+    <target>&lt;b&gt;Serial number&lt;/b&gt;: %s</target>
+</phrase>
+<phrase>
+    <source>&lt;b&gt;Не действителен до&lt;/b&gt;: %s</source>
+    <target>&lt;b&gt;Not valid until&lt;/b&gt;: %s</target>
+</phrase>
+<phrase>
+    <source>&lt;b&gt;Не действителен после&lt;/b&gt;: %s</source>
+    <target>&lt;b&gt;Not valid after&lt;/b&gt;: %s</target>
+</phrase>
+<phrase>
+    <source>&lt;font color=&quot;green&quot;&gt;&lt;b&gt;Цепочка сертификатов была проверена.&lt;/b&gt;&lt;/font&gt;</source>
+    <target>&lt;font color=&quot;green&quot;&gt;&lt;b&gt;The certificate chain has been verified.&lt;/b&gt;&lt;/font&gt;</target>
+</phrase>
+<phrase>
+    <source>&lt;font color=&quot;orange&quot;&gt;&lt;b&gt;ВНИМАНИЕ: Цепочка сертификатов не была проверена.&lt;/b&gt;&lt;/font&gt;</source>
+    <target>&lt;font color=&quot;orange&quot;&gt;&lt;b&gt;WARNING: The certificate chain has not been verified.&lt;/b&gt;&lt;/font&gt;</target>
+</phrase>
+<phrase>
+    <source>&lt;font color=&quot;red&quot;&gt;&lt;b&gt;ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!&lt;/b&gt;&lt;/font&gt;</source>
+    <target>&lt;font color=&quot;red&quot;&gt;&lt;b&gt;WARNING: One or more certificates in the chain have been revoked!&lt;/b&gt;&lt;/font&gt;</target>
+</phrase>
+<phrase>
+    <source>&lt;font color=&quot;red&quot;&gt;&lt;b&gt;ВНИМАНИЕ: Срок действия сертификата истек или еще не наступил!&lt;/b&gt;&lt;/font&gt;</source>
+    <target>&lt;font color=&quot;red&quot;&gt;&lt;b&gt;WARNING: The certificate has expired or has not yet arrived!&lt;/b&gt;&lt;/font&gt;</target>
+</phrase>
+<phrase>
+    <source>&lt;font color=&quot;green&quot;&gt;&lt;b&gt;Сертификат действителен.&lt;/b&gt;&lt;/font&gt;</source>
+    <target></target>
+</phrase>
+<phrase>
+    <source>&lt;font color=&quot;green&quot;&gt;&lt;b&gt;Сертификат действителен.&lt;/b&gt;&lt;/font&gt;</source>
+    <target>&lt;font color=&quot;green&quot;&gt;&lt;b&gt;The certificate is valid.&lt;/b&gt;&lt;/font&gt;</target>
+</phrase>
+<phrase>
+    <source>Шифрование файла %s из %s&lt;br&gt;Текущий файл: %s</source>
+    <target>Encrypt file %s from %s&lt;br&gt;Current file: %s</target>
+</phrase>
+<phrase>
+    <source>Файл %s успешно зашифрован.
+
+Зашифрованный файл: %s
+
+</source>
+    <target>File %s was successfully encrypted.
+
+Encrypted file: %s
+
+</target>
+</phrase>
+<phrase>
+    <source>ВНИМАНИЕ: Статус отзыва сертификата не был проверен!
+</source>
+    <target>WARNING: The revocation status of the certificate has not been checked!
+</target>
+</phrase>
+<phrase>
+    <source>ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!
+</source>
+    <target>WARNING: One or more certificates in the chain have been revoked!</target>
+</phrase>
+<phrase>
+    <source>ВНИМАНИЕ: Один или несколько сертификатов в цепочке отозваны!
+</source>
+    <target>WARNING: One or more certificates in the chain have been revoked!
+</target>
+</phrase>
+<phrase>
+    <source>ВНИМАНИЕ: Срок действия сертификата истек или еще не наступил!
+</source>
+    <target>ATTENTION: The certificate has expired or has not yet arrived!
+</target>
+</phrase>
+<phrase>
+    <source>Файл успешно зашифрован</source>
+    <target>File encrypted successfully</target>
+</phrase>
+<phrase>
+    <source>Расшифровка файла %s из %s&lt;br&gt;Текущий файл: %s</source>
+    <target>Decrypt file %s from %s&lt;br&gt;Current file: %s</target>
+</phrase>
+<phrase>
+    <source>Файл %s успешно расшифрован.
+
+Расшифрованный файл: %s
+
+</source>
+    <target>File %s was successfully decrypted.
+
+Decrypted file: %s
+
+</target>
+</phrase>
+<phrase>
+    <source>неструктурированное имя</source>
+    <target>unstructured name</target>
+</phrase>
+<phrase>
+    <source>код должности</source>
+    <target>position code</target>
+</phrase>
+<phrase>
+    <source>код структурного подразделения ФССП России (ВКСП)</source>
+    <target>code of the structural unit of the FSSP of Russia (VKSP)</target>
+</phrase>
+<phrase>
+    <source>Полномочия публикации обновлений ПО</source>
+    <target>Permissions to publish software updates</target>
+</phrase>
+<phrase>
+    <source>Подсистема АИС ФССП России</source>
+    <target>Subsystem AIS FSSP of Russia</target>
+</phrase>
+<phrase>
+    <source>Главный судебный пристав Российской Федерации</source>
+    <target>Chief bailiff of the Russian Federation</target>
+</phrase>
+<phrase>
+    <source>Заместитель главного судебного пристава Российской Федерации</source>
+    <target>Deputy Chief Bailiff of the Russian Federation</target>
+</phrase>
+<phrase>
+    <source>Главный судебный пристав субъекта Российской Федерации</source>
+    <target>Chief bailiff of the subject of the Russian Federation</target>
+</phrase>
+<phrase>
+    <source>Заместитель главного судебного пристава субъекта Российской Федерации</source>
+    <target>Deputy Chief Bailiff of a Subject of the Russian Federation</target>
+</phrase>
+<phrase>
+    <source>Старший судебный пристав</source>
+    <target>Senior bailiff</target>
+</phrase>
+<phrase>
+    <source>Судебный пристав-исполнитель</source>
+    <target>Bailiff</target>
+</phrase>
+<phrase>
+    <source>Доступ к СМЭВ (ФЛ)</source>
+    <target>Access to SMEV (FL)</target>
+</phrase>
+<phrase>
+    <source>Доступ к СМЭВ (ФЛ)</source>
+    <target>Access to SMEV (FL)</target>
+</phrase>
+<phrase>
+    <source>Доступ к СМЭВ (ЮЛ)</source>
+    <target>Access to SMEV (YuL)</target>
+</phrase>
+<phrase>
+    <source>Доступ к СМЭВ (ЮЛ)</source>
+    <target>Access to SMEV (YuL)</target>
+</phrase>
+<phrase>
+    <source>Временный доступ к Центру Регистрации</source>
+    <target>Temporary access to the Registration Center</target>
+</phrase>
+<phrase>
+    <source>Администратор Центра Регистрации КриптоПро УЦ</source>
+    <target>Administrator of the CryptoPro CA Registration Center</target>
+</phrase>
+<phrase>
+    <source>Оператор Центра Регистрации КриптоПро УЦ</source>
+    <target>Operator of the CryptoPro CA Registration Center</target>
+</phrase>
+<phrase>
+    <source>Пользователь центра регистрации КриптоПро УЦ</source>
+    <target>CryptoPro CA registration center user</target>
+</phrase>
+<phrase>
+    <source>Центр Регистрации КриптоПро УЦ</source>
+    <target>Registration Center CryptoPro CA</target>
+</phrase>
+<phrase>
+    <source>Проверка подлинности сервера</source>
+    <target>Server authentication</target>
+</phrase>
+<phrase>
+    <source>Проверка подлинности клиента</source>
+    <target>Client Authentication</target>
+</phrase>
+<phrase>
+    <source>Защищенная электронная почта</source>
+    <target>Secure email</target>
+</phrase>
+<phrase>
+    <source>Установка штампа времени</source>
+    <target>Setting the timestamp</target>
+</phrase>
+<phrase>
+    <source>Администратор организации</source>
+    <target>Organization Administrator</target>
+</phrase>
+<phrase>
+    <source>Уполномоченный специалист</source>
+    <target>Authorized specialist</target>
+</phrase>
+<phrase>
+    <source>Должностное лицо с правом подписи контракта</source>
+    <target>An official with the right to sign a contract</target>
+</phrase>
+<phrase>
+    <source>Специалист с правом направления проекта контракта участнику размещения заказа</source>
+    <target>Specialist with the right to send the draft contract to the participant in the order placement</target>
+</phrase>
+<phrase>
+    <source>общее имя</source>
+    <target>common name</target>
+</phrase>
+<phrase>
+    <source>фамилия</source>
+    <target>surname</target>
+</phrase>
+<phrase>
+    <source>имя и отчество</source>
+    <target>first and middle name</target>
+</phrase>
+<phrase>
+    <source>инициалы</source>
+    <target>initials</target>
+</phrase>
+<phrase>
+    <source>должность</source>
+    <target>job title</target>
+</phrase>
+<phrase>
+    <source>структурное подразделение</source>
+    <target>structural subdivision</target>
+</phrase>
+<phrase>
+    <source>организация</source>
+    <target>organization</target>
+</phrase>
+<phrase>
+    <source>населенный пункт</source>
+    <target>locality</target>
+</phrase>
+<phrase>
+    <source>субъект РФ</source>
+    <target>The subject of the Russian Federation</target>
+</phrase>
+<phrase>
+    <source>страна</source>
+    <target>country</target>
+</phrase>
+<phrase>
+    <source>адрес электронной почты</source>
+    <target>E-mail address</target>
+</phrase>
+<phrase>
+    <source>ИНН</source>
+    <target>TIN</target>
+</phrase>
+<phrase>
+    <source>ОГРН</source>
+    <target>OGRN</target>
+</phrase>
+<phrase>
+    <source>СНИЛС</source>
+    <target>SNILS</target>
+</phrase>
+<phrase>
+    <source>название улицы, номер дома</source>
+    <target>street name, house number</target>
+</phrase>
+<phrase>
+    <source>адрес места нахождения</source>
+    <target>location address</target>
+</phrase>
+<phrase>
+    <source>&lt;br&gt;2019г. Борис Макаренко&lt;br&gt;УИТ ФССП России</source>
+    <target>&lt;br&gt;2019 Boris Makarenko&lt;br&gt;IT FSSP of Russia</target>
+</phrase>
+<phrase>
+    <source>&lt;br&gt;E-mail: &lt;a href=mailto:makarenko@fssprus.ru&apos;&gt;makarenko@fssprus.ru&lt;/a&gt;</source>
+    <target>&lt;br&gt;E-mail: &lt;a href=mailto:makarenko@fssprus.ru&apos;&gt;makarenko@fssprus.ru&lt;/a&gt;</target>
+</phrase>
+<phrase>
+    <source>&lt;br&gt; &lt;a href=&apos;mailto:bmakarenko90@gmail.com&apos;&gt;bmakarenko90@gmail.com&lt;/a&gt;&lt;br&gt;</source>
+    <target>&lt;br&gt; &lt;a href=&apos;mailto:bmakarenko90@gmail.com&apos;&gt;bmakarenko90@gmail.com&lt;/a&gt;&lt;br&gt;</target>
+</phrase>
+<phrase>
+    <source>&lt;br&gt;2022-2023г. Владлен Мурылев&lt;br&gt;ООО &quot;РЕД СОФТ&quot;</source>
+    <target>&lt;br&gt;2022-2023 Vladlen Murylev&lt;br&gt;LLC &quot;RED SOFT&quot;</target>
+</phrase>
+<phrase>
+    <source>&lt;br&gt;E-mail: &lt;a href=&apos;mailto:redos.support@red-soft.ru&apos;&gt;redos.support@red-soft.ru&lt;/a&gt;&lt;br&gt;</source>
+    <target>&lt;br&gt;E-mail: &lt;a href=&apos;mailto:redos.support@red-soft.ru&apos;&gt;redos.support@red-soft.ru&lt;/a&gt;&lt;br&gt;</target>
+</phrase>
+<phrase>
+    <source>&lt;a href=&apos;http://opensource.org/licenses/MIT&apos;&gt;Лицензия MIT&lt;/a&gt;</source>
+    <target>&lt;a href=&apos;http://opensource.org/licenses/MIT&apos;&gt;MIT License&lt;/a&gt;</target>
+</phrase>
+<phrase>
+    <source>О программе</source>
+    <target>About the program</target>
+</phrase>
+<phrase>
+    <source>Выбор сертификата</source>
+    <target>Certificate selection</target>
+</phrase>
+<phrase>
+    <source>Отмена</source>
+    <target>Cancel</target>
+</phrase>
+<phrase>
+    <source>Выберите сертификат</source>
+    <target>Choose a certificate</target>
+</phrase>
+<phrase>
+    <source>Далее</source>
+    <target>Next</target>
+</phrase>
+<phrase>
+    <source>Результат операций</source>
+    <target>Result of operations</target>
+</phrase>
+<phrase>
+    <source>Закрыть</source>
+    <target>Close</target>
+</phrase>
+<phrase>
+    <source>Подписать указанный файл</source>
+    <target>Sign the specified file</target>
+</phrase>
+<phrase>
+    <source>Подписать файл(ы)</source>
+    <target>Sign file(s)</target>
+</phrase>
+<phrase>
+    <source>Проверить ЭЦП подписанного файла</source>
+    <target>Check the digital signature of the signed file</target>
+</phrase>
+<phrase>
+    <source>Проверить подпись</source>
+    <target>Verify Signature</target>
+</phrase>
+<phrase>
+    <source>Зашифровать указанный файл</source>
+    <target>Encrypt the specified file</target>
+</phrase>
+<phrase>
+    <source>Зашифровать файл(ы)</source>
+    <target>Encrypt file(s)</target>
+</phrase>
+<phrase>
+    <source>Расшифровать файл</source>
+    <target>Decrypt File</target>
+</phrase>
+<phrase>
+    <source>Расшифровать файл(ы)</source>
+    <target>Decrypt file(s)</target>
+</phrase>
+<phrase>
+    <source>Опции</source>
+    <target>Options</target>
+</phrase>
+<phrase>
+    <source>Выбрать используемый криптопровайдер</source>
+    <target>Select the cryptographic provider to use</target>
+</phrase>
+<phrase>
+    <source>Криптопровайдер</source>
+    <target>Crypto provider</target>
+</phrase>
+<phrase>
+    <source>Кодировка файлов</source>
+    <target>File encoding</target>
+</phrase>
+<phrase>
+    <source>Авт. проверка подписи</source>
+    <target>Auto Signature Verification</target>
+</phrase>
+<phrase>
+    <source>Отсоединенная подпись</source>
+    <target>Disconnected signature</target>
+</phrase>
+<phrase>
+    <source>Расширение зашифрованного файла</source>
+    <target>Encrypted file extension</target>
+</phrase>
+<phrase>
+    <source>КриптоПро CSP</source>
+    <target>CryptoPro CSP</target>
+</phrase>
+<phrase>
+    <source>OpenSSL</source>
+    <target>OpenSSL</target>
+</phrase>
+<phrase>
+    <source>base64</source>
+    <target>base64</target>
+</phrase>
+<phrase>
+    <source>Включено</source>
+    <target>Included</target>
+</phrase>
+<phrase>
+    <source>Включено</source>
+    <target>Included</target>
+</phrase>
+<phrase>
+    <source>Выключено</source>
+    <target>Turned off</target>
+</phrase>
+<phrase>
+    <source>enc</source>
+    <target>enc</target>
+</phrase>
+<phrase>
+    <source>p7e</source>
+    <target>p7e</target>
+</phrase>
+<phrase>
+    <source>p7m</source>
+    <target>p7m</target>
+</phrase>
+<phrase>
+    <source>Просмотр</source>
+    <target>View</target>
+</phrase>
+<phrase>
+    <source>Закрыть</source>
+    <target>Сlose</target>
+</phrase>
+<phrase>
+    <source>Сохранить отчет</source>
+    <target>Save report</target>
+</phrase>
+<phrase>
+    <source>О программе</source>
+    <target>About the program</target>
+</phrase>
+<phrase>
+    <source>gost-crypto-gui</source>
+    <target>gost-crypto-gui</target>
+</phrase>
+<phrase>
+    <source>DER</source>
+    <target>DER</target>
+</phrase>
+</QPH>

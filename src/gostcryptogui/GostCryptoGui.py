@@ -3,14 +3,16 @@
 import sys
 import os.path
 
-# from gostcryptogui import gui
-import gui
+from gostcryptogui import gui
+# import gui
 import PyQt5
 from PyQt5 import QtGui, QtCore, QtWidgets
 from PyQt5.QtCore import QTranslator
 
+appdir = os.popen("echo $APPDIR").readline().strip()
 
 def main():
+    global appdir
     app = QtWidgets.QApplication(sys.argv)
 
     print(PyQt5.QtCore.QLocale().system().name())
@@ -19,11 +21,15 @@ def main():
         pass
     elif "en_US" in PyQt5.QtCore.QLocale().system().name():
         translator = QTranslator(app)
-        translator.load("GostCryptoGui-en_US.qm", "/home/wolandius/git_projects/gost-crypto-gui/data/locales")
+        translator.load("GostCryptoGui-en_US.qm",
+                        f"{appdir}/usr/share/gostcryptogui") if appdir else \
+            translator.load("GostCryptoGui-en_US.qm", "/usr/share/gostcryptogui")
         app.installTranslator(translator)
     else:
         translator = QTranslator(app)
-        translator.load("GostCryptoGui-en_US.qm", "/home/wolandius/git_projects/gost-crypto-gui/data/locales")
+        translator.load("GostCryptoGui-en_US.qm",
+                        f"{appdir}/usr/share/gostcryptogui") if appdir else \
+            translator.load("GostCryptoGui-en_US.qm", "/usr/share/gostcryptogui")
         app.installTranslator(translator)
 
     ex = gui.Window()

@@ -4,7 +4,11 @@
 
 Name:		gostcryptogui
 Version:	2.0
-Release:	1%{dist}.3
+%if 0%{?redos_version} < 0730
+Release:        1%{dist}.2
+%else
+Release:        1%{dist}.3
+%endif
 
 Summary:	A PyQt GUI for performing cryptographic operations over files using GOST algorithms
 Summary(ru):    Графический интерфейс PyQt для выполнения криптографических операций над файлами с использованием алгоритмов ГОСТ
@@ -30,6 +34,20 @@ A PyQt5 GUI for performing cryptographic operations over files using GOST algori
 
 %description -l ru
 Графический интерфейс PyQt5 для выполнения криптографических операций над файлами с использованием алгоритмов ГОСТ.
+
+%package caja
+Summary:        Caja plugins for gost-crypto-gui
+Summary(ru):    Расширение файлового менеджера caja для gost-crypto-gui
+BuildArch:      noarch
+Requires:       %{name}
+Obsoletes:      caja-gostcryptogui
+
+%description caja
+Caja plugins for gost-crypto-gui
+
+%description caja -l ru
+Расширение файлового менеджера caja для gost-crypto-gui
+
 %prep
 %setup -q
 rm -rf %{name}.egg-info
@@ -39,6 +57,8 @@ python3 setup.py build
 
 %install
 python3 setup.py install --single-version-externally-managed --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+
+
 
 %post
 xdg-mime install %{_datadir}/mime/applications/x-extension-enc.xml
@@ -61,14 +81,21 @@ do
   fi;
 done
 
-
 %files -f INSTALLED_FILES
 %license LICENSE
 %doc README.md Changelog
 %exclude  /usr/lib/python3*/site-packages/gostcryptogui/*/*.pyc
+%exclude %{_datadir}/caja-python/extensions/gost-crypto-gui-*.py
 
+%files caja
+%{_datadir}/caja-python/extensions/gost-crypto-gui-*.py
 
 %changelog
+* Fri May 26 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.0-1
+- added appimage support
+- added translations for app
+- port gostcryptogui-caja to python3
+
 * Tue Apr 25 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:1.4-1
 - added new MultiOutputDialog
 

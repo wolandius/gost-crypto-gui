@@ -50,20 +50,23 @@ import os
 import subprocess
 
 from datetime import datetime
-
+import PyQt5
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 
 from gostcryptogui.cprocsp import *
 # from cprocsp import *
 
 VERSION = "2.0"
+appdir = os.popen("echo $APPDIR").readline().strip()
+
 class ViewCert(QtWidgets.QDialog):
     report = str
     def __init__(self, parent=None):
         super().__init__(parent)
+        global appdir
         # uic.loadUi('/home/wolandius/git_projects/gost-crypto-gui/data/viewcert.ui', self)
-        uic.loadUi('/usr/share/gostcryptogui/viewcert.ui', self)
-
+        uic.loadUi(f'{appdir}/usr/share/gostcryptogui/viewcert.ui', self) if appdir else \
+            uic.loadUi('/usr/share/gostcryptogui/viewcert.ui', self)
         self.saveReport.clicked.connect(self.saveReportDialog)
         self.close_cert_view.clicked.connect(self.close)
         self.show()
@@ -87,7 +90,9 @@ class HTMLDelegate(QtWidgets.QStyledItemDelegate):
         doc = QtGui.QTextDocument(self)
 
         doc.setHtml(record)
+        doc.setMetaInformation(QtGui.QTextDocument.DocumentUrl, f"file:///{appdir}/usr/share/") if appdir else \
         doc.setMetaInformation(QtGui.QTextDocument.DocumentUrl, "file:///usr/share/")
+
         doc.setTextWidth(option.rect.width())
         ctx = QtGui.QAbstractTextDocumentLayout.PaintContext()
 
@@ -113,8 +118,10 @@ class ChooseCert(QtWidgets.QDialog):
 
     def __init__(self, parent=None, withsecret=bool):
         super().__init__(parent)
+        global appdir
         # uic.loadUi('/home/wolandius/git_projects/gost-crypto-gui/data/selectcert.ui', self)
-        uic.loadUi('/usr/share/gostcryptogui/selectcert.ui', self)
+        uic.loadUi(f'{appdir}/usr/share/gostcryptogui/selectcert.ui', self) if appdir else \
+            uic.loadUi('/usr/share/gostcryptogui/selectcert.ui', self)
 
         self.certs_hashes = []
 
@@ -124,16 +131,17 @@ class ChooseCert(QtWidgets.QDialog):
         if not withsecret:
             cert_list.append(PyQt5.QtCore.QCoreApplication.translate('', '<i>Из файла...</i>'))
         for line in certs_data:
-            cert_html = f'<img src="/usr/share/gostcryptogui/emblem-verified.png" width=22 height=22><b>{line["subjectCN"]}</b> '\
-                        PyQt5.QtCore.QCoreApplication.translate('', '<br>Выдан:') \
+            png_path = f"{appdir}/usr/share/gostcryptogui/emblem-verified.png" if appdir else "/usr/share/gostcryptogui/emblem-verified.png"
+            cert_html = f'<img src="{png_path}" width=22 height=22><b>{line["subjectCN"]}</b> '\
+                        f"{PyQt5.QtCore.QCoreApplication.translate('', '<br>Выдан:')}" \
                         f'{line["issuerCN"]} <br>' \
-                        PyQt5.QtCore.QCoreApplication.translate('', 'Серийный номер: ') \
+                        f"{PyQt5.QtCore.QCoreApplication.translate('', 'Серийный номер: ')}" \
                         f'{line["serial"]}' \
-                        PyQt5.QtCore.QCoreApplication.translate('', '<br>Хэш SHA1: ') \
+                        f"{PyQt5.QtCore.QCoreApplication.translate('', '<br>Хэш SHA1: ')}" \
                         f'{line["thumbprint"]}<br>'
 
             if datetime.strptime(line['notValidBefore'], '%d/%m/%Y  %H:%M:%S') > datetime.utcnow():
-                cert_html += PyQt5.QtCore.QCoreApplication.translate('', 'Не действителен до: ')\
+                cert_html += f"{PyQt5.QtCore.QCoreApplication.translate('', 'Не действителен до: ')}"\
                 f'<font color=red><b>{line["notValidBefore"]}</b></font><br>'
                 cert_html = cert_html.replace('emblem-verified.png', 'emblem-unverified.png')
             else:
@@ -202,12 +210,15 @@ class ResultDialog(QtWidgets.QDialog):
 
     # Если создавалась отсоединенная подпись, отправить и оригинал
     def send(self):
+        prog_path = f"{appdir}/usr/bin/xdg-email" if appdir else "/usr/bin/xdg-email"
         if self.dettached:
-            subprocess.Popen(['xdg-email', '--attach', self.result, '--attach', self.filename])
+
+            subprocess.Popen([prog_path, '--attach', self.result, '--attach', self.filename])
         else:
-            subprocess.Popen(['xdg-email', '--attach', self.result])
+            subprocess.Popen([prog_path, '--attach', self.result])
 
     def showFile(self):
+        prog_path = f"{appdir}/usr/bin/xdg-open" if appdir else "/usr/bin/xdg-open"
         subprocess.Popen(['xdg-open', '/'.join(self.result.split('/')[:-1])])
 
 class MultiResultDialog(QtWidgets.QDialog):
@@ -215,19 +226,21 @@ class MultiResultDialog(QtWidgets.QDialog):
 
     def __init__(self, parent=None, output=None):
         super().__init__(parent)
+        global appdir
         # uic.loadUi('/home/wolandius/git_projects/gost-crypto-gui/data/viewmultiresults.ui', self)
-        uic.loadUi('/usr/share/gostcryptogui/viewmultiresults.ui', self)
+        uic.loadUi(f'{appdir}/usr/share/gostcryptogui/viewmultiresults.ui', self) if appdir else \
+            uic.loadUi('/usr/share/gostcryptogui/viewmultiresults.ui', self)
 
         cert_list = []
         for line in output:
             cert_html = f'{line[0]}:<br>' \
                         f'<b>{line[1]}</b><br>' \
-                        PyQt5.QtCore.QCoreApplication.translate('', 'Информация о сертификате:<br>') \
+                        f"{PyQt5.QtCore.QCoreApplication.translate('', 'Информация о сертификате:<br>')}" \
                         f'<b>{line[2]["subjectCN"]}</b><br>' \
-                        PyQt5.QtCore.QCoreApplication.translate('', 'Серийный номер:') \
+                        f"{PyQt5.QtCore.QCoreApplication.translate('', 'Серийный номер:')}"\
                         f'{line[2]["serial"]}'\
-                        PyQt5.QtCore.QCoreApplication.translate('', '<br>Хэш SHA1:')\
-                        ' {line[2]["thumbprint"]}<br>' \
+                        f"{PyQt5.QtCore.QCoreApplication.translate('', '<br>Хэш SHA1:')}"\
+                        f' {line[2]["thumbprint"]}<br>' \
                         f'{line[3]}'
             cert_list.append(cert_html)
         model = QtCore.QStringListModel(cert_list)
@@ -247,13 +260,16 @@ class Window(QtWidgets.QMainWindow):
         # uic.loadUi('/home/wolandius/git_projects/gost-crypto-gui/data/mainwindow.ui', self)
 
         # # Translate application
-
-        uic.loadUi('/usr/share/gostcryptogui/mainwindow.ui', self)
-
-
-        aboutAction = QtWidgets.QAction(u'&О программе', self)
+        global appdir
+        # uic.loadUi('/home/wolandius/git_projects/gost-crypto-gui/data/viewmultiresults.ui', self)
+        uic.loadUi(f'{appdir}/usr/share/gostcryptogui/mainwindow.ui', self) if appdir else \
+            uic.loadUi('/usr/share/gostcryptogui/mainwindow.ui', self)
+        aboutAction = QtWidgets.QAction(PyQt5.QtCore.QCoreApplication.translate('', 'О программе'), self)
         aboutAction.setShortcut('Ctrl+Q')
         self.menubar.addAction(aboutAction)
+        self.setWindowIcon(PyQt5.QtGui.QIcon(f"{appdir}/usr/share/icons/hicolor/64x64/apps/gost-crypto-gui.png")) if appdir else \
+            self.setWindowIcon(PyQt5.QtGui.QIcon("/usr/share/icons/hicolor/64x64/apps/gost-crypto-gui.png"))
+
         encodingActionGroup = QtWidgets.QActionGroup(self)
         self.actionBase64.setActionGroup(encodingActionGroup)
         self.actionDER.setActionGroup(encodingActionGroup)
@@ -377,6 +393,8 @@ class Window(QtWidgets.QMainWindow):
                 return
         else:
             file_names = args
+        if type(file_names) is tuple and type(file_names[0]) is not list:
+            file_names = (list(file_names),)
         try:
             choose = ChooseCert(parent=self, withsecret=True)
         except Exception as error:
@@ -451,6 +469,10 @@ class Window(QtWidgets.QMainWindow):
                 return
         else:
             file_names = args
+        if type(file_names) is tuple and type(file_names[0]) is not list :
+            file_names = (list(file_names),)
+        # print(file_names, len(file_names), type(file_names))
+        # file_names = (['/home/wolandius/caja.sig'],)
         progressDialog = QtWidgets.QProgressDialog("", PyQt5.QtCore.QCoreApplication.translate('', "Отмена"), 0, 0, self)
         progressDialog.setValue(-1)
         progressDialog.show()
@@ -459,6 +481,7 @@ class Window(QtWidgets.QMainWindow):
             del file_names[-1]
             file_names = tuple(file_names)
         for index, filenames in enumerate(file_names, start=0):
+            print(index, filenames)
             if len(filenames) > 0:
                 if len(filenames) == 1:
                     filename = filenames[0]
@@ -524,6 +547,8 @@ class Window(QtWidgets.QMainWindow):
                 return
         else:
             file_names = args
+        if type(file_names) is tuple and type(file_names[0]) is not list:
+            file_names = (list(file_names),)
         try:
             choose = ChooseCert(parent=self, withsecret=False)
         except Exception as error:
@@ -597,7 +622,7 @@ class Window(QtWidgets.QMainWindow):
                     if expired:
                         message += PyQt5.QtCore.QCoreApplication.translate('', 'ВНИМАНИЕ: Срок действия сертификата истек или еще не наступил!\n')
 
-                    return (PyQt5.QtCore.QCoreApplication.translate('', 'Файл успешно зашифрован'PyQt5.QtCore.QCoreApplication.translate('', , filename + self.fileend, cert_info, message)
+                    return (PyQt5.QtCore.QCoreApplication.translate('', 'Файл успешно зашифрован'), filename + self.fileend, cert_info, message)
 
         except Exception as error:
             QtWidgets.QMessageBox().warning(self, PyQt5.QtCore.QCoreApplication.translate('', "Cообщение"), PyQt5.QtCore.QCoreApplication.translate('', "Произошла ошибка:\n%s") % error)
@@ -608,6 +633,8 @@ class Window(QtWidgets.QMainWindow):
                 return
         else:
             file_names = args
+        if type(file_names) is tuple and type(file_names[0]) is not list:
+            file_names = (list(file_names),)
         try:
             choose = ChooseCert(parent=self, withsecret=True)
         except Exception as error:
@@ -707,11 +734,13 @@ class Window(QtWidgets.QMainWindow):
             return fieldname
 
     def aboutProgram(self):
+        text1 = PyQt5.QtCore.QCoreApplication.translate('', '<br>2019г. Борис Макаренко<br>УИТ ФССП России')
+        text2 = PyQt5.QtCore.QCoreApplication.translate('', "<br>E-mail: <a href=mailto:makarenko@fssprus.ru'>makarenko@fssprus.ru</a>")
+        text3 = PyQt5.QtCore.QCoreApplication.translate('', "<br> <a href='mailto:bmakarenko90@gmail.com'>bmakarenko90@gmail.com</a><br>")
+        text4 = PyQt5.QtCore.QCoreApplication.translate('', '<br>2022-2023г. Владлен Мурылев<br>ООО "РЕД СОФТ"')
+        text5 = PyQt5.QtCore.QCoreApplication.translate('', "<br>E-mail: <a href='mailto:redos.support@red-soft.ru'>redos.support@red-soft.ru</a><br>")
+        text6 = PyQt5.QtCore.QCoreApplication.translate('', "<a href='http://opensource.org/licenses/MIT'>Лицензия MIT</a>")
         QtWidgets.QMessageBox().about(self, PyQt5.QtCore.QCoreApplication.translate('', "О программе"),
                                   f"<b>gost-crypto-gui {VERSION}</b><br>"
-                                  PyQt5.QtCore.QCoreApplication.translate('', "<br>2019г. Борис Макаренко<br>УИТ ФССП России"
-                                  "<br>E-mail: <a href='mailto:makarenko@fssprus.ru'>makarenko@fssprus.ru</a>"
-                                  "<br> <a href='mailto:bmakarenko90@gmail.com'>bmakarenko90@gmail.com</a><br>"
-                                  "<br>2022-2023г. Владлен Мурылев<br>ООО \"РЕД СОФТ\""
-                                  "<br>E-mail: <a href='mailto:redos.support@red-soft.ru'>redos.support@red-soft.ru</a><br>"
-                                  "<a href='http://opensource.org/licenses/MIT'>Лицензия MIT</a>"))
+                                  f"{text1}{text2}{text3}{text4}{text5}{text6}"
+                                      )

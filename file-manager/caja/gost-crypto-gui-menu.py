@@ -44,154 +44,110 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 from gi.repository import Caja, GObject
-import urllib
+import gettext
 import subprocess
 import os
 
+t = gettext.translation('gostcryptogui_caja', "/usr/share/locale/")
+t.install()
+_ = t.gettext
 
-class VerifyMenuProvider(GObject.GObject, Caja.MenuProvider):
-
+class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
     def __init__(self):
-        pass
+        GObject.Object.__init__(self)
 
     def get_file_items(self, window, files):
-        if len(files) != 1:
+        '''Returns the menu items to display when one or more files/folders are
+        selected.'''
+
+        global filelist
+        global pwd
+
+        pwd = None
+        filelist = []
+        for file in files:
+            if pwd == None:
+                pwd = file.get_parent_location().get_path()
+            name = file.get_name()
+            filelist += [name]
+
+
+        if pwd == None or len(filelist) == 0:
             return
 
-        fileObj = files[0]
-        if fileObj.get_uri_scheme() != 'file':
+        elif not os.access(pwd, os.W_OK):
             return
-        if fileObj.is_directory():
+
+        text = "GostCrypto"
+        top_menuitem = Caja.MenuItem(name=f'GostCryptoGuiMenuProvider::main_gost',
+                                     label=text,
+                                     tip=text,
+                                     icon='')
+        extra_actions = Caja.Menu()
+        top_menuitem.set_submenu(extra_actions)
+
+        if file.get_uri_scheme() != 'file':
             return
-        filename = urllib.unquote(fileObj.get_uri())[7:]
-        if filename[-3:] != 'sig':
+        if file.is_directory():
             return
+        filename = file.get_uri()[7:]
+
         if os.path.isfile(filename[:-4]):
             return
+        if filename[-3:] == 'sig':
+            text = _("Проверить ЭЦП")
+            item = Caja.MenuItem(name=f'GostCryptoGuiMenuProvider::Verify',
+                                 label=text,
+                                 tip=f"{text} {filename}",
+                                 icon='')
+            extra_actions.append_item(item)
+            item.connect("activate", self.menu_activate_cb, file, "Verify")
 
-        itemVerify = Caja.MenuItem(name='VerifyMenuProvider::Verify',
-                                       label='Проверить ЭЦП',
-                                       tip='Проверить ЭЦП %s' % filename)
+            text = _("Отсоединить ЭЦП")
+            item = Caja.MenuItem(name=f'GostCryptoGuiMenuProvider::Dettach',
+                                 label=text,
+                                 tip=f"{text} {filename}",
+                                 icon='')
+            extra_actions.append_item(item)
+            item.connect("activate", self.menu_activate_cb, file, "Dettach")
 
-        itemVerify.connect("activate", self.menu_activate_cb, fileObj)
-        return itemVerify,
+        if filename[-3:] == 'enc':
+            text = _("Расшифровать файл")
+            item = Caja.MenuItem(name=f'GostCryptoGuiMenuProvider::Decrypt',
+                                 label=text,
+                                 tip=f"{text} {filename}",
+                                 icon='')
+            extra_actions.append_item(item)
+            item.connect("activate", self.menu_activate_cb, file, "Decrypt")
+        ######
 
-    def menu_activate_cb(self, menu, fileObj):
-        filename = urllib.unquote(fileObj.get_uri())[7:]
-        subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-verify', filename])
+        text = _("Подписать файл")
+        item = Caja.MenuItem(name='SignMenuProvider::Sign',
+                                 label=text,
+                                 tip=f"{text} {filename}",
+                                 icon='')
+        extra_actions.append_item(item)
+        item.connect("activate", self.menu_activate_cb, filename, "Sign")
 
+        text = _('Зашифровать файл')
+        item = Caja.MenuItem(name='EncryptMenuProvider::Encrypt',
+                                    label=text,
+                                    tip=f"{text} {filename}",
+                                    icon='')
+        extra_actions.append_item(item)
+        item.connect("activate", self.menu_activate_cb, filename, "Encrypt")
 
-class DettachMenuProvider(GObject.GObject, Caja.MenuProvider):
+        return [top_menuitem]
 
-    def __init__(self):
-        pass
-
-    def get_file_items(self, window, files):
-        if len(files) != 1:
-            return
-
-        fileObj = files[0]
-        if fileObj.get_uri_scheme() != 'file':
-            return
-        if fileObj.is_directory():
-            return
-        filename = urllib.unquote(fileObj.get_uri())[7:]
-        if filename[-3:] != 'sig':
-            return
-
-        itemVerify = Caja.MenuItem(name='DettachMenuProvider::Dettach',
-                                       label='Отсоединить подпись',
-                                       tip='Отсоединить подпись %s' % filename)
-
-        itemVerify.connect("activate", self.menu_activate_cb, fileObj)
-        return itemVerify,
-
-    def menu_activate_cb(self, menu, fileObj):
-        filename = urllib.unquote(fileObj.get_uri())[7:]
-        subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-dettach', filename])
-
-
-class DecryptMenuProvider(GObject.GObject, Caja.MenuProvider):
-
-    def __init__(self):
-        pass
-
-    def get_file_items(self, window, files):
-        if len(files) != 1:
-            return
-
-        fileObj = files[0]
-        if fileObj.get_uri_scheme() != 'file':
-            return
-        if fileObj.is_directory():
-            return
-        filename = urllib.unquote(fileObj.get_uri())[7:]
-        if filename[-3:] != 'enc':
-            return
-
-        itemDecrypt = Caja.MenuItem(name='DecryptMenuProvider::Decrypt',
-                                        label='Расшифровать',
-                                        tip='Расшифровать файл %s' % filename)
-
-        itemDecrypt.connect("activate", self.menu_activate_cb, fileObj)
-        return itemDecrypt,
-
-    def menu_activate_cb(self, menu, fileObj):
-        filename = urllib.unquote(fileObj.get_uri())[7:]
-        subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-decr', filename])
-
-
-class SignMenuProvider(GObject.GObject, Caja.MenuProvider):
-
-    def __init__(self):
-        pass
-
-    def get_file_items(self, window, files):
-        if len(files) != 1:
-            return
-
-        fileObj = files[0]
-        if fileObj.get_uri_scheme() != 'file':
-            return
-        if fileObj.is_directory():
-            return
-        filename = urllib.unquote(fileObj.get_uri())[7:]
-
-        itemSign = Caja.MenuItem(name='SignMenuProvider::Encrypt',
-                                     label='Подписать',
-                                     tip='Подписать файл %s' % filename)
-
-        itemSign.connect("activate", self.menu_activate_cb, fileObj)
-        return itemSign,
-
-    def menu_activate_cb(self, menu, fileObj):
-        filename = urllib.unquote(fileObj.get_uri())[7:]
-        subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-sign', filename])
-
-
-class EncryptMenuProvider(GObject.GObject, Caja.MenuProvider):
-
-    def __init__(self):
-        pass
-
-    def get_file_items(self, window, files):
-        if len(files) != 1:
-            return
-
-        fileObj = files[0]
-        if fileObj.get_uri_scheme() != 'file':
-            return
-        if fileObj.is_directory():
-            return
-        filename = urllib.unquote(fileObj.get_uri())[7:]
-
-        itemEncrypt = Caja.MenuItem(name='EncryptMenuProvider::Encrypt',
-                                        label='Зашифровать',
-                                        tip='Зашифровать файл %s' % filename)
-
-        itemEncrypt.connect("activate", self.menu_activate_cb, fileObj)
-        return itemEncrypt,
-
-    def menu_activate_cb(self, menu, fileObj):
-        filename = urllib.unquote(fileObj.get_uri())[7:]
-        subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-encr', filename])
+    def menu_activate_cb(self, menu, fileObj, action):
+        filename = fileObj
+        if action == "Verify":
+            subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-verify', filename])
+        elif action == "Dettach":
+            subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-dettach', filename])
+        elif action == "Sign":
+            subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-decr', filename])
+        elif action == "Decrypt":
+            subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-sign', filename])
+        elif action == "Encrypt":
+            subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-encr', filename])
