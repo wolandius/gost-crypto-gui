@@ -35,6 +35,7 @@ A PyQt5 GUI for performing cryptographic operations over files using GOST algori
 %description -l ru
 Графический интерфейс PyQt5 для выполнения криптографических операций над файлами с использованием алгоритмов ГОСТ.
 
+%if 0%{?redos_version} >= 0730
 %package caja
 Summary:        Caja plugins for gost-crypto-gui
 Summary(ru):    Расширение файлового менеджера caja для gost-crypto-gui
@@ -47,6 +48,7 @@ Caja plugins for gost-crypto-gui
 
 %description caja -l ru
 Расширение файлового менеджера caja для gost-crypto-gui
+%endif
 
 %prep
 %setup -q
@@ -57,8 +59,6 @@ python3 setup.py build
 
 %install
 python3 setup.py install --single-version-externally-managed --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
-
-
 
 %post
 xdg-mime install %{_datadir}/mime/applications/x-extension-enc.xml
@@ -85,16 +85,18 @@ done
 %license LICENSE
 %doc README.md Changelog
 %exclude  /usr/lib/python3*/site-packages/gostcryptogui/*/*.pyc
-%exclude %{_datadir}/caja-python/extensions/gost-crypto-gui-*.py
+%exclude %{_datadir}/caja-python/extensions/gost-crypto-gui-*.py*
 
+%if 0%{?redos_version} >= 0730
 %files caja
 %{_datadir}/caja-python/extensions/gost-crypto-gui-*.py
+%endif
 
 %changelog
 * Fri May 26 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.0-1
-- added appimage support
-- added translations for app
-- port gostcryptogui-caja to python3
+- added appimage support for redos72 and redos73
+- added translation files for app
+- port gostcryptogui-caja to python3 only for redos73
 
 * Tue Apr 25 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:1.4-1
 - added new MultiOutputDialog

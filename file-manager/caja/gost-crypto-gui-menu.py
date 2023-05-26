@@ -79,7 +79,7 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
             return
 
         text = "GostCrypto"
-        top_menuitem = Caja.MenuItem(name=f'GostCryptoGuiMenuProvider::main_gost',
+        top_menuitem = Caja.MenuItem(name=f'GostCryptoGuiMenuProvider::Main',
                                      label=text,
                                      tip=text,
                                      icon='')
@@ -101,7 +101,7 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
                                  tip=f"{text} {filename}",
                                  icon='')
             extra_actions.append_item(item)
-            item.connect("activate", self.menu_activate_cb, file, "Verify")
+            item.connect("activate", self.menu_activate_cb, filename, "Verify")
 
             text = _("Отсоединить ЭЦП")
             item = Caja.MenuItem(name=f'GostCryptoGuiMenuProvider::Dettach',
@@ -109,7 +109,7 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
                                  tip=f"{text} {filename}",
                                  icon='')
             extra_actions.append_item(item)
-            item.connect("activate", self.menu_activate_cb, file, "Dettach")
+            item.connect("activate", self.menu_activate_cb, filename, "Dettach")
 
         if filename[-3:] == 'enc':
             text = _("Расшифровать файл")
@@ -118,7 +118,7 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
                                  tip=f"{text} {filename}",
                                  icon='')
             extra_actions.append_item(item)
-            item.connect("activate", self.menu_activate_cb, file, "Decrypt")
+            item.connect("activate", self.menu_activate_cb, filename, "Decrypt")
         ######
 
         text = _("Подписать файл")
@@ -141,6 +141,10 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
 
     def menu_activate_cb(self, menu, fileObj, action):
         filename = fileObj
+
+        #todo: works a bit strangly, need to be tested all IF
+
+        print(filename)
         if action == "Verify":
             subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-verify', filename])
         elif action == "Dettach":
