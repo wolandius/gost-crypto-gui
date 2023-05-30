@@ -2,7 +2,8 @@
 if [ ! -f "./appimagetool" ]; then
     wget https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage -O ./appimagetool
 fi
-rm -rf ./gost-crypto-gui-ro$1.AppImage
+VERSION=$2
+rm -rf ./gost-crypto-gui-ro$1*.AppImage
 #rm -rf ./AppDir
 mkdir -p ./AppDir
 cd ..
@@ -30,5 +31,5 @@ chmod +x ./AppDir/AppRun
 chmod +x ./appimagetool
 ARCH=x86-64 ./appimagetool ./AppDir
 chmod +x ./gost-crypto-gui-x86_64.AppImage
-mv gost-crypto-gui-x86_64.AppImage gost-crypto-gui-ro$1.AppImage
-./gost-crypto-gui-ro$1.AppImage
+mv gost-crypto-gui-x86_64.AppImage gost-crypto-gui-$VERSION-ro$1-x86_64.AppImage
+./gost-crypto-gui-$VERSION-ro$1-x86_64.AppImage
