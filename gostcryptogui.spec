@@ -97,6 +97,7 @@ done
 - added appimage support for redos72 and redos73
 - added translation files for app
 - port gostcryptogui-caja to python3 only for redos73
+- upd setup.py, to build caja extensions only for redos >= 7.3
 
 * Tue Apr 25 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:1.4-1
 - added new MultiOutputDialog
@@ -113,7 +114,7 @@ done
 - fixed popen multithread error if one of chain certs not installed
 - added backport to goslinux and redos72
 
-* Tue Mar 23 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 1.0.1-1
+* Thu Mar 23 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 1.0.1-1
 - create config if not exist on startup of application
 
 * Thu Mar 23 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 1.0-1
