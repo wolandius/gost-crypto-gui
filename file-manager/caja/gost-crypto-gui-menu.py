@@ -86,14 +86,13 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
         extra_actions = Caja.Menu()
         top_menuitem.set_submenu(extra_actions)
 
-        if file.get_uri_scheme() != 'file':
-            return
         if file.is_directory():
             return
         filename = file.get_uri()[7:]
 
-        if os.path.isfile(filename[:-4]):
-            return
+        # if os.path.isfile(filename[:-4]):
+        #     return
+
         if filename[-3:] == 'sig':
             text = _("Проверить ЭЦП")
             item = Caja.MenuItem(name=f'GostCryptoGuiMenuProvider::Verify',
@@ -102,14 +101,6 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
                                  icon='')
             extra_actions.append_item(item)
             item.connect("activate", self.menu_activate_cb, filename, "Verify")
-
-            text = _("Отсоединить ЭЦП")
-            item = Caja.MenuItem(name=f'GostCryptoGuiMenuProvider::Dettach',
-                                 label=text,
-                                 tip=f"{text} {filename}",
-                                 icon='')
-            extra_actions.append_item(item)
-            item.connect("activate", self.menu_activate_cb, filename, "Dettach")
 
         if filename[-3:] == 'enc':
             text = _("Расшифровать файл")
@@ -140,8 +131,9 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
         return [top_menuitem]
 
     def menu_activate_cb(self, menu, fileObj, action):
-        filename = fileObj
-
+        print(dir(fileObj))
+        filename = str(fileObj)
+        print(filename[-3:])
         #todo: works a bit strangly, need to be tested all IF
 
         print(filename)
@@ -150,8 +142,8 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
         elif action == "Dettach":
             subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-dettach', filename])
         elif action == "Sign":
-            subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-decr', filename])
-        elif action == "Decrypt":
             subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-sign', filename])
+        elif action == "Decrypt":
+            subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-decr', filename])
         elif action == "Encrypt":
             subprocess.Popen(['python3', '/usr/bin/gost-crypto-gui', '-encr', filename])

@@ -43,7 +43,6 @@ def main():
         print(PyQt5.QtCore.QCoreApplication.translate('', '-sign\t\tПодписать файл'))
         print(PyQt5.QtCore.QCoreApplication.translate('', '-encr\t\tЗашифровать файл'))
         print(PyQt5.QtCore.QCoreApplication.translate('', '-verify\t\tПроверить электронную подпись файла'))
-        print(PyQt5.QtCore.QCoreApplication.translate('', '-dettach\tОтсоединить электронную подпись от файла'))
         print(PyQt5.QtCore.QCoreApplication.translate('', '-decr\t\tРасшифровать файл'))
     else:
         filename = ""
@@ -59,8 +58,6 @@ def main():
                 ex.encrypt(filename)
             elif sys.argv[1] == '-verify':
                 ex.verify(False, filename)
-            elif sys.argv[1] == '-dettach':
-                ex.verify(True, filename)
             elif sys.argv[1] == '-decr':
                 ex.decrypt(filename)
             elif os.path.isfile(sys.argv[1]):

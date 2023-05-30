@@ -17,6 +17,7 @@ fi
 cp ../data/gost-crypto-gui.desktop ./AppDir/
 cp ../pics/128x128/gost-crypto-gui.png ./AppDir/
 pushd ./redos_rpms
+bash ./get_binaries.sh
 cp -r ./usr ../AppDir/
 cp -r ./etc ../AppDir/
 popd

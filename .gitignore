@@ -13,3 +13,4 @@ appimage/redos_rpms/usr/*
 appimage/redos_rpms/var/*
 appimage/*.AppImage
 src/*egg*
+build/*

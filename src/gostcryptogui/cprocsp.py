@@ -359,7 +359,7 @@ class CryptoPro:
             # output = cryptcp.stdout.read().decode('utf-8')
             cert_info = self.get_store_certs(crt_file=tmpname)
 
-        chainisverified = ('The certificate revocation status or one of the certificates in the certificate chain is'
+        chainisverified = ('The certificate revocation status or one of the certificates in the certificate chain is' 
                            ' unknown.' not in output.decode('utf-8')) \
                           and ('Certificate chain is not checked for this certificate' not in output.decode('utf-8'))
         chainisrevoked = 'Trust for this certificate or one of the certificates in the certificate chain has' \
