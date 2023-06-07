@@ -8,10 +8,12 @@ from gostcryptogui import gui
 import PyQt5
 from PyQt5 import QtGui, QtCore, QtWidgets
 from PyQt5.QtCore import QTranslator
+import urllib.parse
 
 appdir = os.popen("echo $APPDIR").readline().strip()
 
 def main():
+    print(sys.argv)
     global appdir
     app = QtWidgets.QApplication(sys.argv)
     if "ru_RU" in PyQt5.QtCore.QLocale().system().name():
@@ -46,13 +48,16 @@ def main():
         print(PyQt5.QtCore.QCoreApplication.translate('', '-decr\t\tРасшифровать файл'))
     else:
         filename = ""
+        if " -sign " in sys.argv[1]:
+            name = sys.argv[1].split(" -sign ")[1]
+            sys.argv[1] = "-sign"
+            sys.argv.append(name)
+        print(sys.argv)
         for i in range(2, len(sys.argv)):
-            if i < len(sys.argv)-1:
-                filename += f"{sys.argv[i]} "
-            else:
-                filename += f"{sys.argv[i]}"
+            tempfilename = urllib.parse.unquote(sys.argv[i])[7:] if "file:///" in sys.argv[i] else sys.argv[i]
+            filename += f"{tempfilename} " if i < len(sys.argv)-1 else f"{tempfilename}"
         if os.path.exists(filename):
-            if sys.argv[1] == '-sign':
+            if  '-sign' in sys.argv[1]:
                 ex.sign(filename)
             elif sys.argv[1] == '-encr':
                 ex.encrypt(filename)
@@ -65,7 +70,6 @@ def main():
                     ex.decrypt(sys.argv[1])
                 elif sys.argv[1][-4:] == '.sig':
                     ex.verify(True, sys.argv[1])
-
 
 if __name__ == '__main__':
     main()

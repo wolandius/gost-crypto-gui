@@ -38,7 +38,7 @@ data_files=[
 
     ]
 
-if "7.3" in os.popen("lsb_release -d").readline() or "8." in os.popen("lsb_release -d").readline():
+if "7.3" in os.popen("/usr/bin/lsb_release -d").readline() or "8." in os.popen("/usr/bin/lsb_release -d").readline():
     data_files.append(("share/gostcryptogui/", ["data/locales/GostCryptoGui-en_US.qm"]))
     data_files.append(("share/caja-python/extensions/", [
                                                             "file-manager/caja/gost-crypto-gui-emblem.py",
@@ -53,7 +53,7 @@ if "7.3" in os.popen("lsb_release -d").readline() or "8." in os.popen("lsb_relea
 
 setup(
     name='gostcryptogui',
-    version='2.0',
+    version='2.0.1',
     description='A PyQt GUI for performing cryptographic operations over files using GOST algorithms',
     long_description=long_description,
     long_description_content_type="text/markdown",

@@ -3,7 +3,7 @@
 #
 
 Name:		gostcryptogui
-Version:	2.0
+Version:	2.0.1
 %if 0%{?redos_version} < 0730
 Release:        1%{dist}.2
 %else
@@ -23,6 +23,8 @@ BuildArch:	noarch
 Buildrequires:  python3
 Buildrequires:  python3-devel
 Buildrequires:  python3-setuptools
+Buildrequires:  redhat-lsb-core
+
 
 Requires:	qt5
 Requires:	python3-qt5
@@ -93,6 +95,10 @@ done
 %endif
 
 %changelog
+* Wed Jun 07 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.0.1-1
+- improve sys.argv logic for compatibility with libreoffice extension
+- added buildrequire for successful build in mock environment
+
 * Fri May 26 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.0-1
 - added appimage support for redos72 and redos73
 - added translation files for app

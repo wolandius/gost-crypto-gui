@@ -1,3 +1,7 @@
+v2.0.1 Jun 07 2023
+- improve sys.argv logic for compatibility with libreoffice extension
+- added buildrequire for successful build in mock environment
+
 v2.0 May 26 2023
 - added appimage support
 - added translations for app
