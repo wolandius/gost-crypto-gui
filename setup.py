@@ -1,3 +1,5 @@
+import sys
+
 from setuptools import setup, find_packages
 import pathlib
 import os
@@ -38,14 +40,13 @@ data_files=[
 
     ]
 
-if "7.3" in os.popen("/usr/bin/lsb_release -d").readline() or "8." in os.popen("/usr/bin/lsb_release -d").readline():
+if "WITH_CAJA" in os.environ and os.environ['WITH_CAJA'] == "yes":
     data_files.append(("share/gostcryptogui/", ["data/locales/GostCryptoGui-en_US.qm"]))
     data_files.append(("share/caja-python/extensions/", [
                                                             "file-manager/caja/gost-crypto-gui-emblem.py",
                                                             "file-manager/caja/gost-crypto-gui-menu.py"
                                                           ]
                         ))
-
     data_files.append(("share/locale/en_US/LC_MESSAGES/", ["data/locales/en_US/LC_MESSAGES/gostcryptogui_caja.mo"]))
     data_files.append(("share/locale/ru/LC_MESSAGES/", ["data/locales/ru/LC_MESSAGES/gostcryptogui_caja.mo"]))
 
@@ -53,7 +54,7 @@ if "7.3" in os.popen("/usr/bin/lsb_release -d").readline() or "8." in os.popen("
 
 setup(
     name='gostcryptogui',
-    version='2.0.1',
+    version='2.0.2',
     description='A PyQt GUI for performing cryptographic operations over files using GOST algorithms',
     long_description=long_description,
     long_description_content_type="text/markdown",

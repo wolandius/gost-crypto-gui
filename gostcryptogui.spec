@@ -3,7 +3,7 @@
 #
 
 Name:		gostcryptogui
-Version:	2.0.1
+Version:	2.0.2
 %if 0%{?redos_version} < 0730
 Release:        1%{dist}.2
 %else
@@ -57,10 +57,19 @@ Caja plugins for gost-crypto-gui
 rm -rf %{name}.egg-info
 
 %build
+%if 0%{?redos_version} >= 0730
+WITH_CAJA=yes python3 setup.py build
+%else
 python3 setup.py build
+%endif
 
 %install
+
+%if 0%{?redos_version} >= 0730
+WITH_CAJA=yes python3 setup.py install --single-version-externally-managed --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+%else
 python3 setup.py install --single-version-externally-managed --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+%endif
 
 %post
 xdg-mime install %{_datadir}/mime/applications/x-extension-enc.xml
@@ -95,6 +104,9 @@ done
 %endif
 
 %changelog
+* Tue Jun 13 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.0.2-1
+- changed logic in setup.py for use env variable WITH_CAJA
+
 * Wed Jun 07 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.0.1-1
 - improve sys.argv logic for compatibility with libreoffice extension
 - added buildrequire for successful build in mock environment
