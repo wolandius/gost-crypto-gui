@@ -200,7 +200,7 @@ class CryptoPro:
             issuerCN = issuerDN['CN'].strip()
             subjectDN = self.create_dict_from_strk(single_cert_dict[subjectKey[0]])
             subjectCN = subjectDN['CN'].strip()
-            secretKey = single_cert_dict[PrivateKey[0]].strip()
+            secretKey = single_cert_dict[PrivateKey[0]].strip() if len(PrivateKey) > 0 else ""
             serial = single_cert_dict[SerialKey[0]].strip()
             thumbprint = single_cert_dict[SHA1Key[0]].strip()
             notValidBefore = re.sub("UTC", "", single_cert_dict[BeforeKey[0]]).strip()

@@ -3,7 +3,7 @@
 #
 
 Name:		gostcryptogui
-Version:	2.0.2
+Version:	2.1
 %if 0%{?redos_version} < 0730
 Release:        1%{dist}.2
 %else

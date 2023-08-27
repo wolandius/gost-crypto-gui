@@ -56,7 +56,7 @@ from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from gostcryptogui.cprocsp import *
 # from cprocsp import *
 
-VERSION = "2.0.2"
+VERSION = "2.1"
 appdir = os.popen("echo $APPDIR").readline().strip()
 
 class ViewCert(QtWidgets.QDialog):
@@ -398,7 +398,8 @@ class Window(QtWidgets.QMainWindow):
         try:
             choose = ChooseCert(parent=self, withsecret=True)
         except Exception as error:
-            QtWidgets.QMessageBox().warning(self, PyQt5.QtCore.QCoreApplication.translate('', "Cообщение"), PyQt5.QtCore.QCoreApplication.translate('', "Произошла ошибка:\n%s") % error)
+            # QtWidgets.QMessageBox().warning(self, PyQt5.QtCore.QCoreApplication.translate('', "Cообщение"), PyQt5.QtCore.QCoreApplication.translate('', "Произошла ошибка:\n%s") % error)
+            print(error)
             return
         if choose.exec_():
             cert_info = choose.getCertificate()
