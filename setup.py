@@ -54,7 +54,7 @@ if "WITH_CAJA" in os.environ and os.environ['WITH_CAJA'] == "yes":
 
 setup(
     name='gostcryptogui',
-    version='2.0.2',
+    version='2.1',
     description='A PyQt GUI for performing cryptographic operations over files using GOST algorithms',
     long_description=long_description,
     long_description_content_type="text/markdown",

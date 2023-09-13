@@ -68,7 +68,6 @@ def nongui(fun):
             async_.wait(0.01)
             QApplication.processEvents()
         return async_.get()
-
     return wrap
 
 # Класс CryptoPro предназнаечен для выполнения криптографических операций над файлами средствами КриптоПро CSP

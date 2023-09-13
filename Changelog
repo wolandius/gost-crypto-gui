@@ -1,3 +1,6 @@
+v2.1 Sep 13 2023
+- fix in PrivateKey for CryptoPro4
+
 v2.0.2 Jun 13 2023
 - changed logic in setup.py for use env variable WITH_CAJA
 

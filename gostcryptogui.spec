@@ -2,6 +2,8 @@
 # spec file for package gostcryptogui
 #
 
+%undefine __pythonname_provides
+
 Name:		gostcryptogui
 Version:	2.1
 %if 0%{?redos_version} < 0730
@@ -58,18 +60,15 @@ rm -rf %{name}.egg-info
 
 %build
 %if 0%{?redos_version} >= 0730
-WITH_CAJA=yes python3 setup.py build
-%else
-python3 setup.py build
+export WITH_CAJA=yes
 %endif
+python3 setup.py build
 
 %install
-
 %if 0%{?redos_version} >= 0730
-WITH_CAJA=yes python3 setup.py install --single-version-externally-managed --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
-%else
-python3 setup.py install --single-version-externally-managed --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+export WITH_CAJA=yes
 %endif
+python3 setup.py install --single-version-externally-managed --root=%{buildroot} --record=INSTALLED_FILES
 
 %post
 xdg-mime install %{_datadir}/mime/applications/x-extension-enc.xml
@@ -104,6 +103,9 @@ done
 %endif
 
 %changelog
+* Wed Sep 13 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.1-1
+- fix in PrivateKey for CryptoPro4
+
 * Tue Jun 13 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.0.2-1
 - changed logic in setup.py for use env variable WITH_CAJA
 
