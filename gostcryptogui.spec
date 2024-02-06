@@ -6,10 +6,10 @@
 
 Name:		gostcryptogui
 Version:	2.2
-%if 0%{?redos_version} < 0730
-Release:        1%{dist}.2
+%if 0%{?redos_version} < 0800
+Release:     1%{dist}.3
 %else
-Release:        1%{dist}.3
+Release:        1%{dist}
 %endif
 
 Summary:	A PyQt GUI for performing cryptographic operations over files using GOST algorithms
@@ -45,6 +45,7 @@ Summary:        Caja plugins for gost-crypto-gui
 Summary(ru):    Расширение файлового менеджера caja для gost-crypto-gui
 BuildArch:      noarch
 Requires:       %{name}
+Requires:       python3-caja
 Obsoletes:      caja-gostcryptogui
 
 %description caja
