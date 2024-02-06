@@ -104,6 +104,9 @@ done
 %endif
 
 %changelog
+* Wed Feb 07 2024 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.2-1
+- convert size to int
+
 * Wed Sep 13 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.1-1
 - fix in PrivateKey for CryptoPro4
 
