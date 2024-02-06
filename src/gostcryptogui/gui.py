@@ -56,7 +56,7 @@ from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from gostcryptogui.cprocsp import *
 # from cprocsp import *
 
-VERSION = "2.1"
+VERSION = "2.2"
 appdir = os.popen("echo $APPDIR").readline().strip()
 
 class ViewCert(QtWidgets.QDialog):
@@ -109,7 +109,7 @@ class HTMLDelegate(QtWidgets.QStyledItemDelegate):
         doc = QtGui.QTextDocument(self)
         doc.setHtml(record)
         doc.setTextWidth(option.rect.width())
-        return QtCore.QSize(doc.idealWidth(), doc.size().height())
+        return QtCore.QSize(int(doc.idealWidth()), int(doc.size().height()))
 
 # TODO Показывать алгоритмы подписи и открытого ключа
 class ChooseCert(QtWidgets.QDialog):
