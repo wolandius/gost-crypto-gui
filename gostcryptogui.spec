@@ -5,7 +5,7 @@
 %undefine __pythonname_provides
 
 Name:		gostcryptogui
-Version:	2.1
+Version:	2.2
 %if 0%{?redos_version} < 0730
 Release:        1%{dist}.2
 %else
