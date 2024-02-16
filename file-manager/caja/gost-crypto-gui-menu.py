@@ -47,7 +47,7 @@ from gi.repository import Caja, GObject
 import gettext
 import subprocess
 import os
-
+import urllib.parse
 t = gettext.translation('gostcryptogui_caja', "/usr/share/locale/")
 t.install()
 _ = t.gettext
@@ -88,8 +88,7 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
 
         if file.is_directory():
             return
-        filename = file.get_uri()[7:]
-
+        filename = urllib.parse.unquote(file.get_uri())[7:]
         # if os.path.isfile(filename[:-4]):
         #     return
 
@@ -100,7 +99,7 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
                                  tip=f"{text} {filename}",
                                  icon='')
             extra_actions.append_item(item)
-            item.connect("activate", self.menu_activate_cb, filename, "Verify")
+            item.connect("activate", self.menu_activate_cb, str(filename), "Verify")
 
         if filename[-3:] == 'enc':
             text = _("Расшифровать файл")
@@ -109,7 +108,7 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
                                  tip=f"{text} {filename}",
                                  icon='')
             extra_actions.append_item(item)
-            item.connect("activate", self.menu_activate_cb, filename, "Decrypt")
+            item.connect("activate", self.menu_activate_cb, str(filename), "Decrypt")
         ######
 
         text = _("Подписать файл")
@@ -118,7 +117,7 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
                                  tip=f"{text} {filename}",
                                  icon='')
         extra_actions.append_item(item)
-        item.connect("activate", self.menu_activate_cb, filename, "Sign")
+        item.connect("activate", self.menu_activate_cb, str(filename), "Sign")
 
         text = _('Зашифровать файл')
         item = Caja.MenuItem(name='EncryptMenuProvider::Encrypt',
@@ -126,14 +125,12 @@ class GostCryptoGuiMenuProvider(GObject.GObject, Caja.MenuProvider):
                                     tip=f"{text} {filename}",
                                     icon='')
         extra_actions.append_item(item)
-        item.connect("activate", self.menu_activate_cb, filename, "Encrypt")
+        item.connect("activate", self.menu_activate_cb, str(filename), "Encrypt")
 
         return [top_menuitem]
 
     def menu_activate_cb(self, menu, fileObj, action):
-        print(dir(fileObj))
         filename = str(fileObj)
-        print(filename[-3:])
         #todo: works a bit strangly, need to be tested all IF
 
         print(filename)

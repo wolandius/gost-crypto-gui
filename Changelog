@@ -1,3 +1,6 @@
+v2.2.1 Feb 16 2024
+- fix russian utf8 decode for caja extension
+
 v2.1 Sep 13 2023
 - fix in PrivateKey for CryptoPro4
 

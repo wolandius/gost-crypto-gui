@@ -56,7 +56,7 @@ from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from gostcryptogui.cprocsp import *
 # from cprocsp import *
 
-VERSION = "2.2"
+VERSION = "2.2.1"
 appdir = os.popen("echo $APPDIR").readline().strip()
 
 class ViewCert(QtWidgets.QDialog):

@@ -10,6 +10,7 @@ from PyQt5 import QtGui, QtCore, QtWidgets
 from PyQt5.QtCore import QTranslator
 import urllib.parse
 
+
 appdir = os.popen("echo $APPDIR").readline().strip()
 
 def main():

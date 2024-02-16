@@ -5,9 +5,9 @@
 %undefine __pythonname_provides
 
 Name:		gostcryptogui
-Version:	2.2
-%if 0%{?redos_version} < 0730
-Release:        1%{dist}.2
+Version:	2.2.1
+%if 0%{?redos_version} >= 0800
+Release:        1%{dist}
 %else
 Release:        1%{dist}.3
 %endif
@@ -103,7 +103,10 @@ done
 %endif
 
 %changelog
-* Thu Feb 06 2024 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.2-1
+* Fri Feb 16 2024 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.2.1-1
+- fix russian utf8 decode for caja extension
+
+* Tue Feb 06 2024 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.2-1
 - set size to int
 
 * Wed Sep 13 2023 Vladlen Murylyov <vladlen.murylyov@red-soft.ru> - 0:2.1-1
